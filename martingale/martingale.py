@@ -20,18 +20,18 @@ GT honor code violation.
  			  		 			     			  	   		   	  			  	
 -----do not edit anything above this line--- 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
-Student Name: Tucker Balch (replace with your name) 			  		 			     			  	   		   	  			  	
-GT User ID: tb34 (replace with your User ID) 			  		 			     			  	   		   	  			  	
-GT ID: 900897987 (replace with your GT ID) 			  		 			     			  	   		   	  			  	
+Student Name: Qingyang Li (replace with your name) 			  		 			     			  	   		   	  			  	
+GT User ID: qli7 (replace with your User ID) 			  		 			     			  	   		   	  			  	
+GT ID: 902265013 (replace with your GT ID) 			  		 			     			  	   		   	  			  	
 """ 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
 import numpy as np 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
 def author(): 			  		 			     			  	   		   	  			  	
-        return 'tb34' # replace tb34 with your Georgia Tech username. 			  		 			     			  	   		   	  			  	
+        return 'qli7' # replace tb34 with your Georgia Tech username. 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
 def gtid(): 			  		 			     			  	   		   	  			  	
-	return 900897987 # replace with your GT ID number 			  		 			     			  	   		   	  			  	
+	return 902265013 # replace with your GT ID number 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
 def get_spin_result(win_prob): 			  		 			     			  	   		   	  			  	
 	result = False 			  		 			     			  	   		   	  			  	
@@ -40,11 +40,38 @@ def get_spin_result(win_prob):
 	return result 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
 def test_code(): 			  		 			     			  	   		   	  			  	
-	win_prob = 0.60 # set appropriately to the probability of a win 			  		 			     			  	   		   	  			  	
+	win_prob = 18/38.0 # set appropriately to the probability of a win 			  		 			     			  	   		   	  			  	
 	np.random.seed(gtid()) # do this only once 			  		 			     			  	   		   	  			  	
 	print get_spin_result(win_prob) # test the roulette spin 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
-	# add your code here to implement the experiments 			  		 			     			  	   		   	  			  	
+	# add your code here to implement the experiments 
+	
+	
+def gamble_simulator_simple(win_prob):
+	winnings = np.zeros((1000))
+	episode_winnings = 0
+	bet_counter = 0
+	
+	while episode_winnings < 80:
+		bet_amount = 1
+		won = False
+		
+		while not won:
+			won = get_spin_result(win_prob)
+			if won:
+				episode_winnings = episode_winnings + bet_amount
+			
+			else:
+				episode_winnings = episode_winnings - bet_amount
+				bet_amount = bet_amount * 2
+				
+			winnings[bet_counter] = episode_winnings
+			if bet_counter == 999: # make sure the episode won't run over 1000 times
+				return winnings 
+					
+			bet_counter += 1
+		
+	return winnings			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
 if __name__ == "__main__": 			  		 			     			  	   		   	  			  	
     test_code() 			  		 			     			  	   		   	  			  	
