@@ -111,7 +111,7 @@ def test_code():
     lower_line = mean_winnings - std_winnings
 
     plt.figure(1)
-    plt.plot(mean, label="Mean")
+    plt.plot(mean_winnings, label="Mean")
     plt.plot(upper_line, label="Mean + STD")
     plt.plot(lower_line, label="Mean - STD")
 
