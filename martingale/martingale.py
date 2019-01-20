@@ -81,7 +81,7 @@ def test_code():
     plt.figure(0)
     for i in range(10):
         winnings = gamble_simulator_simple(win_prob)
-        plt.plot(winnings,label='run ' % i)
+        plt.plot(winnings,label='run %s' % i)
 	
     plt.xlim((0, 300))
     plt.ylim((-256, 100))
