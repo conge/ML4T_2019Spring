@@ -139,7 +139,7 @@ def test_code():
     plt.xlabel('Number of Spins')
     plt.ylabel('Winnings')
     plt.legend()
-    plt.title("Figure 2: Median Winnings of 1000 episodes\n(simple version)")
+    plt.title("Figure 3: Median Winnings of 1000 episodes\n(simple version)")
     plt.savefig('Exp1_fig3.png')
     plt.close()
 
