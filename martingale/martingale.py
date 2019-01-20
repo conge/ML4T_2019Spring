@@ -26,8 +26,8 @@ GT ID: 902265013 (replace with your GT ID)
 """ 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
 import numpy as np
-import matplotlib
 import matplotlib.pyplot as plt
+import matplotlib
 matplotlib.use('Agg')
 
 
