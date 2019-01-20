@@ -188,6 +188,10 @@ def test_code():
     upper_line = mean_winnings + std_winnings
     lower_line = mean_winnings - std_winnings
 
+    # calculate the winning rate. E.g. when that last value in all_winnings is $80, the we won the episode.
+    winnings_last_spin = all_winnings[:, -1]
+    print("Exp 2: we win %d times out of 100..." % sum(winnings_last_spin == 80))
+
     print("EXP 2: mean winning is %d" %mean_winnings[-1])
 
     # Exp2_fig4
