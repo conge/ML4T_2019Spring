@@ -25,7 +25,8 @@ GT User ID: qli7 (replace with your User ID)
 GT ID: 902265013 (replace with your GT ID) 			  		 			     			  	   		   	  			  	
 """ 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
-import numpy as np 			  		 			     			  	   		   	  			  	
+import numpy as np 	
+import matplotlib.pyplot as plt  		  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
 def author(): 			  		 			     			  	   		   	  			  	
         return 'qli7' # replace tb34 with your Georgia Tech username. 			  		 			     			  	   		   	  			  	
@@ -39,12 +40,7 @@ def get_spin_result(win_prob):
 		result = True 			  		 			     			  	   		   	  			  	
 	return result 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
-def test_code(): 			  		 			     			  	   		   	  			  	
-	win_prob = 18/38.0 # set appropriately to the probability of a win 			  		 			     			  	   		   	  			  	
-	np.random.seed(gtid()) # do this only once 			  		 			     			  	   		   	  			  	
-	print get_spin_result(win_prob) # test the roulette spin 			  		 			     			  	   		   	  			  	
- 			  		 			     			  	   		   	  			  	
-	# add your code here to implement the experiments 
+
 	
 	
 def gamble_simulator_simple(win_prob):
@@ -71,7 +67,27 @@ def gamble_simulator_simple(win_prob):
 					
 			bet_counter += 1
 		
-	return winnings			  		 			     			  	   		   	  			  	
+	return winnings	
+	
+def test_code(): 			  		 			     			  	   		   	  			  	
+	win_prob = 18/38.0 # set appropriately to the probability of a win 			  		 			     			  	   		   	  			  	
+	np.random.seed(gtid()) # do this only once 			  		 			     			  	   		   	  			  	
+	print get_spin_result(win_prob) # test the roulette spin 			  		 			     			  	   		   	  			  	
+ 			  		 			     			  	   		   	  			  	
+	# add your code here to implement the experiments 
+	# Exp1_fig1 = 
+	
+	plt.figure(1)
+	for i in range(10):
+	    winnings = gamble_simulator_simple(win_prob)
+	    plt.plot(winnings,label='run ' % i)
+	plt.xlim((0, 300))
+    plt.ylim((-256, 100))
+    plt.xlabel('Numer of Spins')
+    plt.ylabel('Winnings')
+    plt.savefig('Exp1_fig1.png')
+	    
+	     			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
 if __name__ == "__main__": 			  		 			     			  	   		   	  			  	
     test_code() 			  		 			     			  	   		   	  			  	
