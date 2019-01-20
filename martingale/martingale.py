@@ -85,8 +85,10 @@ def test_code():
 	
     plt.xlim((0, 300))
     plt.ylim((-256, 100))
-    plt.xlabel('Numer of Spins')
+    plt.xlabel('Number of Spins')
     plt.ylabel('Winnings')
+    plt.legend()
+    plt.title("Figure 1: Winnings of the strategy\n(simple version)")
     plt.savefig('Exp1_fig1.png')
     plt.close()
 
