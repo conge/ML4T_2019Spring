@@ -90,8 +90,9 @@ def gamble_simulator_realistic(win_prob, bank_roll=256):
 
         while not won:
             won = get_spin_result(win_prob)
-            if episode_winnings < bet_amount:
+            if episode_winnings + bank_roll < bet_amount:
                 bet_amount = episode_winnings
+
             if won:
                 episode_winnings = episode_winnings + bet_amount
 
@@ -181,6 +182,7 @@ def test_code():
     for i in range(1000):
 
         all_winnings[i,:] = gamble_simulator_realistic(win_prob)
+
     mean_winnings = np.mean(all_winnings, axis=0)
     std_winnings = np.std(all_winnings, axis=0)
     upper_line = mean_winnings + std_winnings
