@@ -81,10 +81,11 @@ def test_code():
 	for i in range(10):
 	    winnings = gamble_simulator_simple(win_prob)
 	    plt.plot(winnings,label='run ' % i)
+	
 	plt.xlim((0, 300))
     plt.ylim((-256, 100))
-    plt.xlabel('Numer of Spins')
-    plt.ylabel('Winnings')
+	plt.xlabel('Numer of Spins')
+	plt.ylabel('Winnings')
     plt.savefig('Exp1_fig1.png')
 	    
 	     			     			  	   		   	  			  	
