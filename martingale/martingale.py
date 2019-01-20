@@ -177,7 +177,7 @@ def test_code():
     plt.savefig('Exp1_fig3.png')
     plt.close()
 
-    # Exp1_fig4
+    # Exp2
     all_winnings = np.zeros((1000,1000))
     for i in range(1000):
 
@@ -187,6 +187,10 @@ def test_code():
     std_winnings = np.std(all_winnings, axis=0)
     upper_line = mean_winnings + std_winnings
     lower_line = mean_winnings - std_winnings
+
+    print("EXP 2: mean winning is %s" %mean_winnings)
+
+    # Exp2_fig4
 
     plt.figure(3)
     plt.plot(mean_winnings, label="Mean")
@@ -205,11 +209,13 @@ def test_code():
     # Exp2_fig5
     median_winnings = np.median(all_winnings, axis=0)
 
+    print("Exp2: Median is %d" % median_winnings)
+
     upper_line = median_winnings + std_winnings
     lower_line = median_winnings - std_winnings
 
     plt.figure(4)
-    plt.plot(mean_winnings, label="Median")
+    plt.plot(median_winnings, label="Median")
     plt.plot(upper_line, label="Median + STD")
     plt.plot(lower_line, label="Median - STD")
 
