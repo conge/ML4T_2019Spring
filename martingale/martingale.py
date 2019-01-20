@@ -75,6 +75,39 @@ def gamble_simulator_simple(win_prob):
 
     return winnings
 
+def gamble_simulator_realistic(win_prob, bank_roll=256):
+    winnings = np.zeros((1000))
+    episode_winnings = 0
+    bet_counter = 0
+
+    while episode_winnings < 80:
+        if episode_winnings <= -1 * bank_roll:
+            winnings[bet_counter:] = -1 * bank_roll
+            return winnings
+
+        bet_amount = 1
+        won = False
+
+        while not won:
+            won = get_spin_result(win_prob)
+            if episode_winnings < bet_amount:
+                bet_amount = episode_winnings
+            if won:
+                episode_winnings = episode_winnings + bet_amount
+
+            else:
+                episode_winnings = episode_winnings - bet_amount
+                bet_amount = bet_amount * 2
+
+            winnings[bet_counter] = episode_winnings
+            if bet_counter == 999: # make sure the episode won't run over 1000 times
+                return winnings
+
+            bet_counter += 1
+    winnings[bet_counter:] = 80
+
+    return winnings
+
 
 def test_code():
     win_prob = 18/38.0 # set appropriately to the probability of a win
@@ -100,7 +133,7 @@ def test_code():
     # Exp1_fig2
 
     all_winnings = np.zeros((1000,1000))
-    for i in range(20):
+    for i in range(1000):
 
         all_winnings[i,:] = gamble_simulator_simple(win_prob)
 
@@ -141,6 +174,50 @@ def test_code():
     plt.legend()
     plt.title("Figure 3: Median Winnings of 1000 episodes\n(simple version)")
     plt.savefig('Exp1_fig3.png')
+    plt.close()
+
+    # Exp1_fig4
+    all_winnings = np.zeros((1000,1000))
+    for i in range(1000):
+
+        all_winnings[i,:] = gamble_simulator_realistic(win_prob)
+    mean_winnings = np.mean(all_winnings, axis=0)
+    std_winnings = np.std(all_winnings, axis=0)
+    upper_line = mean_winnings + std_winnings
+    lower_line = mean_winnings - std_winnings
+
+    plt.figure(3)
+    plt.plot(mean_winnings, label="Mean")
+    plt.plot(upper_line, label="Mean + STD")
+    plt.plot(lower_line, label="Mean - STD")
+
+    plt.xlim((0, 300))
+    plt.ylim((-256, 100))
+    plt.xlabel('Number of Spins')
+    plt.ylabel('Winnings')
+    plt.legend()
+    plt.title("Figure 4: Mean Winnings of 1000 episodes\n(simple version)")
+    plt.savefig('Exp2_fig4.png')
+    plt.close()
+
+    # Exp2_fig5
+    median_winnings = np.median(all_winnings, axis=0)
+
+    upper_line = median_winnings + std_winnings
+    lower_line = median_winnings - std_winnings
+
+    plt.figure(4)
+    plt.plot(mean_winnings, label="Median")
+    plt.plot(upper_line, label="Median + STD")
+    plt.plot(lower_line, label="Median - STD")
+
+    plt.xlim((0, 300))
+    plt.ylim((-256, 100))
+    plt.xlabel('Number of Spins')
+    plt.ylabel('Winnings')
+    plt.legend()
+    plt.title("Figure 5: Median Winnings of 1000 episodes\n(simple version)")
+    plt.savefig('Exp2_fig5.png')
     plt.close()
 
 
