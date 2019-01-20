@@ -80,9 +80,10 @@ def test_code():
     win_prob = 18/38.0 # set appropriately to the probability of a win
     np.random.seed(gtid()) # do this only once
     print get_spin_result(win_prob) # test the roulette spin
-    """
+
     # add your code here to implement the experiments
     # Exp1_fig1
+
     plt.figure(0)
     for i in range(10):
         winnings = gamble_simulator_simple(win_prob)
@@ -95,8 +96,6 @@ def test_code():
     plt.legend()
     plt.title("Figure 1: Winnings of the strategy\n(simple version)")
     plt.savefig('Exp1_fig1.png')
-    plt.close()
-    """
 
     # Exp1_fig2
 
@@ -124,6 +123,25 @@ def test_code():
     plt.savefig('Exp1_fig2.png')
     plt.close()
 
+    # Exp1_fig3
+    median_winnings = np.median(all_winnings, axis=0)
+
+    upper_line = median_winnings + std_winnings
+    lower_line = median_winnings - std_winnings
+
+    plt.figure(2)
+    plt.plot(mean_winnings, label="Median")
+    plt.plot(upper_line, label="Median + STD")
+    plt.plot(lower_line, label="Median - STD")
+
+    plt.xlim((0, 300))
+    plt.ylim((-256, 100))
+    plt.xlabel('Number of Spins')
+    plt.ylabel('Winnings')
+    plt.legend()
+    plt.title("Figure 2: Median Winnings of 1000 episodes\n(simple version)")
+    plt.savefig('Exp1_fig3.png')
+    plt.close()
 
 
 if __name__ == "__main__":
