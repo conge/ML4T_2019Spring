@@ -76,18 +76,19 @@ def test_code():
     print get_spin_result(win_prob) # test the roulette spin
  			  		 			     			  	   		   	  			  	
     # add your code here to implement the experiments
-    # Exp1_fig1 =
+    # Exp1_fig1
 	
-    Exp1_fig1 = plt.figure(0)
+    plt.figure(0)
     for i in range(10):
         winnings = gamble_simulator_simple(win_prob)
-        Exp1_fig1.plot(winnings,label='run ' % i)
+        plot(winnings,label='run ' % i)
 	
-    Exp1_fig1.xlim((0, 300))
-    Exp1_fig1.ylim((-256, 100))
-    Exp1_fig1.xlabel('Numer of Spins')
-    Exp1_fig1.ylabel('Winnings')
-    Exp1_fig1.savefig('Exp1_fig1.png')
+    plt.xlim((0, 300))
+    plt.ylim((-256, 100))
+    plt.xlabel('Numer of Spins')
+    plt.ylabel('Winnings')
+    plt.savefig('Exp1_fig1.png')
+    plt.close()
 
  			  		 			     			  	   		   	  			  	
 if __name__ == "__main__": 			  		 			     			  	   		   	  			  	
