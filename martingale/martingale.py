@@ -188,7 +188,7 @@ def test_code():
     upper_line = mean_winnings + std_winnings
     lower_line = mean_winnings - std_winnings
 
-    print("EXP 2: mean winning is %s" %mean_winnings)
+    print("EXP 2: mean winning is %d" %mean_winnings[-1])
 
     # Exp2_fig4
 
@@ -209,7 +209,7 @@ def test_code():
     # Exp2_fig5
     median_winnings = np.median(all_winnings, axis=0)
 
-    print("Exp2: Median is %d" % median_winnings)
+    print("Exp2: Median is %d" % median_winnings[-1])
 
     upper_line = median_winnings + std_winnings
     lower_line = median_winnings - std_winnings
