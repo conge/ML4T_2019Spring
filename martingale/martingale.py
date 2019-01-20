@@ -67,7 +67,8 @@ def gamble_simulator_simple(win_prob):
                 return winnings
 					
             bet_counter += 1
-		
+	winnings[bet_counter:] = 80
+
     return winnings
 	
 def test_code(): 			  		 			     			  	   		   	  			  	
