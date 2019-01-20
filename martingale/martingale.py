@@ -75,6 +75,7 @@ def gamble_simulator_simple(win_prob):
 
     return winnings
 
+
 def gamble_simulator_realistic(win_prob, bank_roll=256):
     winnings = np.zeros((1000))
     episode_winnings = 0
