@@ -29,66 +29,64 @@ import numpy as np
 import matplotlib.pyplot as plt  		  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
 def author(): 			  		 			     			  	   		   	  			  	
-        return 'qli7' # replace tb34 with your Georgia Tech username. 			  		 			     			  	   		   	  			  	
+    return 'qli7' # replace tb34 with your Georgia Tech username.
  			  		 			     			  	   		   	  			  	
-def gtid(): 			  		 			     			  	   		   	  			  	
-	return 902265013 # replace with your GT ID number 			  		 			     			  	   		   	  			  	
+def gtid():
+
+    return 902265013 # replace with your GT ID number
  			  		 			     			  	   		   	  			  	
 def get_spin_result(win_prob): 			  		 			     			  	   		   	  			  	
-	result = False 			  		 			     			  	   		   	  			  	
-	if np.random.random() <= win_prob: 			  		 			     			  	   		   	  			  	
-		result = True 			  		 			     			  	   		   	  			  	
-	return result 			  		 			     			  	   		   	  			  	
- 			  		 			     			  	   		   	  			  	
-
+    result = False
+    if np.random.random() <= win_prob:
+        result = True
+    return result
 	
 	
 def gamble_simulator_simple(win_prob):
-	winnings = np.zeros((1000))
-	episode_winnings = 0
-	bet_counter = 0
+    winnings = np.zeros((1000))
+    episode_winnings = 0
+    bet_counter = 0
 	
-	while episode_winnings < 80:
-		bet_amount = 1
-		won = False
+    while episode_winnings < 80:
+        bet_amount = 1
+        won = False
 		
-		while not won:
-			won = get_spin_result(win_prob)
-			if won:
-				episode_winnings = episode_winnings + bet_amount
+        while not won:
+            won = get_spin_result(win_prob)
+            if won:
+                episode_winnings = episode_winnings + bet_amount
 			
-			else:
-				episode_winnings = episode_winnings - bet_amount
-				bet_amount = bet_amount * 2
+            else:
+                episode_winnings = episode_winnings - bet_amount
+                bet_amount = bet_amount * 2
 				
-			winnings[bet_counter] = episode_winnings
-			if bet_counter == 999: # make sure the episode won't run over 1000 times
-				return winnings 
+            winnings[bet_counter] = episode_winnings
+            if bet_counter == 999: # make sure the episode won't run over 1000 times
+                return winnings
 					
-			bet_counter += 1
+            bet_counter += 1
 		
-	return winnings	
+    return winnings
 	
 def test_code(): 			  		 			     			  	   		   	  			  	
-	win_prob = 18/38.0 # set appropriately to the probability of a win 			  		 			     			  	   		   	  			  	
-	np.random.seed(gtid()) # do this only once 			  		 			     			  	   		   	  			  	
-	print get_spin_result(win_prob) # test the roulette spin 			  		 			     			  	   		   	  			  	
+    win_prob = 18/38.0 # set appropriately to the probability of a win
+    np.random.seed(gtid()) # do this only once
+    print get_spin_result(win_prob) # test the roulette spin
  			  		 			     			  	   		   	  			  	
-	# add your code here to implement the experiments 
-	# Exp1_fig1 = 
+    # add your code here to implement the experiments
+    # Exp1_fig1 =
 	
-	plt.figure(1)
-	for i in range(10):
-	    winnings = gamble_simulator_simple(win_prob)
-	    plt.plot(winnings,label='run ' % i)
+    plt.figure(1)
+    for i in range(10):
+        winnings = gamble_simulator_simple(win_prob)
+        plt.plot(winnings,label='run ' % i)
 	
-	plt.xlim((0, 300))
+    plt.xlim((0, 300))
     plt.ylim((-256, 100))
-	plt.xlabel('Numer of Spins')
-	plt.ylabel('Winnings')
+    plt.xlabel('Numer of Spins')
+    plt.ylabel('Winnings')
     plt.savefig('Exp1_fig1.png')
-	    
-	     			     			  	   		   	  			  	
+
  			  		 			     			  	   		   	  			  	
 if __name__ == "__main__": 			  		 			     			  	   		   	  			  	
     test_code() 			  		 			     			  	   		   	  			  	
