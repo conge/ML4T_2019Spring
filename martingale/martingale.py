@@ -194,6 +194,8 @@ def test_code():
 
     print("EXP 2: mean winning is %d" %mean_winnings[-1])
 
+    print("EXP 2: Std converges to %d" %std_winnings[-1])
+
     # Exp2_fig4
 
     plt.figure(3)
