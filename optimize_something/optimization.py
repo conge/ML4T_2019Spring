@@ -31,22 +31,113 @@ import numpy as np
 import datetime as dt 			  		 			     			  	   		   	  			  	
 from util import get_data, plot_data
 
+from scipy import optimize as spo
+
+
+def compute_daily_returns(df):
+    """Compute and return daily returns"""
+    daily_returns = (df / df.shift(1)) - 1
+    daily_returns.ix[0, :] = 0
+    return daily_returns
+
+
+def compute_cumulative_returens(df):
+    """Compute and return cumulative returns"""
+    cumulative_returns = (df / df[0]) - 1
+    return cumulative_returns
+
+def sharpe(port_val, rf=0, K=252):
+    """Compute Sharpe ration for a portfolio
+    Input:
+       allocs: allocation of a portfolio, note: allocs.sum() should be one and allocs in [0,1]
+       prices: prices of all stocks in a portfolio
+       rf: risk-free return
+       K: K_daily = 252; K_annually = 1; K_monthly = 12
+    return:
+      Sharpe_ratio
+    """
+
+    sharpe_ratio = np.sqrt(K) * (port_val.mean() - rf) / port_val.std()
+    return sharpe_ratio
+
+
+# this is the function that the minimizer will work on.
+def neg_sharpe(allocs, prices, rf=0, K=252):
+    normed = prices / prices.iloc[0,:]
+    alloced = normed * allocs
+    port_val = alloced.sum(axis=1)
+    daily_returns = compute_daily_returns(part_val)
+    neg_sharpe_ratio = -1 * sharpe(port_val, rf, K)
+    return neg_sharpe_ratio
+
+
+def fit_allocs(prices, sharpe_func):
+    """Find the best allocation for a portfolio
+    based-on the historical prices of the stocks in it.
+
+    :param prices: prices of the portfolio
+    :param sharpe_func: the function to minimize
+    :return: allocs: allocation of the stocks in a portfolio
+
+    """
+    # guess value for minimizer: even distribution
+    size = len(prices.columns) * 1.0
+    allocs_guess = np.ones(size)/size
+
+    # Setting boundary to be [0, 1];
+    # constraints to be sum(allocs == 1)
+    cons = ({ 'type': 'eq', 'fun': lambda x: np.sum(x) - 1 })
+    bnds = [(0.0, 1.0)] * size
+
+    allocs = spo.minimize(sharpe_func, allocs_guess, args(prices,),
+                       method= 'SLSQP',bounds=bnds, constraints=cons)
+
+    return allocs.x
 
 # This is the function that will be tested by the autograder
-# The student must update this code to properly implement the functionality 			  		 			     			  	   		   	  			  	
+# The student must update this code to properly implement the functionality
 def optimize_portfolio(sd=dt.datetime(2008,1,1), ed=dt.datetime(2009,1,1), \
     syms=['GOOG','AAPL','GLD','XOM'], gen_plot=False):
 
+    """
+
+    Return:
+        allocs: A 1-d Numpy ndarray of allocations to the stocks. All the allocations must be between 0.0 and 1.0 and they must sum to 1.0.
+        cr: Cumulative return
+        adr: Average daily return
+        ddr: Standard deviation of daily return
+        sr: Sharpe ratio
+    """
     # Read in adjusted closing prices for given symbols, date range
     dates = pd.date_range(sd, ed) 			  		 			     			  	   		   	  			  	
     prices_all = get_data(syms, dates)  # automatically adds SPY 			  		 			     			  	   		   	  			  	
     prices = prices_all[syms]  # only portfolio symbols 			  		 			     			  	   		   	  			  	
     prices_SPY = prices_all['SPY']  # only SPY, for comparison later
 
+    # dealing with missing values in the data file.
+    prices.fillna(method='ffill', inplace=True)
+    prices.fillna(method='bfill', inplace=True)
+
     #  find the allocations for the optimal portfolio
-    # note that the values here ARE NOT meant to be correct for a test case 			  		 			     			  	   		   	  			  	
-    allocs = np.asarray([0.2, 0.2, 0.3, 0.3]) # add code here to find the allocations 			  		 			     			  	   		   	  			  	
-    cr, adr, sddr, sr = [0.25, 0.001, 0.0005, 2.1] # add code here to compute stats
+    # note that the values here ARE NOT meant to be correct for a test case
+
+    # build the function to minimize, in this case that function should be the negative Sharpe Ratio.
+
+    allocs = fit_allocs(prices, neg_sharpe)
+
+    normed = prices / prices.iloc[0,:]
+    alloced = normed * allocs
+    port_val = alloced.sum(axis=1) # portfolio
+    daily_returns = compute_daily_returns(port_val)
+
+    cr = (port_val[-1] - port_val[0]) / port_val[0]
+    adr = daily_returns.mean() # average daily returns
+    sddr = daily_returns.std()
+
+    # allocs = np.asarray([0.2, 0.2, 0.3, 0.3]) # add code here to find the allocations
+    # cr, adr, sddr, sr = [0.25, 0.001, 0.0005, 2.1] # add code here to compute stats
+
+    #sr = sharpe(port_val)
 
     #  Get daily portfolio value
     port_val = prices_SPY # add code here to compute daily portfolio values
