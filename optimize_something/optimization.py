@@ -81,8 +81,10 @@ def fit_allocs(prices, sharpe_func):
 
     """
     # guess value for minimizer: even distribution
-    size = len(prices.columns) * 1.0
+    size = len(prices.columns)
     allocs_guess = np.ones(size)/size
+
+    print "87: allocs_guess = " + allocs_guess
 
     # Setting boundary to be [0, 1];
     # constraints to be sum(allocs == 1)
