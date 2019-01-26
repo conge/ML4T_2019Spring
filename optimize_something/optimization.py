@@ -84,7 +84,7 @@ def fit_allocs(prices, sharpe_func):
     size = len(prices.columns)
     allocs_guess = np.ones(size)/size
 
-    print "87: allocs_guess = " + allocs_guess
+    print allocs_guess
 
     # Setting boundary to be [0, 1];
     # constraints to be sum(allocs == 1)
