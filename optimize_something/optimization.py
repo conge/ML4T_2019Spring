@@ -91,7 +91,7 @@ def fit_allocs(prices, sharpe_func):
     cons = ({ 'type': 'eq', 'fun': lambda x: np.sum(x) - 1 })
     bnds = [(0.0, 1.0)] * size
 
-    allocs = spo.minimize(sharpe_func, allocs_guess, args(prices,),
+    allocs = spo.minimize(sharpe_func, allocs_guess, args=(prices,),
                        method= 'SLSQP',bounds=bnds, constraints=cons)
 
     return allocs.x
