@@ -21,8 +21,8 @@ GT honor code violation.
 -----do not edit anything above this line---
 
 Student Name: Tucker Balch (replace with your name)
-GT User ID: tb34 (replace with your User ID) 			  		 			     			  	   		   	  			  	
-GT ID: 900897987 (replace with your GT ID) 			  		 			     			  	   		   	  			  	
+GT User ID: qli7 (replace with your User ID)
+GT ID: 902265013 (replace with your GT ID)
 """
 
 import pandas as pd
@@ -43,8 +43,10 @@ def compute_daily_returns(df):
     return daily_returns
 
 
-def compute_cumulative_returens(df):
-    """Compute and return cumulative returns"""
+def compute_cumulative_returns(df):
+    """Compute and return cumulative returns
+
+    """
     cumulative_returns = (df / df[0]) - 1
     return cumulative_returns
 
@@ -54,7 +56,7 @@ def sharpe(daily_returns, rfr=0, samplingRate=252):
     Input:
        allocs: allocation of a portfolio, note: allocs.sum() should be one and allocs in [0,1]
        prices: prices of all stocks in a portfolio
-       rf: risk-free return
+       rfr: risk-free return
        K: K_daily = sqrt(252); K_annually = sqrt(1); K_monthly = sqrt(12)
     return:
       Sharpe_ratio
@@ -134,21 +136,21 @@ def optimize_portfolio(sd=dt.datetime(2008,1,1), ed=dt.datetime(2009,1,1), \
     # allocs = np.asarray([0.2, 0.2, 0.3, 0.3]) # add code here to find the allocations
     # cr, adr, sddr, sr = [0.25, 0.001, 0.0005, 2.1] # add code here to compute stats
 
-    allocs = fit_allocs(prices, neg_sharpe)
+    allocs = fit_allocs(prices, neg_sharpe) # get allocations with minimizer
 
+    # Get daily portfolio value
     normed = prices / prices.iloc[0,:]
     alloced = normed * allocs
     port_val = alloced.sum(axis=1) # portfolio
-    daily_returns = compute_daily_returns(port_val)
 
+    # get stats for the portfolio
+
+    daily_returns = compute_daily_returns(port_val)
     cr = (port_val[-1] - port_val[0]) / port_val[0]
     adr = daily_returns.mean() # average daily returns
     sddr = daily_returns.std()
 
     sr = sharpe(daily_returns)
-
-    #  Get daily portfolio value
-    # port_val = prices_SPY # add code here to compute daily portfolio values
 
     #  Compare daily portfolio value with SPY using a normalized plot
     if gen_plot: 			  		 			     			  	   		   	  			  	
