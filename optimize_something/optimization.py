@@ -37,7 +37,7 @@ from scipy import optimize as spo
 def compute_daily_returns(df):
     """Compute and return daily returns"""
     daily_returns = (df / df.shift(1)) - 1
-    daily_returns.ix[0, :] = 0
+    daily_returns = daily_returns[1:]
     return daily_returns
 
 
