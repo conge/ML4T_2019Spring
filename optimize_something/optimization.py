@@ -87,7 +87,7 @@ def fit_allocs(prices, sharpe_func):
 
     # Setting boundary to be [0, 1];
     # constraints to be sum(allocs) == 1
-    cons = ({'type': 'ineq', 'fun': lambda x: np.sum(x) - 1})
+    cons = ({'type': 'eq', 'fun': lambda x: np.sum(x) - 1})
     bnds = ((0, 1),) * size # duplicate tuple size times in a tuple
 
     allocs = spo.minimize(sharpe_func, allocs_guess, args=(prices,), method='SLSQP', bounds=bnds, constraints=cons)
