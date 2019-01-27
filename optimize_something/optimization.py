@@ -46,7 +46,8 @@ def compute_cumulative_returens(df):
     cumulative_returns = (df / df[0]) - 1
     return cumulative_returns
 
-def sharpe(port_val, rf=0, K=252):
+
+def sharpe(daily_returns, rf=0, samplingRate=252):
     """Compute Sharpe ration for a portfolio
     Input:
        allocs: allocation of a portfolio, note: allocs.sum() should be one and allocs in [0,1]
@@ -57,7 +58,7 @@ def sharpe(port_val, rf=0, K=252):
       Sharpe_ratio
     """
 
-    sharpe_ratio = np.sqrt(K) * (port_val.mean() - rf) / port_val.std()
+    sharpe_ratio = np.sqrt(samplingRate) * (daily_returns.mean() - rf) / daily_returns.std()
     return sharpe_ratio
 
 
@@ -67,7 +68,7 @@ def neg_sharpe(allocs, prices, rf=0, K=252):
     alloced = normed * allocs
     port_val = alloced.sum(axis=1)
     daily_returns = compute_daily_returns(part_val)
-    neg_sharpe_ratio = -1 * sharpe(port_val, rf, K)
+    neg_sharpe_ratio = -1 * sharpe(daily_returns, rf, K)
     return neg_sharpe_ratio
 
 
