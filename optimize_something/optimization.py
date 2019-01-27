@@ -47,7 +47,7 @@ def compute_cumulative_returens(df):
     return cumulative_returns
 
 
-def sharpe(daily_returns, rf=0, samplingRate=252):
+def sharpe(daily_returns, rfr=0, samplingRate=252):
     """Compute Sharpe ration for a portfolio
     Input:
        allocs: allocation of a portfolio, note: allocs.sum() should be one and allocs in [0,1]
@@ -58,17 +58,17 @@ def sharpe(daily_returns, rf=0, samplingRate=252):
       Sharpe_ratio
     """
 
-    sharpe_ratio = np.sqrt(samplingRate) * (daily_returns - rf).mean() / daily_returns.std()
+    sharpe_ratio = np.sqrt(samplingRate) * (daily_returns - rfr).mean() / daily_returns.std()
     return sharpe_ratio
 
 
 # this is the function that the minimizer will work on.
-def neg_sharpe(allocs, prices, rf=0, samplingRate=252):
+def neg_sharpe(allocs, prices, rfr=0, samplingRate=252):
     normed = prices / prices.iloc[0,:]
     alloced = normed * allocs
     port_val = alloced.sum(axis=1)
     daily_returns = compute_daily_returns(port_val)
-    neg_sharpe_ratio = -1 * sharpe(daily_returns, rf, samplingRate)
+    neg_sharpe_ratio = -1 * sharpe(daily_returns, rfr, samplingRate)
     return neg_sharpe_ratio
 
 
@@ -115,6 +115,8 @@ def optimize_portfolio(sd=dt.datetime(2008,1,1), ed=dt.datetime(2009,1,1), \
     prices_all = get_data(syms, dates)  # automatically adds SPY 			  		 			     			  	   		   	  			  	
     prices = prices_all[syms]  # only portfolio symbols 			  		 			     			  	   		   	  			  	
     prices_SPY = prices_all['SPY']  # only SPY, for comparison later
+
+    print type(prices)
 
     # dealing with missing values in the data file.
     prices.fillna(method='ffill', inplace=True)
