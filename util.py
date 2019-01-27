@@ -35,7 +35,8 @@ def plot_data(df, title="Stock prices", xlabel="Date", ylabel="Price"):
     """Plot stock prices with a custom title and meaningful axis labels."""  		   	  			    		  		  		    	 		 		   		 		  
     ax = df.plot(title=title, fontsize=12)  		   	  			    		  		  		    	 		 		   		 		  
     ax.set_xlabel(xlabel)  		   	  			    		  		  		    	 		 		   		 		  
-    ax.set_ylabel(ylabel)  		   	  			    		  		  		    	 		 		   		 		  
+    ax.set_ylabel(ylabel)  
+    plt.savefig('Report.pdf')		   	  			    		  		  		    	 		 		   		 		  
     plt.show()  		   	  			    		  		  		    	 		 		   		 		  
   		   	  			    		  		  		    	 		 		   		 		  
 def get_orders_data_file(basefilename):  		   	  			    		  		  		    	 		 		   		 		  
