@@ -53,22 +53,22 @@ def sharpe(daily_returns, rf=0, samplingRate=252):
        allocs: allocation of a portfolio, note: allocs.sum() should be one and allocs in [0,1]
        prices: prices of all stocks in a portfolio
        rf: risk-free return
-       K: K_daily = 252; K_annually = 1; K_monthly = 12
+       K: K_daily = sqrt(252); K_annually = sqrt(1); K_monthly = sqrt(12)
     return:
       Sharpe_ratio
     """
 
-    sharpe_ratio = np.sqrt(samplingRate) * (daily_returns.mean() - rf) / daily_returns.std()
+    sharpe_ratio = np.sqrt(samplingRate) * (daily_returns - rf).mean() / daily_returns.std()
     return sharpe_ratio
 
 
 # this is the function that the minimizer will work on.
-def neg_sharpe(allocs, prices, rf=0, K=252):
+def neg_sharpe(allocs, prices, rf=0, samplingRate=252):
     normed = prices / prices.iloc[0,:]
     alloced = normed * allocs
     port_val = alloced.sum(axis=1)
     daily_returns = compute_daily_returns(port_val)
-    neg_sharpe_ratio = -1 * sharpe(daily_returns, rf, K)
+    neg_sharpe_ratio = -1 * sharpe(daily_returns, rf, samplingRate)
     return neg_sharpe_ratio
 
 
@@ -139,7 +139,7 @@ def optimize_portfolio(sd=dt.datetime(2008,1,1), ed=dt.datetime(2009,1,1), \
     # allocs = np.asarray([0.2, 0.2, 0.3, 0.3]) # add code here to find the allocations
     # cr, adr, sddr, sr = [0.25, 0.001, 0.0005, 2.1] # add code here to compute stats
 
-    #sr = sharpe(port_val)
+    sr = sharpe(daily_returns)
 
     #  Get daily portfolio value
     port_val = prices_SPY # add code here to compute daily portfolio values
