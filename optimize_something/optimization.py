@@ -67,7 +67,7 @@ def neg_sharpe(allocs, prices, rf=0, K=252):
     normed = prices / prices.iloc[0,:]
     alloced = normed * allocs
     port_val = alloced.sum(axis=1)
-    daily_returns = compute_daily_returns(part_val)
+    daily_returns = compute_daily_returns(port_val)
     neg_sharpe_ratio = -1 * sharpe(daily_returns, rf, K)
     return neg_sharpe_ratio
 
