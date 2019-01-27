@@ -143,7 +143,6 @@ def optimize_portfolio(sd=dt.datetime(2008,1,1), ed=dt.datetime(2009,1,1), \
     adr = daily_returns.mean() # average daily returns
     sddr = daily_returns.std()
 
-
     sr = sharpe(daily_returns)
 
     #  Get daily portfolio value
