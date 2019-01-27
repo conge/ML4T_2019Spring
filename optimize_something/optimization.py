@@ -26,6 +26,8 @@ GT ID: 900897987 (replace with your GT ID)
 """
 
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt 			  		 			     			  	   		   	  			  	
 import numpy as np 			  		 			     			  	   		   	  			  	
 import datetime as dt 			  		 			     			  	   		   	  			  	
