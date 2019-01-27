@@ -147,15 +147,13 @@ def optimize_portfolio(sd=dt.datetime(2008,1,1), ed=dt.datetime(2009,1,1), \
     sr = sharpe(daily_returns)
 
     #  Get daily portfolio value
-    # port_val = prices_SPY # add code here to compute daily portfolio values
+    port_val = prices_SPY # add code here to compute daily portfolio values
 
     #  Compare daily portfolio value with SPY using a normalized plot
     if gen_plot: 			  		 			     			  	   		   	  			  	
         # add code to plot here 			  		 			     			  	   		   	  			  	
-        df_temp = pd.concat([port_val, prices_SPY], keys=['Portfolio', 'SPY'], axis=1)
-
-        df_temp = df_temp / df_temp.iloc[0, :]
-        plot_data(df_temp, title="Performance Comparison: Portfolio V.S. SPY", ylabel="Normalized price")
+        df_temp = pd.concat([port_val, prices_SPY], keys=['Portfolio', 'SPY'], axis=1) 			  		 			     			  	   		   	  			  	
+        pass
 
     return allocs, cr, adr, sddr, sr
 
