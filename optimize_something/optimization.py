@@ -88,8 +88,8 @@ def fit_allocs(prices, sharpe_func):
     print allocs_guess
 
     # Setting boundary to be [0, 1];
-    # constraints to be sum(allocs == 1)
-    cons = ({'type': 'eq', 'fun': lambda x: np.sum(x) - 1})
+    # constraints to be sum(allocs) == 1
+    cons = ({'type': 'ineq', 'fun': lambda x: np.sum(x) - 1})
     bnds = [(0.0, 1.0)] * size
 
     allocs = spo.minimize(sharpe_func, allocs_guess, args=(prices,), method='SLSQP', bounds=bnds, constraints=cons)
@@ -186,4 +186,4 @@ if __name__ == "__main__":
     # This code WILL NOT be called by the auto grader 			  		 			     			  	   		   	  			  	
     # Do not assume that it will be called 			  		 			     			  	   		   	  			  	
     test_code()
-    
+
