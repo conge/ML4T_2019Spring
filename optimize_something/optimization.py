@@ -85,7 +85,9 @@ def fit_allocs(prices, sharpe_func):
     size = len(prices.columns)
     allocs_guess = np.ones(size)/size
 
+    print type(prices)
     print allocs_guess
+    print type(prices)
 
     # Setting boundary to be [0, 1];
     # constraints to be sum(allocs) == 1
@@ -116,7 +118,6 @@ def optimize_portfolio(sd=dt.datetime(2008,1,1), ed=dt.datetime(2009,1,1), \
     prices = prices_all[syms]  # only portfolio symbols 			  		 			     			  	   		   	  			  	
     prices_SPY = prices_all['SPY']  # only SPY, for comparison later
 
-    print type(prices)
 
     # dealing with missing values in the data file.
     prices.fillna(method='ffill', inplace=True)
