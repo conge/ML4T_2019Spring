@@ -124,7 +124,12 @@ def optimize_portfolio(sd=dt.datetime(2008,1,1), ed=dt.datetime(2009,1,1), \
 
     # build the function to minimize, in this case that function should be the negative Sharpe Ratio.
 
-    allocs = np.asarray([0.2, 0.2, 0.3, 0.3]) # add code here to find the allocations
+    # testing code
+    size = len(prices.columns)
+    allocs_guess = np.ones(size)/size
+    allocs = allocs_guess
+
+    # allocs = np.asarray([0.2, 0.2, 0.3, 0.3]) # add code here to find the allocations
     # cr, adr, sddr, sr = [0.25, 0.001, 0.0005, 2.1] # add code here to compute stats
 
     # allocs = fit_allocs(prices, neg_sharpe)
