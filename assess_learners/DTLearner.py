@@ -115,7 +115,7 @@ class DTLearner(object):
                 if factor == -1:  # if yes, then we get the predicted value for point, and we can stop searching.
                     print "predY = ", predY
                     print "node_index = ", node_index
-                    predY = predY.append(self.tree[node_index,1])
+                    predY.append(self.tree[node_index,1])
                     keep_searching = False
 
                 else:  # if not compare the factor value with the points to determine which node to search
