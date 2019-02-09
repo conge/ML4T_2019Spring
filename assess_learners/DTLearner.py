@@ -88,10 +88,10 @@ class DTLearner(object):
         if self.verbose:
             if self.tree is None:
                 print ("Tree is None")
-        else:
-            print ("The shape of tree is", self.tree.shape)
-            print ("The tree is：")
-            print (self.tree)
+            else:
+                print ("The shape of tree is", self.tree.shape)
+                print ("The tree is：")
+                print (self.tree)
 
     def query(self, points):
         """ 			  		 			     			  	   		   	  			  	
