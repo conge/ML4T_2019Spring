@@ -54,7 +54,7 @@ if __name__=="__main__":
     print learner.author()
     """
 
-    learner = DT.DTLearner(20, verbose = True) # create a dt learner
+    learner = DT.DTLearner(10, verbose = True) # create a dt learner
     learner.addEvidence(trainX, trainY) # train it
     print learner.author()
  			  		 			     			  	   		   	  			  	
