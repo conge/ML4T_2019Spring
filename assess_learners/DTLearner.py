@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 A simple wrapper for decision tree  (c) 2019 Qingyang Li
 
