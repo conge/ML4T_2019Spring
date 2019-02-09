@@ -26,6 +26,7 @@ import numpy as np
 import math 			  		 			     			  	   		   	  			  	
 import LinRegLearner as lrl
 import DTLearner as DT
+import RTLearner as RT
 import sys 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
 if __name__=="__main__": 			  		 			     			  	   		   	  			  	
@@ -54,7 +55,7 @@ if __name__=="__main__":
     print learner.author()
     """
 
-    learner = DT.DTLearner(10, verbose = True) # create a dt learner
+    learner = RT.RTLearner(10, verbose = True) # create a dt learner
     learner.addEvidence(trainX, trainY) # train it
     print learner.author()
  			  		 			     			  	   		   	  			  	

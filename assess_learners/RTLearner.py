@@ -8,7 +8,7 @@ A simple wrapper for decision tree  (c) 2019 Qingyang Li
 import numpy as np
 
 
-class DTLearner(object):
+class RTLearner(object):
 
     def __init__(self, leaf_size=1, verbose=False):
         self.leaf_size = leaf_size
@@ -19,23 +19,23 @@ class DTLearner(object):
     def author(self):
         return 'qli7' # replace tb34 with your Georgia Tech username
 
-    def find_best_feature(self,dataX,dataY):
-        """
-        @Summary: find the index of best feature in dataX based on the absolute correlation with dataY
-        :param dataX: Training data of Xs
-        :param dataY: Training data, Y
-        :return: the index of the best feature
-        """
-
-        corrs = []
-        for i in range(dataX.shape[1]):
-            tmp = np.corrcoef(dataX[:, i], dataY) # calculate correlation coeficient
-            corr = abs(tmp[0, 1])  # get the absolute value of the correlation coeficient (r)
-            corrs.append(corr)
-
-        best_feature_index = np.argmax(corrs)
-
-        return best_feature_index
+    # def find_best_feature(self,dataX,dataY):
+    #     """
+    #     @Summary: find the index of best feature in dataX based on the absolute correlation with dataY
+    #     :param dataX: Training data of Xs
+    #     :param dataY: Training data, Y
+    #     :return: the index of the best feature
+    #     """
+    #
+    #     corrs = []
+    #     for i in range(dataX.shape[1]):
+    #         tmp = np.corrcoef(dataX[:, i], dataY) # calculate correlation coeficient
+    #         corr = abs(tmp[0, 1])  # get the absolute value of the correlation coeficient (r)
+    #         corrs.append(corr)
+    #
+    #     best_feature_index = np.argmax(corrs)
+    #
+    #     return best_feature_index
 
     def buildTree(self, dataX, dataY):
 
@@ -47,17 +47,18 @@ class DTLearner(object):
             return leaf
 
         # condition 2: the tree is not worth splitting when all the value in dataY is the same
-        if np.std(dataY) == 0:
+        if np.all(dataY == dataY[0]):
             return np.array([[-1, dataY[0], -1, -1]])  # in this case, np.mean(dataY) and dataY[0] are the same
             # return np.array([[-1, np.mean(dataY), -1, -1]])
 
-        # find the "best feature to split on" as the feature (Xi) that has the highest absolute value correlation with Y
-        best_feature_index = self.find_best_feature(dataX, dataY)
+        # find the "random feature to split on" as the feature
+        rand_feature_index = np.random.randint(dataX.shape[1])
 
-        feature_to_split = dataX[:, best_feature_index]
+        feature_to_split = dataX[:, rand_feature_index]
         split_value = np.median(feature_to_split)
 
         # condition 3：when the median of the data is the largest value, there is no way to split it further
+        # This condition covers the situation when the feature has the same value for all the instances.
         if np.all(feature_to_split <= split_value):
             return np.array([[-1, np.mean(dataY), -1, -1]])
 
@@ -78,10 +79,10 @@ class DTLearner(object):
         return np.vstack((root, left_branch, right_branch))
 
     def addEvidence(self, dataX, dataY):
-        """ 			  		 			     			  	   		   	  			  	
+        """
         @summary: Add training data to learner, train a model and save it
-        @param dataX: X values of data to add 			  		 			     			  	   		   	  			  	
-        @param dataY: the Y training values 
+        @param dataX: X values of data to add
+        @param dataY: the Y training values
         """
 
         self.tree = self.buildTree(dataX, dataY)
@@ -97,10 +98,10 @@ class DTLearner(object):
                 print (self.tree)
 
     def query(self, points):
-        """ 			  		 			     			  	   		   	  			  	
-        @summary: Estimate a set of test points given the model we built. 			  		 			     			  	   		   	  			  	
-        @param points: should be a numpy array with each row corresponding to a specific query. 			  		 			     			  	   		   	  			  	
-        @returns the estimated values according to the saved model. 			  		 			     			  	   		   	  			  	
+        """
+        @summary: Estimate a set of test points given the model we built.
+        @param points: should be a numpy array with each row corresponding to a specific query.
+        @returns the estimated values according to the saved model.
         """
 
         predY = [0]
