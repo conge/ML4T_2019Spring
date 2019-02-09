@@ -113,6 +113,7 @@ class DTLearner(object):
 
                 # check if the node is leaf,
                 if factor == -1:  # if yes, then we get the predicted value for point, and we can stop searching.
+                    print ("predY = ", predY)
                     predY = predY.append(self.tree[node_index,1])
                     keep_searching = False
 
