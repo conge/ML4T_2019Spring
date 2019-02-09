@@ -86,7 +86,7 @@ class DTLearner(object):
         self.tree = self.buildTree(dataX, dataY)
 
         if self.verbose:
-            if self.model is None:
+            if self.tree is None:
                 print ("Tree is None")
         else:
             print ("The shape of tree is", self.tree.shape)
