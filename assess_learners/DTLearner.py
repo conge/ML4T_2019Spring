@@ -43,12 +43,13 @@ class DTLearner(object):
 
         # condition 1: the tree is not splittable when the size of the data is less or equal to leaf_size
         if dataX.shape[0] <= self.leaf_size:
-            leaf = np.array([[-1, np.mean(dataY), -1, -1]])
+            leaf = np.array([[-1, np.mean(dataY), -1, -1]])  # leaf node when factor is -1, [factor, value, left, right]
             return leaf
 
         # condition 2: the tree is not worth splitting when all the value in dataY is the same
         if np.all(dataY == dataY[0]):
-            return np.array([[-1, dataY[0], -1, -1]])
+            return np.array([[-1, dataY[0], -1, -1]])  # in this case, np.mean(dataY) and dataY[0] are the same
+            # return np.array([[-1, np.mean(dataY), -1, -1]])
 
         # find the "best feature to split on" as the feature (Xi) that has the highest absolute value correlation with Y
         best_feature_index = self.find_best_feature(dataX, dataY)
@@ -86,10 +87,12 @@ class DTLearner(object):
         self.tree = self.buildTree(dataX, dataY)
 
         if self.verbose:
+            print ("the author of this code is ",self.author())
             if self.tree is None:
-                print ("Tree is None")
+                print ("The tree is empty!")
             else:
-                print ("The shape of tree is", self.tree.shape)
+                print ("The leaf size is ", self.leaf_size)
+                print ("The shape of tree is ", self.tree.shape)
                 print ("The tree is：")
                 print (self.tree)
 
@@ -100,6 +103,29 @@ class DTLearner(object):
         @returns the estimated values according to the saved model. 			  		 			     			  	   		   	  			  	
         """
 
-        pass
+        predY = []
+        for point in points:
 
+            keep_searching = True
+            node_index = 0 # start searching from the root for each row of input data (points).
+            while keep_searching:
+                factor = int(self.tree[node_index,0])  # get factor to check
+
+                # check if the node is leaf,
+                if factor == -1:  # if yes, then we get the predicted value for point, and we can stop searching.
+                    predY = predY.append(self.tree[node_index,1])
+                    keep_searching = False
+
+                else:  # if not compare the factor value with the points to determine which node to search
+                    split_value = self.tree[node_index,1]
+                    if point[factor] <= split_value:
+                        node_index = node_index + int(self.tree[node_index, 2])  # goes to the left branch
+                    else:
+                        node_index = node_index + int(self.tree[node_index, -1])  # goes to the right branch
+
+        return predY
+
+
+if __name__=="__main__":
+    print "the secret clue is 'zzyzx'"
 
