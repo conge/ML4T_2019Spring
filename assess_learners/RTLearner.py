@@ -74,7 +74,7 @@ class RTLearner(object):
         left_branch = self.buildTree(left_dataX,left_dataY)
         right_branch = self.buildTree(right_dataX,right_dataY)
 
-        root = np.array([[best_feature_index, split_value, 1, left_branch.shape[0] + 1]])
+        root = np.array([[rand_feature_index, split_value, 1, left_branch.shape[0] + 1]])
 
         return np.vstack((root, left_branch, right_branch))
 
