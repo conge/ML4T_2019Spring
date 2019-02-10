@@ -51,10 +51,10 @@ class BagLearner(object):
         for learner in self.models:
             predY.append(learner.query(points))
 
-        print "line 54: predY "
-        print predY
+        #print "line 54: predY "
+        #print predY
 
-        return np.mean(predY, axis=0)
+        return np.mean(predY, axis=0)  # average of the predicted value by all models is the result of the bagLearner
 
 
 if __name__ == "__main__":
