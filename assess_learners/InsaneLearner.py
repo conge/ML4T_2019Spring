@@ -1,3 +1,4 @@
+import numpy as np
 import BagLearner as bl
 import LinRegLearner as lrl
 
