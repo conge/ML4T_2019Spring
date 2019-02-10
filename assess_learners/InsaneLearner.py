@@ -12,7 +12,9 @@ class InsaneLearner(object):
     def __init__(self, verbose = False):
         self.verbose = verbose
         # initialize the learner to be a bag learner with 20 LinRegLearners.
-        self.learner = bl.BagLearner(learner=lrl.LinRegLearner, kwargs={}, bags=20, boost=False, verbose=self.verbose)
+        self.learners = []
+        for i in range(20):
+            self.learners.append(bl.BagLearner(learner=lrl.LinRegLearner, kwargs={}, bags=20, boost=False, verbose=self.verbose))
 
     def author(self):
         return 'qli7' # replace tb34 with your Georgia Tech username
@@ -24,17 +26,12 @@ class InsaneLearner(object):
         @param dataY: the Y training values
         """
 
-        # build 20 bag learners
-        self.models = []
-        for i in range(20):
-            # start a learner
-            learner = self.learner()
+        # train all the learners
+
+        for learner in self.learners:
 
             # train the learners with different data
             learner.addEvidence(dataX, dataY)
-
-            # save the learnt model for later use
-            self.models.append(learner)
 
     def query(self, points):
         """
@@ -44,7 +41,7 @@ class InsaneLearner(object):
         """
 
         predY = []
-        for learner in self.models:
+        for learner in self.learners:
             predY.append(learner.query(points))
 
         return np.mean(predY, axis=0)  # average of the predicted value by all models is the result of the bagLearner
