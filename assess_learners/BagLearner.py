@@ -4,7 +4,7 @@ import numpy as np
 class BagLearner(object):
 
     def __init__(self, learner, kwargs, bags, boost = False, verbose = False):
-        self.leaner = learner
+        self.learner = learner
         self.kwargs = kwargs
         self.bags = bags
         self.boost = boost
