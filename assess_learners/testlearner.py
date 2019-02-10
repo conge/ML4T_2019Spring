@@ -28,14 +28,20 @@ import LinRegLearner as lrl
 import DTLearner as DT
 import RTLearner as RT
 import BagLearner as bl
-import sys 			  		 			     			  	   		   	  			  	
+import sys
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
  			  		 			     			  	   		   	  			  	
 if __name__=="__main__": 			  		 			     			  	   		   	  			  	
     if len(sys.argv) != 2: 			  		 			     			  	   		   	  			  	
         print "Usage: python testlearner.py <filename>" 			  		 			     			  	   		   	  			  	
         sys.exit(1) 			  		 			     			  	   		   	  			  	
     inf = open(sys.argv[1]) 			  		 			     			  	   		   	  			  	
-    data = np.array([map(float,s.strip().split(',')) for s in inf.readlines()]) 			  		 			     			  	   		   	  			  	
+    data = np.array([map(float,s.strip().split(',')) for s in inf.readlines()])
+
+    if sys.argv[1] == 'Istanbul.csv':
+        data = data[1:, 1:]
  			  		 			     			  	   		   	  			  	
     # compute how much of the data is training and testing 			  		 			     			  	   		   	  			  	
     train_rows = int(0.6* data.shape[0]) 			  		 			     			  	   		   	  			  	

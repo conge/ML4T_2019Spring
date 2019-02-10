@@ -44,7 +44,7 @@ class BagLearner(object):
         @returns the estimated values according to the saved model.
         """
         if not self.models:
-            print "Please train the bag learner before querying it: learner.addEvidence(Xtrain, Ytrain)"
+            # print "Please train the bag learner before querying it: learner.addEvidence(Xtrain, Ytrain)"
             return np.nan
 
         predY = []
