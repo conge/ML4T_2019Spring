@@ -25,7 +25,7 @@ class BagLearner(object):
         for i in range(0, self.bags):
             # start a learner
             learner = self.learner(**self.kwargs)
-            
+
             # create a bag of data by sampling dataX and dataY
             choice = np.random.choice(a=dataX.shape[0], size=len(dataY),replace=True)
             bag_dataX = dataX[choice]

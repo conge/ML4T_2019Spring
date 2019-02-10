@@ -27,6 +27,7 @@ import math
 import LinRegLearner as lrl
 import DTLearner as DT
 import RTLearner as RT
+import BagLearner as bl
 import sys 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
 if __name__=="__main__": 			  		 			     			  	   		   	  			  	
@@ -53,9 +54,15 @@ if __name__=="__main__":
     learner = lrl.LinRegLearner(verbose = True) # create a LinRegLearner 			  		 			     			  	   		   	  			  	
     learner.addEvidence(trainX, trainY) # train it 			  		 			     			  	   		   	  			  	
     print learner.author()
-    """
+    
 
     learner = RT.RTLearner(10, verbose = True) # create a dt learner
+    learner.addEvidence(trainX, trainY) # train it
+    print learner.author()
+    """
+
+
+    learner = bl.BagLearner(learner = RT.RTLearner, kwargs = {"leaf_size":10}, bags = 10, boost = False, verbose = False)
     learner.addEvidence(trainX, trainY) # train it
     print learner.author()
  			  		 			     			  	   		   	  			  	
