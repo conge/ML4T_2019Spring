@@ -51,7 +51,10 @@ class BagLearner(object):
         for learner in self.models:
             predY.append(learner.query(points))
 
-        return np.mean(predY)
+        print "line 54: predY "
+        print predY
+
+        return np.mean(predY, axis=0)
 
 
 if __name__ == "__main__":
