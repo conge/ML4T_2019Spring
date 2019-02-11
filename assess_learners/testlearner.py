@@ -34,28 +34,78 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
  			  		 			     			  	   		   	  			  	
 if __name__=="__main__": 			  		 			     			  	   		   	  			  	
-    if len(sys.argv) != 2: 			  		 			     			  	   		   	  			  	
-        print "Usage: python testlearner.py <filename>" 			  		 			     			  	   		   	  			  	
-        sys.exit(1) 			  		 			     			  	   		   	  			  	
-    inf = open(sys.argv[1]) 			  		 			     			  	   		   	  			  	
+    #if len(sys.argv) != 2:
+    #    print "Usage: python testlearner.py <filename>"
+    #    sys.exit(1)
+
+    # =========== EXPERiMENT 1 ===================
+    """
+    Train DTLearners with varied leaf_size and calculate RMSE and Correlation to measure accuracy of the models
+    for each leaf_size, repeat 15 iterations and get the mean value of the metrics. For each iteration, randomly select
+    data as Training and testing set. 
+    """
+
+    # Get data from Istanbul.csv
+    inf = open('Data/Istanbul.csv')
     data = np.array([map(float,s.strip().split(',')) for s in inf.readlines()])
 
-    if sys.argv[1] == 'Istanbul.csv':
-        data = data[1:, 1:]
+    data = data[1:, 1:] # remove the header row and the time column
  			  		 			     			  	   		   	  			  	
     # compute how much of the data is training and testing 			  		 			     			  	   		   	  			  	
     train_rows = int(0.6* data.shape[0]) 			  		 			     			  	   		   	  			  	
-    test_rows = data.shape[0] - train_rows 			  		 			     			  	   		   	  			  	
+    test_rows = data.shape[0] - train_rows
+
+    max_leaf_size = 80
+    repeat_times = 15
+
  			  		 			     			  	   		   	  			  	
-    # separate out training and testing data 			  		 			     			  	   		   	  			  	
-    trainX = data[:train_rows,0:-1] 			  		 			     			  	   		   	  			  	
-    trainY = data[:train_rows,-1] 			  		 			     			  	   		   	  			  	
-    testX = data[train_rows:,0:-1] 			  		 			     			  	   		   	  			  	
-    testY = data[train_rows:,-1] 			  		 			     			  	   		   	  			  	
- 			  		 			     			  	   		   	  			  	
-    print testX.shape 			  		 			     			  	   		   	  			  	
-    print testY.shape 			  		 			     			  	   		   	  			  	
- 			  		 			     			  	   		   	  			  	
+    #print testX.shape
+    #print testY.shape
+
+ 	# experiment 1: Run DT with different leaf_size and calculate RMSE
+    rmse_in_sample = np.zeros((repeat_times, max_leaf_size))
+    corr_in_sample = []
+    rmse_out_sample = []
+    corr_out_sample = []
+    # separate out training and testing data
+    trainX = data[:train_rows,0:-1]
+    trainY = data[:train_rows,-1]
+    testX = data[train_rows:,0:-1]
+    testY = data[train_rows:,-1]
+
+    for j in range(max_leaf_size):
+        leaf_size = j + 1
+        learner = DT.DTLearner(leaf_size, verbose = False) # create a dt learner
+        learner.addEvidence(trainX, trainY) # train it
+        # evaluate in sample
+        predY = learner.query(trainX) # get the predictions
+        rmse_in_sample.append(math.sqrt(((trainY - predY) ** 2).sum()/trainY.shape[0]))
+        c = np.corrcoef(predY, y=trainY)
+        corr_in_sample.append(c[0,1])
+
+        # evaluate out of sample
+        predY = learner.query(testX) # get the predictions
+        rmse_out_sample.append(math.sqrt(((testY - predY) ** 2).sum()/testY.shape[0]))
+        c = np.corrcoef(predY, y=testY)
+        corr_out_sample.append(c[0,1])
+
+    # plot the data
+
+    x = range(1, max_leaf_size + 1)
+    plt.figure(1)
+    plt.plot(x, rmse_in_sample, label="in-sample", linewidth=2.0)
+    plt.plot(x, rmse_out_sample, label="out-of-sample", linewidth=2.0)
+    plt.xlabel("Leaf Size")
+    plt.ylabel("RMSE")
+    plt.legend()
+    plt.title("RMSE of Decision Tree Learner with different leaf size")
+    plt.savefig('Exp1_fig1.png')
+    plt.close()
+
+
+
+
+
     """# create a learner and train it 			  		 			     			  	   		   	  			  	
     learner = lrl.LinRegLearner(verbose = True) # create a LinRegLearner 			  		 			     			  	   		   	  			  	
     learner.addEvidence(trainX, trainY) # train it 			  		 			     			  	   		   	  			  	
@@ -65,7 +115,7 @@ if __name__=="__main__":
     learner = RT.RTLearner(10, verbose = True) # create a dt learner
     learner.addEvidence(trainX, trainY) # train it
     print learner.author()
-    """
+    
 
 
     learner = bl.BagLearner(learner = RT.RTLearner, kwargs = {"leaf_size":10}, bags = 10, boost = False, verbose = False)
@@ -88,4 +138,5 @@ if __name__=="__main__":
     print "Out of sample results" 			  		 			     			  	   		   	  			  	
     print "RMSE: ", rmse 			  		 			     			  	   		   	  			  	
     c = np.corrcoef(predY, y=testY) 			  		 			     			  	   		   	  			  	
-    print "corr: ", c[0,1] 			  		 			     			  	   		   	  			  	
+    print "corr: ", c[0,1] 	
+    """
