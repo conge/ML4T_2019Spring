@@ -301,8 +301,11 @@ if __name__=="__main__":
         train_time_RT.append( train_finish - start)
         query_time_RT.append(query_finish - train_finish)
 
+    print "query_time_RT before: ", query_time_RT
+
     query_time_RT = query_time_RT[::-1]
     query_time_DT = query_time_DT[::-1]
+    print "query_time_RT after: ", query_time_RT
 
     plt.figure(5)
     x = portions
@@ -310,7 +313,7 @@ if __name__=="__main__":
     plt.plot(x, train_time_RT, label="Random Tree", linewidth=2.0)
     plt.xlabel("Dataset size (proportion)")
     plt.ylabel("Speed")
-    plt.legend(loc="lower right")
+    plt.legend(loc="center right")
     plt.title("Compute time to train")
     plt.savefig('Exp3_fig4a.png')
     plt.close()
@@ -321,7 +324,7 @@ if __name__=="__main__":
     plt.plot(x, query_time_RT, label="Random Tree", linewidth=2.0)
     plt.xlabel("Dataset size (proportion)")
     plt.ylabel("Speed")
-    plt.legend(loc="lower right")
+    plt.legend(loc="center right")
     plt.title("Compute time to query")
     plt.savefig('Exp3_fig4b.png')
     plt.close()
