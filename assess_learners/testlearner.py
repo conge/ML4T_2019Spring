@@ -261,7 +261,7 @@ if __name__=="__main__":
     train_time_DT = []
     query_time_DT = []
     train_time_RT = []
-    query_time_DT = []
+    query_time_RT = []
 
 
     for p in portions:
