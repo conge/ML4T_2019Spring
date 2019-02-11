@@ -116,6 +116,8 @@ if __name__=="__main__":
     Using BagLearner with DTLearners with varied leaf_size and calculate RMSE and Correlation to measure accuracy of the models
     for each leaf_size. 
     """
+    gtid = 902265013
+    np.random.seed(gtid)
 
     rmse_in_sample = []
     corr_in_sample = []
@@ -149,7 +151,7 @@ if __name__=="__main__":
     plt.xlabel("Leaf Size")
     plt.ylabel("Root Mean Squared Errors")
     plt.legend(loc="lower right")
-    plt.title("RMSE of Bagging with Decision Tree Learner with different leaf size")
+    plt.title("RMSE of Bagging with Decision Tree Learner with different leaf size\n(20 bags)")
     plt.savefig('Exp2_fig2.png')
     plt.close()
 
