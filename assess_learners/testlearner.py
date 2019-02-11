@@ -97,11 +97,17 @@ if __name__=="__main__":
     plt.plot(x, rmse_in_sample, label="in-sample", linewidth=2.0)
     plt.plot(x, rmse_out_sample, label="out-of-sample", linewidth=2.0)
     plt.xlabel("Leaf Size")
-    plt.ylabel("RMSE")
-    plt.legend()
+    plt.ylabel("Root Mean Squared Errors")
+    plt.legend(loc="lower right")
     plt.title("RMSE of Decision Tree Learner with different leaf size")
     plt.savefig('Exp1_fig1.png')
     plt.close()
+
+    # Overfitting happens when in sample error is smaller than the out of sample error
+    # when in-sample error is higher than out-of-sample error, it is not overfitting.
+    # in figure 1, smaller leaf sizes are more likely to overfit
+    # Find and print the index of the first leaf_size that does not overfit
+    print "DT stopped overfit when leaf size is larger than ", np.argmax(np.subtract(rmse_in_sample, rmse_out_sample) > 0 ) + 1
 
 
 
