@@ -46,11 +46,11 @@ if __name__=="__main__":
     """
 
     # Get data from Istanbul.csv
-    inf = open('Data/Istanbul.csv')
-    data = [map(float,s.strip().split(',')) for s in inf.readlines()]
+    f = 'Data/Istanbul.csv'
+    data = np.genfromtxt(f,delimiter=',')
 
     data = data[1:, 1:] # remove the header row and the time column
-    data = np.array(data)
+    data = np.array([map(float,s.strip().split(',')) for s in inf.readlines()])
  			  		 			     			  	   		   	  			  	
     # compute how much of the data is training and testing 			  		 			     			  	   		   	  			  	
     train_rows = int(0.6* data.shape[0]) 			  		 			     			  	   		   	  			  	
