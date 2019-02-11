@@ -64,7 +64,7 @@ if __name__=="__main__":
     #print testY.shape
 
  	# experiment 1: Run DT with different leaf_size and calculate RMSE
-    rmse_in_sample = np.zeros((repeat_times, max_leaf_size))
+    rmse_in_sample = []
     corr_in_sample = []
     rmse_out_sample = []
     corr_out_sample = []
