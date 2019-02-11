@@ -301,11 +301,11 @@ if __name__=="__main__":
         train_time_RT.append( train_finish - start)
         query_time_RT.append(query_finish - train_finish)
 
-    print "query_time_RT before: ", query_time_RT
+    #print "query_time_RT before: ", query_time_RT
 
-    query_time_RT = query_time_RT[::-1]
-    query_time_DT = query_time_DT[::-1]
-    print "query_time_RT after: ", query_time_RT
+    #query_time_RT = query_time_RT[::-1]
+    #query_time_DT = query_time_DT[::-1]
+    #print "query_time_RT after: ", query_time_RT
 
     plt.figure(5)
     x = portions
