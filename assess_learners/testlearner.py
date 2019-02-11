@@ -298,7 +298,7 @@ if __name__=="__main__":
         predY = learner.query(trainX) # get the predictions
         query_finish = time.time()
 
-        train_time_R.append( train_finish - start)
+        train_time_RT.append( train_finish - start)
         query_time_RT.append(query_finish - train_finish)
 
     query_time_RT = query_time_RT[::-1]
