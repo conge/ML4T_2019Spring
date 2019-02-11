@@ -119,6 +119,7 @@ if __name__=="__main__":
     gtid = 902265013
     np.random.seed(gtid)
 
+    bags = 20
     rmse_in_sample = []
     corr_in_sample = []
     rmse_out_sample = []
@@ -128,7 +129,7 @@ if __name__=="__main__":
     for i in range(max_leaf_size):
         leaf_size = i + 1
         # learner = DT.DTLearner(leaf_size, verbose = False) # create a dt learner
-        learner = bl.BagLearner(learner = DT.DTLearner, kwargs = {"leaf_size":leaf_size}, bags = 20, boost = False, verbose = False)
+        learner = bl.BagLearner(learner = DT.DTLearner, kwargs = {"leaf_size":leaf_size}, bags = bags, boost = False, verbose = False)
         learner.addEvidence(trainX, trainY) # train it
         # evaluate in sample
         predY = learner.query(trainX) # get the predictions
@@ -162,7 +163,91 @@ if __name__=="__main__":
     print "EXP2: DT with bagging stopped overfit when leaf size is larger than ", np.argmax(np.subtract(rmse_in_sample, rmse_out_sample) > 0 ) + 1
 
 
+    bags = 10
+    rmse_in_sample = []
+    corr_in_sample = []
+    rmse_out_sample = []
+    corr_out_sample = []
 
+
+    for i in range(max_leaf_size):
+        leaf_size = i + 1
+        # learner = DT.DTLearner(leaf_size, verbose = False) # create a dt learner
+        learner = bl.BagLearner(learner = DT.DTLearner, kwargs = {"leaf_size":leaf_size}, bags = bags, boost = False, verbose = False)
+        learner.addEvidence(trainX, trainY) # train it
+        # evaluate in sample
+        predY = learner.query(trainX) # get the predictions
+        rmse_in_sample.append(math.sqrt(((trainY - predY) ** 2).sum()/trainY.shape[0]))
+        c = np.corrcoef(predY, y=trainY)
+        corr_in_sample.append(c[0,1])
+
+        # evaluate out of sample
+        predY = learner.query(testX) # get the predictions
+        rmse_out_sample.append(math.sqrt(((testY - predY) ** 2).sum()/testY.shape[0]))
+        c = np.corrcoef(predY, y=testY)
+        corr_out_sample.append(c[0,1])
+
+    # plot the data
+
+    #x = range(1, max_leaf_size + 1)
+    plt.figure(2)
+    plt.plot(x, rmse_in_sample, label="in-sample", linewidth=2.0)
+    plt.plot(x, rmse_out_sample, label="out-of-sample", linewidth=2.0)
+    plt.xlabel("Leaf Size")
+    plt.ylabel("Root Mean Squared Errors")
+    plt.legend(loc="lower right")
+    plt.title("RMSE of Bagging with Decision Tree Learner with different leaf size\n(10 bags)")
+    plt.savefig('Exp2_fig3a.png')
+    plt.close()
+
+    # Overfitting happens when in sample error is smaller than the out of sample error
+    # when in-sample error is higher than out-of-sample error, it is not overfitting.
+    # in figure 1, smaller leaf sizes are more likely to overfit
+    # Find and print the index of the first leaf_size that does not overfit
+    print "EXP2-3a: DT with bagging stopped overfit when leaf size is larger than ", np.argmax(np.subtract(rmse_in_sample, rmse_out_sample) > 0 ) + 1
+
+    bags = 100
+    rmse_in_sample = []
+    corr_in_sample = []
+    rmse_out_sample = []
+    corr_out_sample = []
+
+
+    for i in range(max_leaf_size):
+        leaf_size = i + 1
+        # learner = DT.DTLearner(leaf_size, verbose = False) # create a dt learner
+        learner = bl.BagLearner(learner = DT.DTLearner, kwargs = {"leaf_size":leaf_size}, bags = bags, boost = False, verbose = False)
+        learner.addEvidence(trainX, trainY) # train it
+        # evaluate in sample
+        predY = learner.query(trainX) # get the predictions
+        rmse_in_sample.append(math.sqrt(((trainY - predY) ** 2).sum()/trainY.shape[0]))
+        c = np.corrcoef(predY, y=trainY)
+        corr_in_sample.append(c[0,1])
+
+        # evaluate out of sample
+        predY = learner.query(testX) # get the predictions
+        rmse_out_sample.append(math.sqrt(((testY - predY) ** 2).sum()/testY.shape[0]))
+        c = np.corrcoef(predY, y=testY)
+        corr_out_sample.append(c[0,1])
+
+    # plot the data
+
+    #x = range(1, max_leaf_size + 1)
+    plt.figure(2)
+    plt.plot(x, rmse_in_sample, label="in-sample", linewidth=2.0)
+    plt.plot(x, rmse_out_sample, label="out-of-sample", linewidth=2.0)
+    plt.xlabel("Leaf Size")
+    plt.ylabel("Root Mean Squared Errors")
+    plt.legend(loc="lower right")
+    plt.title("RMSE of Bagging with Decision Tree Learner with different leaf size\n(100 bags)")
+    plt.savefig('Exp2_fig3b.png')
+    plt.close()
+
+    # Overfitting happens when in sample error is smaller than the out of sample error
+    # when in-sample error is higher than out-of-sample error, it is not overfitting.
+    # in figure 1, smaller leaf sizes are more likely to overfit
+    # Find and print the index of the first leaf_size that does not overfit
+    print "EXP2: DT with bagging stopped overfit when leaf size is larger than ", np.argmax(np.subtract(rmse_in_sample, rmse_out_sample) > 0 ) + 1
 
 
 
