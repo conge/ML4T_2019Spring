@@ -108,7 +108,7 @@ if __name__=="__main__":
     # when in-sample error is higher than out-of-sample error, it is not overfitting.
     # in figure 1, smaller leaf sizes are more likely to overfit
     # Find and print the index of the first leaf_size that does not overfit
-    print "Experiment 1: DT stopped overfit when leaf size is larger than ", np.argmax(np.subtract(rmse_in_sample, rmse_out_sample) > 0 ) + 1
+    print "Experiment 1: DT stopped overfit when leaf size is larger than ", np.argmin(rmse_out_sample ) + 1
 
 
     # =========== EXPERiMENT 2 ===================
@@ -160,7 +160,7 @@ if __name__=="__main__":
     # when in-sample error is higher than out-of-sample error, it is not overfitting.
     # in figure 1, smaller leaf sizes are more likely to overfit
     # Find and print the index of the first leaf_size that does not overfit
-    print "EXP2: DT with bagging stopped overfit when leaf size is larger than ", np.argmax(np.subtract(rmse_in_sample, rmse_out_sample) > 0 ) + 1
+    print "EXP2: DT with bagging stopped overfit when leaf size is larger than ", np.argmin(rmse_out_sample ) + 1
 
 
     bags = 10
@@ -204,7 +204,7 @@ if __name__=="__main__":
     # when in-sample error is higher than out-of-sample error, it is not overfitting.
     # in figure 1, smaller leaf sizes are more likely to overfit
     # Find and print the index of the first leaf_size that does not overfit
-    print "EXP2-3a: DT with bagging stopped overfit when leaf size is larger than ", np.argmax(np.subtract(rmse_in_sample, rmse_out_sample) > 0 ) + 1
+    print "EXP2-3a: DT with bagging stopped overfit when leaf size is larger than ", np.argmin(rmse_out_sample ) + 1
 
     bags = 100
     rmse_in_sample = []
@@ -247,7 +247,7 @@ if __name__=="__main__":
     # when in-sample error is higher than out-of-sample error, it is not overfitting.
     # in figure 1, smaller leaf sizes are more likely to overfit
     # Find and print the index of the first leaf_size that does not overfit
-    print "EXP2: DT with bagging stopped overfit when leaf size is larger than ", np.argmax(np.subtract(rmse_in_sample, rmse_out_sample) > 0 ) + 1
+    print "EXP2-3b: DT with bagging stopped overfit when leaf size is larger than ", np.argmin(rmse_out_sample ) + 1
 
 
 
