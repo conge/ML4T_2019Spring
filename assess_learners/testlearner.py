@@ -362,21 +362,21 @@ if __name__=="__main__":
         learner.addEvidence(trainX, trainY) # train it
         # evaluate in sample
         predY = learner.query(trainX) # get the predictions
-        mae_in_sample_DT.append(np.abs(trainY - predY)/trainY.shape[0])
+        mae_in_sample_DT.append(np.mean(np.abs(trainY - predY)))
 
         # evaluate out of sample
         predY = learner.query(testX)  # get the predictions
-        mae_out_sample_DT.append(np.abs(testY - predY)/trainY.shape[0])
+        mae_out_sample_DT.append(np.mean(np.abs(testY - predY)))
 
         learner = RT.RTLearner(leaf_size, verbose = False) # create a dt learner
         learner.addEvidence(trainX, trainY) # train it
         # evaluate in sample
         predY = learner.query(trainX) # get the predictions
-        mae_in_sample_RT.append(np.abs(trainY - predY)/trainY.shape[0])
+        mae_in_sample_RT.append(np.mean(np.abs(trainY - predY)))
 
         # evaluate out of sample
         predY = learner.query(testX) # get the predictions
-        mae_out_sample_RT.append(np.abs(testY - predY)/trainY.shape[0])
+        mae_out_sample_RT.append(np.mean(np.abs(testY - predY)))
 
 
     # plot the data
