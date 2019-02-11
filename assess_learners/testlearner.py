@@ -330,6 +330,69 @@ if __name__=="__main__":
     plt.close()
 
 
+    # =========Mean Absolute Error(MAE) =======
+    # compute how much of the data is training and testing
+    train_rows = int(0.6* data.shape[0])
+    test_rows = data.shape[0] - train_rows
+
+    # separate out training and testing data
+    trainX = data[:train_rows,0:-1]
+    trainY = data[:train_rows,-1]
+    testX = data[train_rows:,0:-1]
+    testY = data[train_rows:,-1]
+
+    max_leaf_size = 80
+    #repeat_times = 15
+
+
+    #print testX.shape
+    #print testY.shape
+
+ 	# experiment 1: Run DT with different leaf_size and calculate RMSE
+    mae_in_sample_DT = []
+    mae_out_sample_DT = []
+    mae_in_sample_RT = []
+    mae_out_sample_RT = []
+
+
+
+    for i in range(max_leaf_size):
+        leaf_size = i + 1
+        learner = DT.DTLearner(leaf_size, verbose = False) # create a dt learner
+        learner.addEvidence(trainX, trainY) # train it
+        # evaluate in sample
+        predY = learner.query(trainX) # get the predictions
+        mae_in_sample_DT.append(np.abs(trainY - predY)/trainY.shape[0])
+
+        # evaluate out of sample
+        predY = learner.query(testX)  # get the predictions
+        mae_out_sample_DT.append(np.abs(testY - predY)/trainY.shape[0])
+
+        learner = RT.RTLearner(leaf_size, verbose = False) # create a dt learner
+        learner.addEvidence(trainX, trainY) # train it
+        # evaluate in sample
+        predY = learner.query(trainX) # get the predictions
+        mae_in_sample_RT.append(np.abs(trainY - predY)/trainY.shape[0])
+
+        # evaluate out of sample
+        predY = learner.query(testX) # get the predictions
+        mae_out_sample_RT.append(np.abs(testY - predY)/trainY.shape[0])
+
+
+    # plot the data
+
+    x = range(1, max_leaf_size + 1)
+    plt.figure(1)
+    plt.plot(x, mae_in_sample_DT, label="DT-in-sample", linewidth=2.0)
+    plt.plot(x, mae_out_sample_DT, label="DT-out-of-sample", linewidth=2.0)
+    plt.plot(x, mae_in_sample_RT, label="RT-in-sample", linewidth=2.0)
+    plt.plot(x, mae_out_sample_RT, label="RT-out-of-sample", linewidth=2.0)
+    plt.xlabel("Leaf Size")
+    plt.ylabel("Mean Absolute Error")
+    plt.legend(loc="lower right")
+    plt.title("MAE of Decision Tree Learner and Random Tree Learner \nwith different leaf size")
+    plt.savefig('Exp3_fig5.png')
+    plt.close()
 
 
 
