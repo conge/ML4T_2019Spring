@@ -51,7 +51,8 @@ if __name__=="__main__":
 
     data = data[1:, 1:] # remove the header row and the time column
     #data = np.array([map(float,s.strip().split(',')) for s in inf.readlines()])
- 	"""		  		 			     			  	   		   	  			  	
+
+
     # compute how much of the data is training and testing 			  		 			     			  	   		   	  			  	
     train_rows = int(0.6* data.shape[0]) 			  		 			     			  	   		   	  			  	
     test_rows = data.shape[0] - train_rows
@@ -249,7 +250,6 @@ if __name__=="__main__":
     # in figure 1, smaller leaf sizes are more likely to overfit
     # Find and print the index of the first leaf_size that does not overfit
     print "EXP2-3b: DT with bagging stopped overfit when leaf size is larger than ", np.argmin(rmse_out_sample ) + 1
-    """
 
     # =========== EXPERiMENT 3 ===================
 
