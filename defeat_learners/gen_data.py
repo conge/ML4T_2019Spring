@@ -39,7 +39,7 @@ def best4LinReg(seed=1489683273):
     b = np.random.random(size=(100,1))
     X = np.random.random(size=(100,2))*100
 
-    Y = a * X + b
+    Y = np.sum(a * X) + b
 
 
     # Here's is an example of creating a Y from randomly generated 			  		 			     			  	   		   	  			  	
