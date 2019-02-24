@@ -49,11 +49,11 @@ def best4LinReg(seed=1489683273):
  			  		 			     			  	   		   	  			  	
 def best4DT(seed=1489683273): 			  		 			     			  	   		   	  			  	
     np.random.seed(seed) 			  		 			     			  	   		   	  			  	
-    #X = np.zeros((100,2))
+    #X = np.zeros((100,2))*200-100
     Y = np.random.random(size = (100,))*200-100
     X = np.random.random(size=(100,2))*100
 
-    Y += np.sum(X**3, axis=1)
+    Y += np.sum(X**3 + np.sin(X), axis=1)
     return X, Y 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
 def author(): 			  		 			     			  	   		   	  			  	
