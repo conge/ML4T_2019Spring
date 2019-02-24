@@ -36,7 +36,7 @@ def best4LinReg(seed=1489683273):
     #X = np.zeros((100,2))
     #Y = np.random.random(size = (100,))*200-100
     a = np.random.randint(low=-30, high=100,size=2)
-    b = np.random.random(size=(100,1))
+    b = np.random.random(size=(100,))
     X = np.random.random(size=(100,2))*100
 
     Y = np.sum(a * X) + b
@@ -50,10 +50,10 @@ def best4LinReg(seed=1489683273):
 def best4DT(seed=1489683273): 			  		 			     			  	   		   	  			  	
     np.random.seed(seed) 			  		 			     			  	   		   	  			  	
     #X = np.zeros((100,2))
-    #Y = np.random.random(size = (100,))*200-100
+    Y = np.random.random(size = (100,))*200-100
     X = np.random.random(size=(100,2))*100
 
-    Y = np.sum(X**3, axis=1)
+    Y += np.sum(X**3, axis=1)
     return X, Y 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
 def author(): 			  		 			     			  	   		   	  			  	
