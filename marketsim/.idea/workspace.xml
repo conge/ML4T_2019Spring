@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="06bf67f6-1797-4b89-878f-a040f471c908" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/marketsim.py" beforeDir="false" afterPath="$PROJECT_DIR$/marketsim.py" afterDir="false" />
-    </list>
+    <list default="true" id="06bf67f6-1797-4b89-878f-a040f471c908" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,13 +18,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="1308" />
+          <entry key="Python Console" value="1315" />
           <entry key="py" value="1627" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="2935" />
+          <entry key="Python" value="2942" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -47,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/marketsim.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
+            <state relative-caret-position="301">
+              <caret line="80" column="54" lean-forward="true" selection-start-line="66" selection-start-column="8" selection-end-line="80" selection-end-column="54" />
               <folding>
                 <element signature="e#1959#2018#0" expanded="true" />
               </folding>
@@ -133,7 +131,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="727" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -167,8 +164,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/marketsim.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
+        <state relative-caret-position="301">
+          <caret line="80" column="54" lean-forward="true" selection-start-line="66" selection-start-column="8" selection-end-line="80" selection-end-column="54" />
           <folding>
             <element signature="e#1959#2018#0" expanded="true" />
           </folding>
