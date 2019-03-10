@@ -82,16 +82,18 @@ def compute_portvals(orders_file = "./orders/orders-01.csv", start_val = 1000000
 
 
     # start a holdings dataFrame based on the prices and the orders dataFrame
-    # the holdings is simply the cumulative sum of the trades. need to notice the start value will affect the first Cash row.
+    # the holdings is simply the cumulative sum of the trades. need to notice
+    # the start value will affect the first Cash row.
     df_holdings = df_trades.copy(deep=True)
+
     #df_holdings[:] = 0 # initialize the df to be all zeros.
+
     # the first value of the Cash column should be the Start value + the cost of the buying the stocks.
     df_holdings.loc[df_holdings.index[0],'CASH'] += start_val
 
     df_holdings = df_holdings.cumsum()
 
     # things become easier from here
-
     df_values = df_prices * df_holdings
     portvals = df_values.sum(axis=1)
 
@@ -111,7 +113,7 @@ def test_code():
     # note that during autograding his function will not be called. 			  		 			     			  	   		   	  			  	
     # Define input parameters 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
-    of = "./orders/orders2.csv" 			  		 			     			  	   		   	  			  	
+    of = "./orders/orders-03.csv"
     sv = 1000000 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
     # Process orders 			  		 			     			  	   		   	  			  	
