@@ -1,5 +1,5 @@
 <pre>--- Summary ---
-Tests passed: 10 out of 13
+Tests passed: 11 out of 13
 
 --- Details ---
 Test #0: passed 
@@ -28,12 +28,5 @@ IncorrectOutput: Test failed on one or more output criteria.
   Failures:
    Incorrect final value: 1050040.6, expected 1026658.3265
 
-Test #12: failed 
-Test case description: author() test
-IncorrectOutput: Test failed on one or more output criteria.
-  Inputs:
-None
-  Failures:
-   Exception occured when calling author() method: 'module' object has no attribute 'author'
-
+Test #12: passed 
 </pre>
