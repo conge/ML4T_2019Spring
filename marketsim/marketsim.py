@@ -63,17 +63,22 @@ def compute_portvals(orders_file = "./orders/orders-01.csv", start_val = 1000000
         symbol = orders.iloc[i]['Symbol']
         order =  orders.iloc[i]['Order']
         shares =  orders.iloc[i]['Shares']
+
+        price = df_prices.get_value(index, symbol)
         if order == 'SELL':
             shares = shares * -1
+            price = (1 - impact) * price
+        else:
+            price = (1 + impact) * price
 
-        cash = df_prices.get_value(index,symbol) * shares * -1 - commission
+        cash = price * shares * -1 - commission
 
         # update the values in the df_trade
-        trade_cash = cash + df_trades.get_value(index,'CASH')
-        trade_shares = shares + df_trades.get_value(index,symbol)
+        trade_cash = cash + df_trades.get_value(index, 'CASH')
+        trade_shares = shares + df_trades.get_value(index, symbol)
 
-        df_trades.set_value(index,symbol,trade_shares)
-        df_trades.set_value(index,'CASH',trade_cash)
+        df_trades.set_value(index, symbol, trade_shares)
+        df_trades.set_value(index, 'CASH', trade_cash)
 
 
     # start a holdings dataFrame based on the prices and the orders dataFrame
