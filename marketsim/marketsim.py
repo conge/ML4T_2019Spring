@@ -30,6 +30,12 @@ import numpy as np
 import datetime as dt 			  		 			     			  	   		   	  			  	
 import os 			  		 			     			  	   		   	  			  	
 from util import get_data, plot_data
+
+
+def author():
+
+    return 'qli7' # replace tb34 with your Georgia Tech username.
+
  			  		 			     			  	   		   	  			  	
 def compute_portvals(orders_file = "./orders/orders-01.csv", start_val = 1000000, commission=9.95, impact=0.005):
     # this is the function the autograder will call to test your code 			  		 			     			  	   		   	  			  	
