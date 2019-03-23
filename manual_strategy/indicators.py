@@ -90,7 +90,7 @@ def plot_indicators():
     top.plot(pd.concat([prices, SMA,upper_bb, lower_bb],axis=1))
     bottom.plot(bb_indicator, color='crimson')
 
-    filename = '02_bb_indicator.pgn'
+    filename = '02_bb_indicator.png'
 
     plt.savefig(filename)
 
