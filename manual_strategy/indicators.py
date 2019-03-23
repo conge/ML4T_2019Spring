@@ -76,7 +76,7 @@ def plot_indicators():
     prices, prices_SPY = get_price(symbols, dates)
 
     normed_prices = prices / prices.iloc[0,:]
-    normed_prices_SPY = prices_SPY / prices_SPY.iloc[0, :]
+    normed_prices_SPY = prices_SPY / prices_SPY.iloc[0]
 
     upper_bb, lower_bb, bb_indicator, SMA = get_BB(prices, 14) # 14 day
 
