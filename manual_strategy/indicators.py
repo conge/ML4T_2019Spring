@@ -36,7 +36,7 @@ def get_SMA(prices, lookback):
 def get_BB(prices, lookback):
     # calculate Bollinger Bands from price
 
-    SMA, _ = get_SMA(prices, lookback)
+    SMA = get_SMA(prices, lookback)
     rolling_std = pd.rolling_std(prices, window=lookback)
     upper_bb = SMA + (2 * rolling_std)
     lower_bb = SMA - (2 * rolling_std)
