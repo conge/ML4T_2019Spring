@@ -28,7 +28,7 @@ def get_price(symbols, dates):
 
 def get_SMA(prices, lookback):
     # calculate simple moving average from prices
-    SMA = pd.rolling_mean(prices, window=lookback)
+    SMA = prices.rolling(window=lookback,center=False).mean()
 
     return SMA
 
@@ -37,7 +37,7 @@ def get_BB(prices, lookback):
     # calculate Bollinger Bands from price
 
     SMA = get_SMA(prices, lookback)
-    rolling_std = pd.rolling_std(prices, window=lookback)
+    rolling_std = prices.rolling(window=lookback,center=False).std()
     upper_bb = SMA + (2 * rolling_std)
     lower_bb = SMA - (2 * rolling_std)
     bb_indicator = (prices - SMA) / (2 * rolling_std)
