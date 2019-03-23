@@ -88,8 +88,9 @@ def plot_indicators():
     bottom = plt.subplot2grid((5,1), (4,0), rowspan=1, colspan=1, sharex=top)
     top.xaxis_date()
     top.grid(True)
+    top.plot(prices, lw=2, color='blue')
 
-    top.plot(pd.concat([prices, SMA, upper_bb, lower_bb],axis=1),lw=[2,1,1,1],label = ['JPM prices','Moving average','upper band','lower band'])
+    top.plot(pd.concat([SMA, upper_bb, lower_bb],axis=1), lw=1)
     top.set_title('Bollinger Bands')
     top.set_ylabel('Adj Closing Price $')
     bottom.plot(bb_indicator, color='blue',lw = 1)
