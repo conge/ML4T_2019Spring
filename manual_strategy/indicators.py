@@ -86,9 +86,18 @@ def plot_indicators():
     fig = plt.figure(figsize=(12,6.5))
     top = plt.subplot2grid((5,1), (0,0), rowspan=4, colspan=1)
     bottom = plt.subplot2grid((5,1), (4,0), rowspan=1, colspan=1, sharex=top)
+    top.xaxis_date()
+    top.grid(True)
 
-    top.plot(pd.concat([prices, SMA,upper_bb, lower_bb],axis=1))
-    bottom.plot(bb_indicator, color='crimson')
+    top.plot(pd.concat([prices, SMA, upper_bb, lower_bb],axis=1),lw=[2,1,1,1],label = ['JPM prices','Moving average','upper band','lower band'])
+    top.set_title('Bollinger Bands')
+    top.set_ylabel('Adj Closing Price $')
+    bottom.plot(bb_indicator, color='blue',lw = 1)
+    bottom.set_title('Bollinger Bands Indicator')
+
+    bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = 50,  color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = 100, color = 'grey', linestyle='--', alpha = 0.5)
 
     filename = '02_bb_indicator.png'
 
