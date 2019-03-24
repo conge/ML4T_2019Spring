@@ -90,7 +90,7 @@ def plot_optimal_strategy():
     plt.savefig('04_TOS.png')
     """
 
-    plt.figure(4)
+    plt.figure(figsize=(12,6.5))
     plt.plot(normed_port, label="Portfolio", color='red', lw=2)
     plt.plot(normed_bench, label="Benchmark",color='green', lw=1.2)
 
