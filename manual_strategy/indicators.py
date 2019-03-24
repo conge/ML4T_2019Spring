@@ -67,8 +67,8 @@ def plot_indicators():
     # Note that ALL of these values will be set to different values by
     # the autograder!
 
-    start_date = dt.datetime(2008,1,1)
-    end_date = dt.datetime(2009,12,31)
+    start_date = dt.datetime(2008, 1, 1)
+    end_date = dt.datetime(2009, 12, 31)
     dates = pd.date_range(start_date, end_date)
     symbols = ['JPM']
 
