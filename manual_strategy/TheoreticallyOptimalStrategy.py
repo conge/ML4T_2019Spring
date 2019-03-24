@@ -50,8 +50,10 @@ def plot_optimal_strategy():
     symbol = 'JPM'
 
     df_trades = tos.testPolicy(symbol=symbol, sd=start_date, ed=end_date, sv = 100000)
+    print(df_trades)
 
     df_orders = df_trades[['Trades']][df_trades['Trades'] != 0]
+    print("df_orders = ", df_orders)
 
     df_orders['Symbol'] = symbol
     df_orders['Order'] = np.where(df_orders['Trades']>0, 'BUY', 'SELL')
