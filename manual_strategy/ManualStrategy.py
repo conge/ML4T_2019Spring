@@ -33,15 +33,18 @@ class ManualStrategy(object):
         # make sure when PSR (= price / SMA -1) >0.05 and bb_indicator > 1 and momentum > 0.05 SELL or hold -1000
         # when PSR (= price / SMA -1) < -0.05 and bb_indicator < -1 and momentum < -0.05 Buy or hold -1000
 
+        print("=== prices ===")
+        print(prices.head())
+
         print("PSR: ", PSR.head())
         print("momentum: ", momentum.head())
         print("bb_indicator: ", bb_indicator.head())
 
         for t in range(prices.shape[0]):
-            if PSR.iloc[t,0]< -0.05 and bb_indicator.iloc[t,0] < -1 and momentum.iloc[t,0] < -0.05:
-                holdings.iloc[t,0] = 1000
-            elif PSR.iloc[t,0] > 0.05 and bb_indicator.iloc[t,0] > 1 and momentum.iloc[t,0] > 0.05:
-                holdings.iloc[t,0] = -1000
+            if PSR.iloc[t]< -0.05 and bb_indicator.iloc[t] < -1 and momentum.iloc[t] < -0.05:
+                holdings.iloc[t] = 1000
+            elif PSR.iloc[t] > 0.05 and bb_indicator.iloc[t] > 1 and momentum.iloc[t] > 0.05:
+                holdings.iloc[t] = -1000
 
         # fill the NAN data
         holdings.ffill(inplace=True)
@@ -84,7 +87,7 @@ def plot_manual_strategy():
     # dates = pd.date_range(start_date, end_date)
     symbol = 'JPM'
 
-    df_trades = ms.testPolicy(symbol=symbol, sd=start_date, ed=end_date, sv = 100000)
+    df_trades = ms.testPolicy(symbol=[symbol], sd=start_date, ed=end_date, sv = 100000)
 
     # generate orders based on trades
     df_orders, benchmark_orders= generate_orders(df_trades,symbol)
