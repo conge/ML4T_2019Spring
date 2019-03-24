@@ -54,6 +54,8 @@ def compute_portvals(orders, start_val = 1000000, commission=9.95, impact=0.005)
     else:
         symbols = orders['Symbol'].unique().tolist()
 
+    print(symbols)
+
     df_prices = get_data(symbols, pd.date_range(start_date, end_date), addSPY=True)
     df_prices.index.name = 'Date'
     df_prices['CASH'] = 1.0
