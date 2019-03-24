@@ -1,21 +1,21 @@
 import pandas as pd
 import datetime as dt
 import numpy as np
-
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-
 from util import get_data
 from marketsimcode import compute_portvals, get_portfolio_stats
 import indicators as id
+
 
 class ManualStrategy(object):
     def __init__(self):
         pass
 
+
     def testPolicy(self, symbol, sd, ed, sv=100000):
-        ## this policy is like this: buy when the price will go up the next day, sell when the price will do down the next day
+        # this policy is like this: buy when the price will go up the next day, sell when the price will do down the next day
         # get price data
         dates = pd.date_range(sd, ed)
         prices_all = get_data([symbol], dates, addSPY=True, colname='Adj Close')
@@ -140,7 +140,7 @@ def plot_manual_strategy():
     bottom.axhline(y = -0.2,  color = 'grey', linestyle='--', alpha = 0.5)
     bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
     bottom.axhline(y = 0.2,   color = 'grey', linestyle='--', alpha = 0.5)
-    bottom.lengend()
+    bottom.legend()
 
     top.legend()
     top.axes.get_xaxis().set_visible(False)
