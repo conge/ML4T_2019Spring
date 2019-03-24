@@ -83,6 +83,8 @@ def plot_indicators():
     # calculate the price to SMA ratio (PSR)
     PSR = prices / SMA - 1
 
+    momentum = get_momentum(prices, 14)
+
 
     # figure 1.
     fig = plt.figure(figsize=(12,6.5))
@@ -100,9 +102,9 @@ def plot_indicators():
     bottom.plot(PSR, color='olive', lw=1)
     bottom.set_title('Price over SMA ratio')
 
-    bottom.axhline(y = -0.25,  color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = -0.2,  color = 'grey', linestyle='--', alpha = 0.5)
     bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
-    bottom.axhline(y = .25,   color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = .2,   color = 'grey', linestyle='--', alpha = 0.5)
     bottom.set_ylim(-0.5, .5)
 
     top.legend()
@@ -144,7 +146,34 @@ def plot_indicators():
     plt.savefig(filename)
 
 
+    # figure 3.
+    fig = plt.figure(figsize=(12,6.5))
+    top = plt.subplot2grid((5,1), (0,0), rowspan=4, colspan=1)
+    bottom = plt.subplot2grid((5,1), (4,0), rowspan=1, colspan=1, sharex=top)
+    top.xaxis_date()
+    top.grid(True)
+    top.plot(prices, lw=2, color='blue', label='Price')
 
+    top.plot(SMA, label='SMA - 14-day lookback', lw=1,color='red')
+    top.plot(upper_bb, label='Upper band', lw=1,color='limegreen')
+    top.plot(lower_bb, label='Lower band', lw=1,color='olive')
+
+    top.set_title('Bollinger Bands')
+    top.set_ylabel('Stock Price $ (Adjused Closing)')
+    bottom.plot(bb_indicator, color='olive', lw=1)
+    bottom.set_title('Bollinger Bands Indicator')
+
+    bottom.axhline(y = -1,  color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = 1,   color = 'grey', linestyle='--', alpha = 0.5)
+
+    top.legend()
+    top.axes.get_xaxis().set_visible(False)
+    plt.xlim(start_date,end_date)
+
+    filename = '02_bb_indicator.png'
+
+    plt.savefig(filename)
 
 
 
