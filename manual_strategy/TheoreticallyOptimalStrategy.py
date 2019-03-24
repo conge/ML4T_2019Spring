@@ -37,9 +37,9 @@ class TheoreticallyOptimalStrategy(object):
         trades.columns = 'Trades'
 
         # buy and sell happens when the difference change direction
-        #df_trades = pd.DataFrame(data=trades., index = prices.index, columns = ['Trades'])
+        df_trades = pd.DataFrame(data=trades.iloc[:,0], index = trades.index, columns = ['Trades'])
 
-        return trades
+        return df_trades
 
 
 def plot_optimal_strategy():
@@ -52,8 +52,7 @@ def plot_optimal_strategy():
     symbol = 'JPM'
 
     df_trades = tos.testPolicy(symbol=symbol, sd=start_date, ed=end_date, sv = 100000)
-    print(df_trades.head())
-    print(df_trades.index[0:2])
+
 
     df_orders = df_trades.loc[:, (df_trades.Trades != 0)]
 
