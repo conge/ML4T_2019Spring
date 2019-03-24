@@ -90,17 +90,17 @@ def plot_indicators():
     bottom = plt.subplot2grid((5,1), (4,0), rowspan=1, colspan=1, sharex=top)
     top.xaxis_date()
     top.grid(True)
-    top.plot(prices, lw=2, color='blue')
+    top.plot(prices, lw=2, color='blue', label='Price')
 
-    top.plot(pd.concat([SMA, upper_bb, lower_bb],axis=1), lw=1)
+    top.plot(pd.concat([SMA, upper_bb, lower_bb],keys=['Moving average', 'Upper band','Lower Band'],axis=1), lw=1)
     top.set_title('Bollinger Bands')
     top.set_ylabel('Stock Price $ (Adjused Closing)')
-    bottom.plot(bb_indicator, color='blue',lw = 1)
+    bottom.plot(bb_indicator, color='olive', lw=1)
     bottom.set_title('Bollinger Bands Indicator')
 
-    bottom.axhline(y = .0,  color = 'grey', linestyle='--', alpha = 0.5)
-    bottom.axhline(y = .5,  color = 'grey', linestyle='--', alpha = 0.5)
-    bottom.axhline(y = 1.0, color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = -1,  color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = 1,   color = 'grey', linestyle='--', alpha = 0.5)
 
     top.legend()
     top.axes.get_xaxis().set_visible(False)
