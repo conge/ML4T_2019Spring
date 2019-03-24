@@ -71,6 +71,10 @@ def plot_optimal_strategy():
     normed_port = port_vals / port_vals.ix[0]
     normed_bench = benchmark_vals / benchmark_vals.ix[0]
 
+    print( port_vals)
+    print("benchmark_vals")
+    print(benchmark_vals)
+
 
 
     fig = plt.figure()
