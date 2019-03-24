@@ -38,9 +38,9 @@ class ManualStrategy(object):
         print("bb_indicator: ", bb_indicator)
 
         for t in range(prices.shape[0]):
-            if PSR.iloc[t]< -0.03 and bb_indicator.iloc[t] < -0.8 and momentum.iloc[t] < -0.03:
+            if PSR.iloc[t]< -0.02 and bb_indicator.iloc[t] < -0.8 and momentum.iloc[t] < -0.03:
                 holdings.iloc[t] = 1000
-            elif PSR.iloc[t] > 0.03 and bb_indicator.iloc[t] > 0.8 and momentum.iloc[t] > 0.03:
+            elif PSR.iloc[t] > 0.02 and bb_indicator.iloc[t] > 0.8 and momentum.iloc[t] > 0.03:
                 holdings.iloc[t] = -1000
 
         # fill the NAN data
