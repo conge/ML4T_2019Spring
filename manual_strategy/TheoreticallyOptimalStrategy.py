@@ -33,6 +33,7 @@ class TheoreticallyOptimalStrategy(object):
         position = np.sign(prices_diff.shift(-1)) * 1000
         trades = position.diff()
         trades.ix[0] = position[0]
+        print("36: trades = ", trades)
 
         # buy and sell happens when the difference change direction
         df_trades = pd.DataFrame(data=trades, index = prices.index, columns = ['Trades'])
