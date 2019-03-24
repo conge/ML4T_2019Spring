@@ -87,9 +87,8 @@ def plot_optimal_strategy():
     ax1.set_ylabel('Normalized Portfolio Value')
     ax1.set_xlabel('Date')
     plt.grid(True)
-    red_patch = mpatches.Patch(color='black', label='Best Strategy')
-    blue_patch = mpatches.Patch(color='blue', label='Benchmark')
-    plt.legend(handles=[red_patch,blue_patch], loc='upper left')
+
+    plt.legend()
     plt.title('Theoretically Optimal Strategy (%s)' % symbol)
     #plt.show()
     plt.savefig('04_TOS.png')
