@@ -61,20 +61,19 @@ def plot_optimal_strategy():
     df_orders['Symbol'] = symbol
     df_orders['Order'] = np.where(df_orders['Trades']>0, 'BUY', 'SELL')
     df_orders['Shares'] = np.abs(df_orders['Trades'])
-    print("64 head of dr)orders:", df_orders.head())
 
     df_orders = df_orders.reset_index()
 
     port_vals = compute_portvals(df_orders, start_val=100000, commission=0.0, impact=0.0)
 
-    benchmark_orders = df_orders.copy()
-    benchmark_orders = benchmark_orders.iloc[0:1, :]
+    benchmark_orders = df_trades.copy()
+    benchmark_orders = benchmark_orders.iloc[0:1]
+    benchmark_orders['Symbol'] = symbol
+    benchmark_orders['Order'] = 'BUY'
+    benchmark_orders['Shares'] = 1000.0
+    benchmark_orders.loc[benchmark_orders.index[1], 'Shares'] = 0
 
     print("benchmark_orders = ", benchmark_orders)
-    benchmark_orders.loc[benchmark_orders.index[0], 'Order'] = 'BUY'
-    benchmark_orders.loc[benchmark_orders.index[0], 'Shares'] = 1000
-    benchmark_orders.loc[benchmark_orders.index[1], 'Order'] = 'BUY' ## The compute_portvals require at least two orders
-    benchmark_orders.loc[benchmark_orders.index[1], 'Shares'] = 0
 
     benchmark_vals = compute_portvals(benchmark_orders, start_val=100000, commission=0.0, impact=0.0)
 
