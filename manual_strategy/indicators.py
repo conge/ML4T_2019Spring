@@ -96,7 +96,7 @@ def plot_indicators():
 
     top.plot(SMA, label='SMA - 14-day lookback', lw=1,color='red')
 
-    top.set_title('Simple Moving Average')
+    top.set_title('Simple Moving Average - JPM')
     top.set_ylabel('Stock Price $ (Adjused Closing)')
 
     bottom.plot(PSR, color='olive', lw=1)
@@ -128,7 +128,7 @@ def plot_indicators():
     top.plot(upper_bb, label='Upper band', lw=1,color='limegreen')
     top.plot(lower_bb, label='Lower band', lw=1,color='olive')
 
-    top.set_title('Bollinger Bands')
+    top.set_title('Bollinger Bands - JPM')
     top.set_ylabel('Stock Price $ (Adjused Closing)')
     bottom.plot(bb_indicator, color='olive', lw=1)
     bottom.set_title('Bollinger Bands Indicator')
@@ -155,14 +155,14 @@ def plot_indicators():
     top.plot(prices, lw=2, color='blue', label='Price')
 
 
-    top.set_title('Price')
+    top.set_title('Price - JPM')
     top.set_ylabel('Stock Price $ (Adjused Closing)')
     bottom.plot(momentum, color='olive', lw=1)
     bottom.set_title('Momentum')
 
-    bottom.axhline(y = -0.1,  color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = -0.2,  color = 'grey', linestyle='--', alpha = 0.5)
     bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
-    bottom.axhline(y = 0.1,   color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = 0.2,   color = 'grey', linestyle='--', alpha = 0.5)
 
     top.legend()
     top.axes.get_xaxis().set_visible(False)
