@@ -88,7 +88,7 @@ def plot_indicators():
 
     # figure 1.
     fig = plt.figure(figsize=(12,6.5))
-    top = plt.subplot2grid((5,1), (0,0), rowspan=2, colspan=1)
+    top = plt.subplot2grid((5,1), (0,0), rowspan=3, colspan=1)
     bottom = plt.subplot2grid((5,1), (3,0), rowspan=2, colspan=1, sharex=top)
     top.xaxis_date()
     top.grid(True)
@@ -148,8 +148,8 @@ def plot_indicators():
 
     # figure 3.
     fig = plt.figure(figsize=(12,6.5))
-    top = plt.subplot2grid((5,1), (0,0), rowspan=4, colspan=1)
-    bottom = plt.subplot2grid((5,1), (4,0), rowspan=1, colspan=1, sharex=top)
+    top = plt.subplot2grid((5,1), (0,0), rowspan=3, colspan=1)
+    bottom = plt.subplot2grid((5,1), (3,0), rowspan=2, colspan=1, sharex=top)
     top.xaxis_date()
     top.grid(True)
     top.plot(prices, lw=2, color='blue', label='Price')
@@ -160,9 +160,9 @@ def plot_indicators():
     bottom.plot(momentum, color='olive', lw=1)
     bottom.set_title('Momentum')
 
-    bottom.axhline(y = -1,  color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = -0.1,  color = 'grey', linestyle='--', alpha = 0.5)
     bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
-    bottom.axhline(y = 1,   color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = 0.1,   color = 'grey', linestyle='--', alpha = 0.5)
 
     top.legend()
     top.axes.get_xaxis().set_visible(False)
