@@ -92,7 +92,10 @@ def plot_indicators():
     top.grid(True)
     top.plot(prices, lw=2, color='blue', label='Price')
 
-    top.plot(pd.concat([SMA, upper_bb, lower_bb],keys=['Moving average', 'Upper band','Lower Band'],axis=1), lw=1)
+    top.plot(SMA, label='SMA - 14-day lookback', lw=1,color='red')
+    top.plot(upper_bb, label='Upper band', lw=1,color='limegreen')
+    top.plot(lower_bb, label='Lower band', lw=1,color='olive')
+
     top.set_title('Bollinger Bands')
     top.set_ylabel('Stock Price $ (Adjused Closing)')
     bottom.plot(bb_indicator, color='olive', lw=1)
