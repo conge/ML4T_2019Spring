@@ -121,9 +121,9 @@ def plot_manual_strategy():
     # plot the Long or short action
     for index, marks in df_trades.iterrows():
         if marks['Trades'] > 0:
-            plt.axvline(x=index, color='blue',linestyle='dashed', alpha = .5)
+            plt.axvline(x=index, color='blue',linestyle='dashed', alpha = .9)
         elif marks['Trades'] < 0:
-            plt.axvline(x=index, color='black',linestyle='dashed', alpha = .5)
+            plt.axvline(x=index, color='black',linestyle='dashed', alpha = .9)
         else:
             pass
 
@@ -136,9 +136,9 @@ def plot_manual_strategy():
     top.set_ylabel('Normalized Value')
     for index, marks in df_trades.iterrows():
         if marks['Trades'] > 0:
-            top.axvline(x=index, color='green',linestyle='dashed', alpha = .5)
+            top.axvline(x=index, color='blue',linestyle='dashed', alpha=.9)
         elif marks['Trades'] < 0:
-            top.axvline(x=index, color='red',linestyle='dashed', alpha = .5)
+            top.axvline(x=index, color='black',linestyle='dashed', alpha=.9)
         else:
             pass
 
@@ -225,9 +225,9 @@ def plot_manual_strategy():
     # plot the
     for index, marks in df_trades.iterrows():
         if marks['Trades'] > 0:
-            plt.axvline(x=index, color='blue',linestyle='dashed')
+            plt.axvline(x=index, color='blue',linestyle='dashed', alpha = .9)
         elif marks['Trades'] < 0:
-            plt.axvline(x=index, color='black',linestyle='dashed')
+            plt.axvline(x=index, color='black',linestyle='dashed', alpha = .9)
         else:
             pass
 
@@ -239,9 +239,9 @@ def plot_manual_strategy():
     # plot the Long or short action
     for index, marks in df_trades.iterrows():
         if marks['Trades'] > 0:
-            top.axvline(x=index, color='blue', linestyle='dashed', alpha = .5)
+            top.axvline(x=index, color='blue', linestyle='dashed', alpha = .9)
         elif marks['Trades'] < 0:
-            top.axvline(x=index, color='black', linestyle='dashed', alpha = .5)
+            top.axvline(x=index, color='black', linestyle='dashed', alpha = .9)
         else:
             pass
 
