@@ -78,6 +78,9 @@ def plot_manual_strategy():
 
     ms = ManualStrategy()
 
+    commission = 9.95
+    impact = 0.005
+
     # in sample
     start_date = dt.datetime(2008, 1, 1)
     end_date = dt.datetime(2009, 12, 31)
@@ -89,10 +92,10 @@ def plot_manual_strategy():
     # generate orders based on trades
     df_orders, benchmark_orders= generate_orders(df_trades,symbol)
 
-    port_vals = compute_portvals(df_orders, start_val=100000, commission=0.0, impact=0.0)
+    port_vals = compute_portvals(df_orders, start_val=100000, commission=commission, impact=impact)
     #benchmark_orders.loc[benchmark_orders.index[1], 'Shares'] = 0
 
-    benchmark_vals = compute_portvals(benchmark_orders, start_val=100000, commission=0.0, impact=0.0)
+    benchmark_vals = compute_portvals(benchmark_orders, start_val=100000, commission=commission, impact=impact)
 
     normed_port = port_vals / port_vals.ix[0]
     normed_bench = benchmark_vals / benchmark_vals.ix[0]
@@ -109,32 +112,35 @@ def plot_manual_strategy():
     momentum = id.get_momentum(prices, lookback)
 
     # figure 5.
-    fig = plt.figure(figsize=(12,6.5))
+    plt.figure(figsize=(12,6.5))
     top = plt.subplot2grid((5,1), (0,0), rowspan=3, colspan=1)
     bottom = plt.subplot2grid((5,1), (3,0), rowspan=2, colspan=1, sharex=top)
+
+    # plot the
+    for index, marks in df_trades.iterrows():
+        if marks['Trades'] > 0:
+            plt.axvline(x=index, color='green',linestyle='dashed', label = "BUY")
+        elif marks['Trades'] < 0:
+            plt.axvline(x=index, color='red',linestyle='dashed', label = "SELL")
+        else:
+            pass
+
     top.xaxis_date()
     top.grid(True)
-    top.plot(port_vals, lw=2, color='red', label='Manual Strategy')
-    top.plot(benchmark_vals, lw=2, color='blue', label='Benchmark')
+    top.plot(normed_port, lw=2, color='red', label='Manual Strategy')
+    top.plot(normed_bench, lw=1.2, color='blue', label='Benchmark')
 
-    top.set_title('Price - Portfolio V.S Benchmark')
-    top.set_ylabel('Stock Price $ (Adjused Closing)')
+    top.set_title('Portfolio V.S Benchmark - In Sample Analysis')
+    top.set_ylabel('Normalized Value')
     bottom.plot(momentum, color='olive', lw=1, label="momentum")
     bottom.plot(PSR, color='red', lw=1, label="PSR")
-    bottom.plot(bb_indicator, color='blue', lw=1, label="Bollinger")
+    #bottom.plot(bb_indicator, color='blue', lw=1, label="Bollinger")
     bottom.set_title('Indicators')
 
     bottom.axhline(y = -0.2,  color = 'grey', linestyle='--', alpha = 0.5)
     bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
     bottom.axhline(y = 0.2,   color = 'grey', linestyle='--', alpha = 0.5)
-
-    for index, marks in df_trades.iterrows():
-        if marks['Trades'] > 0:
-            plt.axvline(x=index, color='green',linestyle='dashed')
-        elif marks['Trades'] < 0:
-            plt.axvline(x=index, color='red',linestyle='dashed')
-        else:
-            pass
+    bottom.lengend()
 
     top.legend()
     top.axes.get_xaxis().set_visible(False)
@@ -144,19 +150,6 @@ def plot_manual_strategy():
 
     plt.savefig(filename)
 
-
-    plt.figure(figsize=(12, 6.5))
-    plt.plot(normed_port, label="Portfolio", color='red', lw=2)
-    plt.plot(normed_bench, label="Benchmark",color='green', lw=1.2)
-
-
-
-    plt.xlabel('Date')
-    plt.ylabel('Normalized Value')
-    plt.legend()
-    plt.grid(True)
-    plt.title('Theoretically Optimal Strategy (%s)' % symbol)
-    #plt.savefig('05_MS_insample.png')
     plt.close()
 
     port_cr, port_adr, port_stddr, port_sr = get_portfolio_stats(port_vals)
@@ -164,6 +157,102 @@ def plot_manual_strategy():
 
     # Compare portfolio against benchmark
     print "=== Manual Strategy (MS) In Sample ==="
+    print "Date Range: {} to {}".format(start_date, end_date)
+    print
+    print "Sharpe Ratio of MS: {}".format(port_sr)
+    print "Sharpe Ratio of BenchMark : {}".format(bench_sr)
+    print
+    print "Cumulative Return of MS: {}".format(port_cr)
+    print "Cumulative Return of Benchmark : {}".format(bench_cr)
+    print
+    print "Standard Deviation of MS: {}".format(port_stddr)
+    print "Standard Deviation of Benchmark : {}".format(bench_stddr)
+    print
+    print "Average Daily Return of MS: {}".format(port_adr)
+    print "Average Daily Return of BenchMark : {}".format(bench_adr)
+    print
+    print "Final MS Portfolio Value: {}".format(port_vals[-1])
+    print "Final Benchmark Portfolio Value: {}".format(benchmark_vals[-1])
+    print
+
+    # ========================
+    # OUT OF SAMPLE Analysis
+    # ========================
+    start_date = dt.datetime(2010, 1, 1)
+    end_date = dt.datetime(2011, 12, 31)
+    # dates = pd.date_range(start_date, end_date)
+    symbol = 'JPM'
+
+    df_trades = ms.testPolicy(symbol=symbol, sd=start_date, ed=end_date, sv = 100000)
+
+    # generate orders based on trades
+    df_orders, benchmark_orders= generate_orders(df_trades,symbol)
+
+    port_vals = compute_portvals(df_orders, start_val=100000, commission=commission, impact=impact)
+    #benchmark_orders.loc[benchmark_orders.index[1], 'Shares'] = 0
+
+    benchmark_vals = compute_portvals(benchmark_orders, start_val=100000, commission=commission, impact=impact)
+
+    normed_port = port_vals / port_vals.ix[0]
+    normed_bench = benchmark_vals / benchmark_vals.ix[0]
+
+    dates = pd.date_range(start_date, end_date)
+    prices_all = get_data([symbol], dates, addSPY=True, colname='Adj Close')
+    prices = prices_all[symbol]  # only portfolio symbols
+
+    # get indicators
+    lookback = 14
+
+    _, PSR = id.get_SMA(prices, lookback)
+    _, _, bb_indicator = id.get_BB(prices, lookback)
+    momentum = id.get_momentum(prices, lookback)
+
+    # figure 6.
+    plt.figure(figsize=(12,6.5))
+    top = plt.subplot2grid((5,1), (0,0), rowspan=3, colspan=1)
+    bottom = plt.subplot2grid((5,1), (3,0), rowspan=2, colspan=1, sharex=top)
+
+    # plot the
+    for index, marks in df_trades.iterrows():
+        if marks['Trades'] > 0:
+            plt.axvline(x=index, color='green',linestyle='dashed', label = "BUY")
+        elif marks['Trades'] < 0:
+            plt.axvline(x=index, color='red',linestyle='dashed', label = "SELL")
+        else:
+            pass
+
+    top.xaxis_date()
+    top.grid(True)
+    top.plot(normed_port, lw=2, color='red', label='Manual Strategy')
+    top.plot(normed_bench, lw=1.2, color='blue', label='Benchmark')
+
+    top.set_title('Portfolio V.S Benchmark - Out Sample Analysis')
+    top.set_ylabel('Normalized Value')
+    bottom.plot(momentum, color='olive', lw=1, label="momentum")
+    bottom.plot(PSR, color='red', lw=1, label="PSR")
+    #bottom.plot(bb_indicator, color='blue', lw=1, label="Bollinger")
+    bottom.set_title('Indicators')
+
+    bottom.axhline(y = -0.2,  color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = 0.2,   color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.lengend()
+
+    top.legend()
+    top.axes.get_xaxis().set_visible(False)
+    plt.xlim(start_date,end_date)
+
+    filename = '06_MS_OutSample.png'
+
+    plt.savefig(filename)
+
+    plt.close()
+
+    port_cr, port_adr, port_stddr, port_sr = get_portfolio_stats(port_vals)
+    bench_cr, bench_adr, bench_stddr, bench_sr = get_portfolio_stats(benchmark_vals)
+
+    # Compare portfolio against benchmark
+    print "=== Manual Strategy (MS) Out Sample ==="
     print "Date Range: {} to {}".format(start_date, end_date)
     print
     print "Sharpe Ratio of MS: {}".format(port_sr)
