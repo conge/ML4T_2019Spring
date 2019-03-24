@@ -68,11 +68,6 @@ def plot_optimal_strategy():
 
     benchmark_orders = pd.DataFrame(data={'Symbol': ["JPM","JPM"], 'Order': ["BUY","BUY"],'Shares': [1000,0]},index={df_trades.index.min(),df_trades.index.max()})
 
-    #benchmark_orders = benchmark_orders.loc[benchmark_orders.index[0:1],:]
-    #print("benchmark_orders1: ", benchmark_orders)
-    #benchmark_orders['Symbol'] = symbol
-    #benchmark_orders['Order'] = 'BUY'
-    #benchmark_orders['Shares'] = 1000.0
     print("benchmark_orders2: ", benchmark_orders)
     #benchmark_orders.loc[benchmark_orders.index[1], 'Shares'] = 0
 
@@ -85,19 +80,17 @@ def plot_optimal_strategy():
     print("benchmark_vals")
     print(benchmark_vals)
 
-
-
     fig = plt.figure()
     ax1 = fig.add_subplot(111)
-    normed_port.plot(ax=ax1, color='black', lw=1.2)
-    normed_bench.plot(ax=ax1, color='blue', lw=1.2)
+    normed_port.plot(ax=ax1, color='red', lw=2)
+    normed_bench.plot(ax=ax1, color='green', lw=1.2)
     ax1.set_ylabel('Normalized Portfolio Value')
     ax1.set_xlabel('Date')
     plt.grid(True)
     red_patch = mpatches.Patch(color='black', label='Best Strategy')
     blue_patch = mpatches.Patch(color='blue', label='Benchmark')
     plt.legend(handles=[red_patch,blue_patch], loc='upper left')
-    plt.title('%s Best Possible Strategy' % symbol)
+    plt.title('Theoretically Optimal Strategy (%s)' % symbol)
     #plt.show()
     plt.savefig('04_TOS.png')
 
