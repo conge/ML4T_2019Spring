@@ -118,12 +118,12 @@ def plot_manual_strategy():
     top = plt.subplot2grid((5,1), (0,0), rowspan=3, colspan=1)
     bottom = plt.subplot2grid((5,1), (3,0), rowspan=2, colspan=1, sharex=top)
 
-    # plot the
+    # plot the Long or short action
     for index, marks in df_trades.iterrows():
         if marks['Trades'] > 0:
-            plt.axvline(x=index, color='green',linestyle='dashed')
+            plt.axvline(x=index, color='green',linestyle='dashed', alpha = .5)
         elif marks['Trades'] < 0:
-            plt.axvline(x=index, color='red',linestyle='dashed')
+            plt.axvline(x=index, color='red',linestyle='dashed', alpha = .5)
         else:
             pass
 
@@ -134,6 +134,14 @@ def plot_manual_strategy():
 
     top.set_title('Portfolio V.S Benchmark - In Sample Analysis')
     top.set_ylabel('Normalized Value')
+    for index, marks in df_trades.iterrows():
+        if marks['Trades'] > 0:
+            plt.axvline(x=index, color='green',linestyle='dashed', alpha = .5)
+        elif marks['Trades'] < 0:
+            plt.axvline(x=index, color='red',linestyle='dashed', alpha = .5)
+        else:
+            pass
+
     bottom.plot(momentum, color='olive', lw=1, label="momentum")
     bottom.plot(PSR, color='red', lw=1, label="PSR")
     #bottom.plot(bb_indicator, color='blue', lw=1, label="Bollinger")
@@ -227,6 +235,15 @@ def plot_manual_strategy():
     top.grid(True)
     top.plot(normed_port, lw=2, color='red', label='Manual Strategy')
     top.plot(normed_bench, lw=1.2, color='blue', label='Benchmark')
+
+    # plot the Long or short action
+    for index, marks in df_trades.iterrows():
+        if marks['Trades'] > 0:
+            plt.axvline(x=index, color='green',linestyle='dashed', alpha = .5)
+        elif marks['Trades'] < 0:
+            plt.axvline(x=index, color='red',linestyle='dashed', alpha = .5)
+        else:
+            pass
 
     top.set_title('Portfolio V.S Benchmark - Out Sample Analysis')
     top.set_ylabel('Normalized Value')
