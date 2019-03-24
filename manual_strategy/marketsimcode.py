@@ -50,7 +50,7 @@ def compute_portvals(orders, start_val = 1000000, commission=9.95, impact=0.005)
 
     # Not reading in 'SPY'
     if orders.__len__() == 1:
-        symbols = [orders['Symbol']]
+        symbols = orders['Symbol'].tolist()
     else:
         symbols = orders['Symbol'].unique().tolist()
 
