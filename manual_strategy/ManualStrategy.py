@@ -1,3 +1,5 @@
+
+
 import pandas as pd
 import datetime as dt
 import numpy as np
@@ -9,10 +11,8 @@ import matplotlib.pyplot as plt
 
 from util import get_data
 from marketsimcode import compute_portvals
-import indicators
 
-
-class TheoreticallyOptimalStrategy(object):
+class ManualStrategy(object):
     def __init__(self):
         pass
 
@@ -22,13 +22,6 @@ class TheoreticallyOptimalStrategy(object):
         dates = pd.date_range(sd, ed)
         prices_all = get_data([symbol], dates, addSPY=True, colname='Adj Close')
         prices = prices_all[symbol]  # only portfolio symbols
-        # prices_SPY = prices_all['SPY']  # only SPY, for comparison later
-
-        # detect price changes
-        prices_diff = prices.diff()
-        # if the next price change from increase to drop, today sell and short. get a -1000 position
-        # if next day price change from droping to increasing, buy and long: get a 1000 position.
-        # when the trend does not change, do nothing, no trading.
 
         position = np.sign(prices_diff.shift(-1)) * 1000
         trades = position.diff()
@@ -43,16 +36,17 @@ class TheoreticallyOptimalStrategy(object):
         return df_trades
 
 
-def plot_optimal_strategy():
+def plot_manual_strategy():
 
-    tos = TheoreticallyOptimalStrategy()
+    ms = ManualStrategy()
 
+    # in sample
     start_date = dt.datetime(2008, 1, 1)
     end_date = dt.datetime(2009, 12, 31)
     # dates = pd.date_range(start_date, end_date)
     symbol = 'JPM'
 
-    df_trades = tos.testPolicy(symbol=symbol, sd=start_date, ed=end_date, sv = 100000)
+    df_trades = ms.testPolicy(symbol=symbol, sd=start_date, ed=end_date, sv = 100000)
 
     df_orders = df_trades.copy()
 
@@ -102,36 +96,6 @@ def plot_optimal_strategy():
     plt.savefig('04_TOS.png')
     plt.close()
 
-    port_Return = port_vals.iloc[-1] / port_vals.iloc[0] - 1
-    bench_Return = benchmark_vals.iloc[-1] / benchmark_vals.iloc[0] - 1
-    port_Return_daily = port_vals[1:].values / port_vals[:-1] - 1
-    bench_Return_daily = benchmark_vals[1:].values / benchmark_vals[:-1] - 1
-
-    print "The Cumulative Return of the Optimal Strategy is", port_Return[0]
-    print "The Cumulative Return of the Benchmark is", bench_Return[0]
-    print "The Average Daily Return of the Optimal Strategy is", port_Return_daily['Strategy'].mean()
-    print "The Average Daily Return of benchmark is", bench_Return_daily['Benchmark'].mean()
-    print "The std of the Optimal Strategy is", np.std(port_Return_daily['Strategy'])
-    print "The std of the benchmark is", np.std(bench_Return_daily['Benchmark'])
-
-    # Compare portfolio against $SPX
-    print "Date Range: {} to {}".format(start_date, end_date)
-    print
-    #print "Sharpe Ratio of Fund: {}".format(sharpe_ratio)
-    #print "Sharpe Ratio of SPY : {}".format(sharpe_ratio_SPY)
-    print
-    print "Cumulative Return of Fund: {}".format(port_Return)
-    print "Cumulative Return of Benchmark : {}".format(bench_Return)
-    print
-    print "Standard Deviation of Fund: {}".format(port_Return_daily.std())
-    print "Standard Deviation of Benchmark : {}".format(bench_Return_daily.std())
-    print
-    print "Average Daily Return of Fund: {}".format(port_Return_daily.mean())
-    print "Average Daily Return of BenchMark : {}".format(bench_Return_daily.mean())
-    print
-    print "Final Portfolio Value: {}".format(port_vals[-1])
-    print "Final Portfolio Value: {}".format(benchmark_vals[-1])
-    print
 
 
 

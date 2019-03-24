@@ -29,19 +29,21 @@ def get_price(symbols, dates):
 def get_SMA(prices, lookback):
     # calculate simple moving average from prices
     SMA = prices.rolling(window=lookback,center=False).mean()
+    # calculate the price to SMA ratio (PSR)
+    PSR = prices / SMA - 1
 
-    return SMA
+    return SMA, PSR
 
 
 def get_BB(prices, lookback):
     # calculate Bollinger Bands from price
 
-    SMA = get_SMA(prices, lookback)
+    SMA, _ = get_SMA(prices, lookback)
     rolling_std = prices.rolling(window=lookback,center=False).std()
     upper_bb = SMA + (2 * rolling_std)
     lower_bb = SMA - (2 * rolling_std)
     bb_indicator = (prices - SMA) / (2 * rolling_std)
-    return upper_bb, lower_bb, bb_indicator, SMA
+    return upper_bb, lower_bb, bb_indicator
 
 
 def get_volatility(prices):
@@ -70,21 +72,19 @@ def plot_indicators():
     start_date = dt.datetime(2008, 1, 1)
     end_date = dt.datetime(2009, 12, 31)
     dates = pd.date_range(start_date, end_date)
+    lookback = 14
     symbols = ['JPM']
 
     # Assess the portfolio
     prices, prices_SPY = get_price(symbols, dates)
+    # normed_prices = prices / prices.iloc[0,:]
+    # normed_prices_SPY = prices_SPY / prices_SPY.iloc[0]
 
-    normed_prices = prices / prices.iloc[0,:]
-    normed_prices_SPY = prices_SPY / prices_SPY.iloc[0]
+    SMA, PSR = get_SMA(prices, lookback)
 
-    upper_bb, lower_bb, bb_indicator, SMA = get_BB(prices, 14) # 14 day
-
-    # calculate the price to SMA ratio (PSR)
-    PSR = prices / SMA - 1
+    upper_bb, lower_bb, bb_indicator  = get_BB(prices, lookback) # 14 day
 
     momentum = get_momentum(prices, 14)
-
 
     # figure 1.
     fig = plt.figure(figsize=(12,6.5))
@@ -94,7 +94,7 @@ def plot_indicators():
     top.grid(True)
     top.plot(prices, lw=2, color='blue', label='Price')
 
-    top.plot(SMA, label='SMA - 14-day lookback', lw=1,color='red')
+    top.plot(SMA, label='SMA - {}-day lookback'.format(lookback), lw=1,color='red')
 
     top.set_title('Simple Moving Average - JPM')
     top.set_ylabel('Stock Price $ (Adjused Closing)')
@@ -114,6 +114,7 @@ def plot_indicators():
     filename = '01_Price_over_SMA_ratio.png'
 
     plt.savefig(filename)
+    fig.close()
 
 
     # figure 2.
