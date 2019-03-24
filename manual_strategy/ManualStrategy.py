@@ -121,29 +121,29 @@ def plot_manual_strategy():
     # plot the Long or short action
     for index, marks in df_trades.iterrows():
         if marks['Trades'] > 0:
-            plt.axvline(x=index, color='green',linestyle='dashed', alpha = .5)
+            plt.axvline(x=index, color='blue',linestyle='dashed', alpha = .5)
         elif marks['Trades'] < 0:
-            plt.axvline(x=index, color='red',linestyle='dashed', alpha = .5)
+            plt.axvline(x=index, color='black',linestyle='dashed', alpha = .5)
         else:
             pass
 
     top.xaxis_date()
     top.grid(True)
     top.plot(normed_port, lw=2, color='red', label='Manual Strategy')
-    top.plot(normed_bench, lw=1.2, color='blue', label='Benchmark')
+    top.plot(normed_bench, lw=1.2, color='green', label='Benchmark')
 
     top.set_title('Portfolio V.S Benchmark - In Sample Analysis')
     top.set_ylabel('Normalized Value')
     for index, marks in df_trades.iterrows():
         if marks['Trades'] > 0:
-            plt.axvline(x=index, color='green',linestyle='dashed', alpha = .5)
+            top.axvline(x=index, color='green',linestyle='dashed', alpha = .5)
         elif marks['Trades'] < 0:
-            plt.axvline(x=index, color='red',linestyle='dashed', alpha = .5)
+            top.axvline(x=index, color='red',linestyle='dashed', alpha = .5)
         else:
             pass
 
     bottom.plot(momentum, color='olive', lw=1, label="momentum")
-    bottom.plot(PSR, color='red', lw=1, label="PSR")
+    bottom.plot(PSR, color='purple', lw=1, label="PSR")
     #bottom.plot(bb_indicator, color='blue', lw=1, label="Bollinger")
     bottom.set_title('Indicators')
 
@@ -225,30 +225,30 @@ def plot_manual_strategy():
     # plot the
     for index, marks in df_trades.iterrows():
         if marks['Trades'] > 0:
-            plt.axvline(x=index, color='green',linestyle='dashed')
+            plt.axvline(x=index, color='blue',linestyle='dashed')
         elif marks['Trades'] < 0:
-            plt.axvline(x=index, color='red',linestyle='dashed')
+            plt.axvline(x=index, color='blak',linestyle='dashed')
         else:
             pass
 
     top.xaxis_date()
     top.grid(True)
     top.plot(normed_port, lw=2, color='red', label='Manual Strategy')
-    top.plot(normed_bench, lw=1.2, color='blue', label='Benchmark')
+    top.plot(normed_bench, lw=1.2, color='green', label='Benchmark')
 
     # plot the Long or short action
     for index, marks in df_trades.iterrows():
         if marks['Trades'] > 0:
-            plt.axvline(x=index, color='green',linestyle='dashed', alpha = .5)
+            top.axvline(x=index, color='blue', linestyle='dashed', alpha = .5)
         elif marks['Trades'] < 0:
-            plt.axvline(x=index, color='red',linestyle='dashed', alpha = .5)
+            top.axvline(x=index, color='black', linestyle='dashed', alpha = .5)
         else:
             pass
 
     top.set_title('Portfolio V.S Benchmark - Out Sample Analysis')
     top.set_ylabel('Normalized Value')
     bottom.plot(momentum, color='olive', lw=1, label="momentum")
-    bottom.plot(PSR, color='red', lw=1, label="PSR")
+    bottom.plot(PSR, color='purple', lw=1, label="PSR")
     #bottom.plot(bb_indicator, color='blue', lw=1, label="Bollinger")
     bottom.set_title('Indicators')
 
