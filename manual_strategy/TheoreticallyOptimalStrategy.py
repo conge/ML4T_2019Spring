@@ -20,7 +20,7 @@ class TheoreticallyOptimalStrategy(object):
         ## this policy is like this: buy when the price will go up the next day, sell when the price will do down the next day
         # get price data
         dates = pd.date_range(sd, ed)
-        prices_all = get_data(symbol, dates, addSPY=True, colname='Adj Close')
+        prices_all = get_data([symbol], dates, addSPY=True, colname='Adj Close')
         prices = prices_all[symbol]  # only portfolio symbols
         # prices_SPY = prices_all['SPY']  # only SPY, for comparison later
 
