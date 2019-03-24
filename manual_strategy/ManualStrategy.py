@@ -38,9 +38,9 @@ class ManualStrategy(object):
         print("bb_indicator: ", bb_indicator)
 
         for t in range(prices.shape[0]):
-            if PSR.iloc[t]< -0.03 and bb_indicator.iloc[t] < -0.3 and momentum.iloc[t] < -0.03:
+            if PSR.iloc[t]< -0.03 and bb_indicator.iloc[t] < -0.8 and momentum.iloc[t] < -0.03:
                 holdings.iloc[t] = 1000
-            elif PSR.iloc[t] > 0.05 and bb_indicator.iloc[t] > 0.3 and momentum.iloc[t] > 0.05:
+            elif PSR.iloc[t] > 0.03 and bb_indicator.iloc[t] > 0.8 and momentum.iloc[t] > 0.03:
                 holdings.iloc[t] = -1000
 
         # fill the NAN data
@@ -59,6 +59,7 @@ class ManualStrategy(object):
 
 def generate_orders(df_trades,symbol):
     df_orders = df_trades.copy()
+    df_orders[-1] = 1
 
     df_orders = df_orders.loc[(df_orders.Trades != 0)]
 
@@ -67,9 +68,10 @@ def generate_orders(df_trades,symbol):
     df_orders['Symbol'] = symbol
     df_orders['Order'] = np.where(df_orders['Trades']>0, 'BUY', 'SELL')
     df_orders['Shares'] = np.abs(df_orders['Trades'])
+    df_orders.loc[df_orders.index[-1],'Shares'] = 0
 
     benchmark_orders = pd.DataFrame(data={'Symbol': [symbol,symbol], 'Order': ["BUY","BUY"],'Shares': [1000,0]},
-                                    index={df_trades.index.min(),df_trades.index.max()})
+                                    index={df_trades.index.min(), df_trades.index.max()})
 
     return df_orders, benchmark_orders
 
@@ -119,9 +121,9 @@ def plot_manual_strategy():
     # plot the
     for index, marks in df_trades.iterrows():
         if marks['Trades'] > 0:
-            plt.axvline(x=index, color='green',linestyle='dashed', label = "BUY")
+            plt.axvline(x=index, color='green',linestyle='dashed')
         elif marks['Trades'] < 0:
-            plt.axvline(x=index, color='red',linestyle='dashed', label = "SELL")
+            plt.axvline(x=index, color='red',linestyle='dashed')
         else:
             pass
 
@@ -215,9 +217,9 @@ def plot_manual_strategy():
     # plot the
     for index, marks in df_trades.iterrows():
         if marks['Trades'] > 0:
-            plt.axvline(x=index, color='green',linestyle='dashed', label = "BUY")
+            plt.axvline(x=index, color='green',linestyle='dashed')
         elif marks['Trades'] < 0:
-            plt.axvline(x=index, color='red',linestyle='dashed', label = "SELL")
+            plt.axvline(x=index, color='red',linestyle='dashed')
         else:
             pass
 
