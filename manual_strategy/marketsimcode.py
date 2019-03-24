@@ -52,7 +52,7 @@ def compute_portvals(orders, start_val = 1000000, commission=9.95, impact=0.005)
     if orders.__len__() == 1:
         symbols = orders['Symbol'].tolist()
     else:
-        symbols = set(orders['Symbol'].tolist)
+        symbols = orders['Symbol'].unique().tolist()
 
     print(symbols)
 
