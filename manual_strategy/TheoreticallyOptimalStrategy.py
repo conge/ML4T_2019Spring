@@ -54,7 +54,9 @@ def plot_optimal_strategy():
     df_trades = tos.testPolicy(symbol=symbol, sd=start_date, ed=end_date, sv = 100000)
     print(df_trades)
 
-    df_orders = df_trades[['Trades']][df_trades['Trades'] != 0]
+    df_orders = df_trades.loc[:, (df_trades != 0)]
+
+    #df_orders = df_trades[['Trades']][df_trades['Trades'] != 0]
     print("df_orders = ", df_orders)
 
     df_orders['Symbol'] = symbol
