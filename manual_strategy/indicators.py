@@ -114,8 +114,6 @@ def plot_indicators():
     filename = '01_Price_over_SMA_ratio.png'
 
     plt.savefig(filename)
-    fig.close()
-
 
     # figure 2.
     fig = plt.figure(figsize=(12,6.5))

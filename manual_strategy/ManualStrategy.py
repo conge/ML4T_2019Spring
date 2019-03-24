@@ -38,9 +38,9 @@ class ManualStrategy(object):
         print("bb_indicator: ", bb_indicator)
 
         for t in range(prices.shape[0]):
-            if PSR.iloc[t]< -0.05 and bb_indicator.iloc[t] < -1 and momentum.iloc[t] < -0.05:
+            if PSR.iloc[t]< -0.05 and bb_indicator.iloc[t] < -0.8 and momentum.iloc[t] < -0.05:
                 holdings.iloc[t] = 1000
-            elif PSR.iloc[t] > 0.05 and bb_indicator.iloc[t] > 1 and momentum.iloc[t] > 0.05:
+            elif PSR.iloc[t] > 0.05 and bb_indicator.iloc[t] > 0.8 and momentum.iloc[t] > 0.05:
                 holdings.iloc[t] = -1000
 
         # fill the NAN data
@@ -128,6 +128,14 @@ def plot_manual_strategy():
     bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
     bottom.axhline(y = 0.2,   color = 'grey', linestyle='--', alpha = 0.5)
 
+    for index, marks in df_trades.iterrows():
+        if marks['Trades'] == 1000:
+            plt.axvline(x=index, color='green',linestyle='dashed')
+        elif marks['Trades'] == -1000:
+            plt.axvline(x=index, color='red',linestyle='dashed')
+        else:
+            pass
+
     top.legend()
     top.axes.get_xaxis().set_visible(False)
     plt.xlim(start_date,end_date)
@@ -141,13 +149,7 @@ def plot_manual_strategy():
     plt.plot(normed_port, label="Portfolio", color='red', lw=2)
     plt.plot(normed_bench, label="Benchmark",color='green', lw=1.2)
 
-    for index, marks in df_trades.iterrows():
-        if marks['Trades'] == 1000:
-            plt.axvline(x=index, color='green',linestyle='dashed')
-        elif marks['Trades'] == -1000:
-            plt.axvline(x=index, color='red',linestyle='dashed')
-        else:
-            pass
+
 
     plt.xlabel('Date')
     plt.ylabel('Normalized Value')
