@@ -65,6 +65,8 @@ def plot_optimal_strategy():
     port_vals = compute_portvals(df_orders, start_val=100000, commission=0.0, impact=0.0)
 
     benchmark_orders = df_trades.copy()
+
+    print("benchmark_orders: ", benchmark_orders)
     benchmark_orders = benchmark_orders.iloc[0:1,:]
     benchmark_orders['Symbol'] = symbol
     benchmark_orders['Order'] = 'BUY'
