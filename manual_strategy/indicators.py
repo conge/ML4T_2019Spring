@@ -84,7 +84,7 @@ def plot_indicators():
 
     upper_bb, lower_bb, bb_indicator  = get_BB(prices, lookback) # 14 day
 
-    momentum = get_momentum(prices, 14)
+    momentum = get_momentum(prices, lookback)
 
     # figure 1.
     fig = plt.figure(figsize=(12,6.5))

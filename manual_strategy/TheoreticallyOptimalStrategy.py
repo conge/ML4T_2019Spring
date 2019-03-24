@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 
 from util import get_data
-from marketsimcode import compute_portvals
+from marketsimcode import compute_portvals, get_portfolio_stats
 import indicators
 
 
@@ -102,29 +102,27 @@ def plot_optimal_strategy():
     plt.savefig('04_TOS.png')
     plt.close()
 
-    port_Return = port_vals.iloc[-1] / port_vals.iloc[0] - 1
-    bench_Return = benchmark_vals.iloc[-1] / benchmark_vals.iloc[0] - 1
-    port_Return_daily = port_vals[1:].values / port_vals[:-1] - 1
-    bench_Return_daily = benchmark_vals[1:].values / benchmark_vals[:-1] - 1
-
+    port_cr, port_adr, port_stddr, port_sr = get_portfolio_stats(port_vals)
+    bench_cr, bench_adr, bench_stddr, bench_sr = get_portfolio_stats(benchmark_vals)
 
     # Compare portfolio against benchmark
+    print "=== Theoretically Optimal Strategy (TOS) ==="
     print "Date Range: {} to {}".format(start_date, end_date)
     print
-    #print "Sharpe Ratio of Fund: {}".format(sharpe_ratio)
-    #print "Sharpe Ratio of SPY : {}".format(sharpe_ratio_SPY)
+    print "Sharpe Ratio of TOS: {}".format(port_sr)
+    print "Sharpe Ratio of BenchMark : {}".format(bench_sr)
     print
-    print "Cumulative Return of Fund: {}".format(port_Return)
-    print "Cumulative Return of Benchmark : {}".format(bench_Return)
+    print "Cumulative Return of TOS: {}".format(port_cr)
+    print "Cumulative Return of Benchmark : {}".format(bench_cr)
     print
-    print "Standard Deviation of Fund: {}".format(port_Return_daily.std())
-    print "Standard Deviation of Benchmark : {}".format(bench_Return_daily.std())
+    print "Standard Deviation of TOS: {}".format(port_stddr)
+    print "Standard Deviation of Benchmark : {}".format(bench_stddr)
     print
-    print "Average Daily Return of Fund: {}".format(port_Return_daily.mean())
-    print "Average Daily Return of BenchMark : {}".format(bench_Return_daily.mean())
+    print "Average Daily Return of TOS: {}".format(port_adr)
+    print "Average Daily Return of BenchMark : {}".format(bench_adr)
     print
-    print "Final Portfolio Value: {}".format(port_vals[-1])
-    print "Final Portfolio Value: {}".format(benchmark_vals[-1])
+    print "Final TOS Portfolio Value: {}".format(port_vals[-1])
+    print "Final Benchmark Portfolio Value: {}".format(benchmark_vals[-1])
     print
 
 

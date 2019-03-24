@@ -115,6 +115,19 @@ def compute_portvals(orders, start_val = 1000000, commission=9.95, impact=0.005)
     ## return rv
     return portvals
 
+def get_portfolio_stats(port_val, rfr=0, sf=252):
+    #Daily Returns
+    daily_rets = (port_val / port_val.shift(1)) - 1
+    daily_rets = daily_rets[1:]
+
+    # Get portfolio statistics
+    cr = (port_val[-1] / port_val[0]) - 1
+    adr = daily_rets.mean()
+    sddr = daily_rets.std()
+    sr = np.sqrt(sf) * np.mean(adr - rfr) / sddr
+
+    return cr, adr, sddr, sr
+
 def test_code():
     # this is a helper function you can use to test your code
     # note that during autograding his function will not be called.
