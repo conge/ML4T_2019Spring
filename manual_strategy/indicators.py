@@ -83,6 +83,8 @@ def plot_indicators():
     # calculate the price to SMA ratio (PSR)
     PSR = prices / SMA - 1
 
+
+    # figure 2.
     fig = plt.figure(figsize=(12,6.5))
     top = plt.subplot2grid((5,1), (0,0), rowspan=4, colspan=1)
     bottom = plt.subplot2grid((5,1), (4,0), rowspan=1, colspan=1, sharex=top)
@@ -92,13 +94,17 @@ def plot_indicators():
 
     top.plot(pd.concat([SMA, upper_bb, lower_bb],axis=1), lw=1)
     top.set_title('Bollinger Bands')
-    top.set_ylabel('Adj Closing Price $')
+    top.set_ylabel('Stock Price $ (Adjused Closing)')
     bottom.plot(bb_indicator, color='blue',lw = 1)
     bottom.set_title('Bollinger Bands Indicator')
 
-    bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
-    bottom.axhline(y = 50,  color = 'grey', linestyle='--', alpha = 0.5)
-    bottom.axhline(y = 100, color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = .0,  color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = .5,  color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = 1.0, color = 'grey', linestyle='--', alpha = 0.5)
+
+    top.legend()
+    top.axes.get_xaxis().set_visible(False)
+    plt.xlim(start_date,end_date)
 
     filename = '02_bb_indicator.png'
 
