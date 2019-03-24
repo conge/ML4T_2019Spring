@@ -61,6 +61,9 @@ def plot_optimal_strategy():
     df_orders['Symbol'] = symbol
     df_orders['Order'] = np.where(df_orders['Trades']>0, 'BUY', 'SELL')
     df_orders['Shares'] = np.abs(df_orders['Trades'])
+    print("64 head of dr)orders:", df_orders.head())
+
+    df_orders = df_orders.reset_index()
 
     port_vals = compute_portvals(df_orders, start_val=100000, commission=0.0, impact=0.0)
 
