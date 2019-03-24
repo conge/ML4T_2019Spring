@@ -49,7 +49,12 @@ def compute_portvals(orders, start_val = 1000000, commission=9.95, impact=0.005)
     end_date = orders.index.max()
 
     # Not reading in 'SPY'
-    df_prices = get_data(orders['Symbol'].unique().tolist(), pd.date_range(start_date, end_date), addSPY=True)
+    if orders.__len__() == 1:
+        symbols = [orders['Symbol']]
+    else:
+        symbols = orders['Symbol'].unique().tolist()
+
+    df_prices = get_data(symbols, pd.date_range(start_date, end_date), addSPY=True)
     df_prices.index.name = 'Date'
     df_prices['CASH'] = 1.0
     df_prices = df_prices.drop(labels='SPY', axis=1) # read SPY in to ensure we get every trading day in the prices dataFrame
@@ -118,7 +123,7 @@ def test_code():
 
     # Process orders
     orders = pd.read_csv(of, index_col='Date', parse_dates=True, na_values=['nan']);
-    
+
     portvals = compute_portvals(orders, start_val = sv)
     if isinstance(portvals, pd.DataFrame):
         portvals = portvals[portvals.columns[0]] # just get the first column

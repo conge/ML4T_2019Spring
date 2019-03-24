@@ -60,9 +60,11 @@ def plot_optimal_strategy():
     port_vals = compute_portvals(df_orders, start_val=100000, commission=0.0, impact=0.0)
 
     benchmark_orders = df_orders.copy()
-    benchmark_orders = benchmark_orders.iloc[0, :]
+    benchmark_orders = benchmark_orders.iloc[0:1, :]
     benchmark_orders.loc[benchmark_orders.index[0],'Order'] = 'BUY'
     benchmark_orders.loc[benchmark_orders.index[0],'Shares'] = 1000
+    #benchmark_orders.loc[benchmark_orders.index[1],'Order'] = 'BUY' ## The compute_portvals require at least two orders
+    #benchmark_orders.loc[benchmark_orders.index[1],'Shares'] = 0
 
     benchmark_vals = compute_portvals(benchmark_orders, start_val=100000, commission=0.0, impact=0.0)
 
