@@ -134,4 +134,5 @@ def plot_manual_strategy():
 if __name__ == "__main__":
     # This code WILL NOT be called by the auto grader
     # Do not assume that it will be called
-    plot_optimal_strategy()
+    #plot_optimal_strategy()
+    plot_manual_strategy()
