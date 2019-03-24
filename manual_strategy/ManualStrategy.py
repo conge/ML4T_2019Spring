@@ -33,12 +33,9 @@ class ManualStrategy(object):
         # make sure when PSR (= price / SMA -1) >0.05 and bb_indicator > 1 and momentum > 0.05 SELL or hold -1000
         # when PSR (= price / SMA -1) < -0.05 and bb_indicator < -1 and momentum < -0.05 Buy or hold -1000
 
-        print("=== prices ===")
-        print(prices.head())
-
-        print("PSR: ", PSR.head())
-        print("momentum: ", momentum.head())
-        print("bb_indicator: ", bb_indicator.head())
+        print("PSR: ", PSR)
+        print("momentum: ", momentum)
+        print("bb_indicator: ", bb_indicator)
 
         for t in range(prices.shape[0]):
             if PSR.iloc[t]< -0.05 and bb_indicator.iloc[t] < -1 and momentum.iloc[t] < -0.05:

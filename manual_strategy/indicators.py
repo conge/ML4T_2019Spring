@@ -82,7 +82,7 @@ def plot_indicators():
 
     SMA, PSR = get_SMA(prices, lookback)
 
-    upper_bb, lower_bb, bb_indicator  = get_BB(prices, lookback) # 14 day
+    upper_bb, lower_bb, bb_indicator = get_BB(prices, lookback) # 14 day
 
     momentum = get_momentum(prices, lookback)
 
