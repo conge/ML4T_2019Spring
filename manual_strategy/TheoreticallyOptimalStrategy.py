@@ -76,11 +76,7 @@ def plot_optimal_strategy():
     normed_port = port_vals / port_vals.ix[0]
     normed_bench = benchmark_vals / benchmark_vals.ix[0]
 
-    print( port_vals)
-    print("benchmark_vals")
-    print(benchmark_vals)
-
-    fig = plt.figure()
+    fig = plt.figure(figsize=(12,6.5))
     ax1 = fig.add_subplot(111)
     normed_port.plot(ax=ax1, color='red', lw=2)
     normed_bench.plot(ax=ax1, color='green', lw=1.2)
