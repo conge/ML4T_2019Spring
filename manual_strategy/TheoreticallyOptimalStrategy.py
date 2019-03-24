@@ -68,7 +68,6 @@ def plot_optimal_strategy():
 
     benchmark_orders = pd.DataFrame(data={'Symbol': ["JPM","JPM"], 'Order': ["BUY","BUY"],'Shares': [1000,0]},index={df_trades.index.min(),df_trades.index.max()})
 
-    print("benchmark_orders2: ", benchmark_orders)
     #benchmark_orders.loc[benchmark_orders.index[1], 'Shares'] = 0
 
     benchmark_vals = compute_portvals(benchmark_orders, start_val=100000, commission=0.0, impact=0.0)
@@ -76,7 +75,8 @@ def plot_optimal_strategy():
     normed_port = port_vals / port_vals.ix[0]
     normed_bench = benchmark_vals / benchmark_vals.ix[0]
 
-    fig = plt.figure(figsize=(12,6.5))
+
+    """fig = plt.figure(figsize=(12,6.5))
     ax1 = fig.add_subplot(111)
     normed_port.plot(ax=ax1, color='red', lw=2)
     normed_bench.plot(ax=ax1, color='green', lw=1.2)
@@ -88,6 +88,19 @@ def plot_optimal_strategy():
     plt.title('Theoretically Optimal Strategy (%s)' % symbol)
     #plt.show()
     plt.savefig('04_TOS.png')
+    """
+
+    plt.figure(4)
+    plt.plot(normed_port, label="Portfolio", color='red', lw=2)
+    plt.plot(normed_bench, label="Benchmark",color='green', lw=1.2)
+
+    plt.xlabel('Date')
+    plt.ylabel('Normalized Value')
+    plt.legend()
+    plt.grid(True)
+    plt.title('Theoretically Optimal Strategy (%s)' % symbol)
+    plt.savefig('04_TOS.png')
+    plt.close()
 
 
 
