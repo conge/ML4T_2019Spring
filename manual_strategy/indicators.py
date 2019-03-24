@@ -88,8 +88,8 @@ def plot_indicators():
 
     # figure 1.
     fig = plt.figure(figsize=(12,6.5))
-    top = plt.subplot2grid((5,1), (0,0), rowspan=4, colspan=1)
-    bottom = plt.subplot2grid((5,1), (4,0), rowspan=1, colspan=1, sharex=top)
+    top = plt.subplot2grid((5,1), (0,0), rowspan=2, colspan=1)
+    bottom = plt.subplot2grid((5,1), (3,0), rowspan=2, colspan=1, sharex=top)
     top.xaxis_date()
     top.grid(True)
     top.plot(prices, lw=2, color='blue', label='Price')
@@ -154,14 +154,11 @@ def plot_indicators():
     top.grid(True)
     top.plot(prices, lw=2, color='blue', label='Price')
 
-    top.plot(SMA, label='SMA - 14-day lookback', lw=1,color='red')
-    top.plot(upper_bb, label='Upper band', lw=1,color='limegreen')
-    top.plot(lower_bb, label='Lower band', lw=1,color='olive')
 
-    top.set_title('Bollinger Bands')
+    top.set_title('Price')
     top.set_ylabel('Stock Price $ (Adjused Closing)')
-    bottom.plot(bb_indicator, color='olive', lw=1)
-    bottom.set_title('Bollinger Bands Indicator')
+    bottom.plot(momentum, color='olive', lw=1)
+    bottom.set_title('Momentum')
 
     bottom.axhline(y = -1,  color = 'grey', linestyle='--', alpha = 0.5)
     bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
@@ -171,7 +168,7 @@ def plot_indicators():
     top.axes.get_xaxis().set_visible(False)
     plt.xlim(start_date,end_date)
 
-    filename = '02_bb_indicator.png'
+    filename = '03_momentum.png'
 
     plt.savefig(filename)
 
