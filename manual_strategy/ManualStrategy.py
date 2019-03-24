@@ -97,6 +97,43 @@ def plot_manual_strategy():
     normed_port = port_vals / port_vals.ix[0]
     normed_bench = benchmark_vals / benchmark_vals.ix[0]
 
+    dates = pd.date_range(start_date, end_date)
+    prices_all = get_data([symbol], dates, addSPY=True, colname='Adj Close')
+    prices = prices_all[symbol]  # only portfolio symbols
+
+    # get indicators
+    lookback = 14
+
+    _, PSR = id.get_SMA(prices, lookback)
+    _, _, bb_indicator = id.get_BB(prices, lookback)
+    momentum = id.get_momentum(prices, lookback)
+
+    # figure 5.
+    fig = plt.figure(figsize=(12,6.5))
+    top = plt.subplot2grid((5,1), (0,0), rowspan=3, colspan=1)
+    bottom = plt.subplot2grid((5,1), (3,0), rowspan=2, colspan=1, sharex=top)
+    top.xaxis_date()
+    top.grid(True)
+    top.plot(port_vals, lw=2, color='red', label='Manual Strategy')
+    top.plot(benchmark_vals, lw=2, color='blue', label='Benchmark')
+
+    top.set_title('Price - Portfolio V.S Benchmark')
+    top.set_ylabel('Stock Price $ (Adjused Closing)')
+    bottom.plot(momentum, color='olive', lw=1)
+    bottom.set_title('Momentum')
+
+    bottom.axhline(y = -0.2,  color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = 0.2,   color = 'grey', linestyle='--', alpha = 0.5)
+
+    top.legend()
+    top.axes.get_xaxis().set_visible(False)
+    plt.xlim(start_date,end_date)
+
+    filename = '03_momentum.png'
+
+    plt.savefig(filename)
+
 
     plt.figure(figsize=(12, 6.5))
     plt.plot(normed_port, label="Portfolio", color='red', lw=2)

@@ -35,12 +35,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="764" />
-          <entry key="py" value="5734" />
+          <entry key="py" value="5826" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="6498" />
+          <entry key="Python" value="6590" />
         </counts>
       </usages-collector>
     </session>
@@ -50,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/indicators.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+            <state relative-caret-position="266">
+              <caret line="173" column="25" lean-forward="true" selection-start-line="149" selection-start-column="4" selection-end-line="173" selection-end-column="25" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -88,12 +88,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ManualStrategy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="110" column="12" selection-start-line="110" selection-start-column="12" selection-end-line="110" selection-end-column="12" />
+            <state relative-caret-position="-115">
+              <caret line="99" column="46" selection-start-line="99" selection-start-column="46" selection-end-line="99" selection-end-column="46" />
               <folding>
                 <element signature="e#19#38#0" expanded="true" />
-                <marker date="1553460032588" expanded="true" signature="2101:2662" ph="..." />
-                <marker date="1553460032588" expanded="true" signature="2689:2695" ph="..." />
+                <marker date="1553460473941" expanded="true" signature="2101:2662" ph="..." />
+                <marker date="1553460473941" expanded="true" signature="2689:2695" ph="..." />
               </folding>
             </state>
           </provider>
@@ -296,8 +296,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/indicators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+        <state relative-caret-position="266">
+          <caret line="173" column="25" lean-forward="true" selection-start-line="149" selection-start-column="4" selection-end-line="173" selection-end-column="25" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
@@ -306,12 +306,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ManualStrategy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="110" column="12" selection-start-line="110" selection-start-column="12" selection-end-line="110" selection-end-column="12" />
+        <state relative-caret-position="-115">
+          <caret line="99" column="46" selection-start-line="99" selection-start-column="46" selection-end-line="99" selection-end-column="46" />
           <folding>
             <element signature="e#19#38#0" expanded="true" />
-            <marker date="1553460032588" expanded="true" signature="2101:2662" ph="..." />
-            <marker date="1553460032588" expanded="true" signature="2689:2695" ph="..." />
+            <marker date="1553460473941" expanded="true" signature="2101:2662" ph="..." />
+            <marker date="1553460473941" expanded="true" signature="2689:2695" ph="..." />
           </folding>
         </state>
       </provider>
