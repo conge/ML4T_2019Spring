@@ -154,7 +154,7 @@ def plot_manual_strategy():
     plt.legend()
     plt.grid(True)
     plt.title('Theoretically Optimal Strategy (%s)' % symbol)
-    plt.savefig('05_MS_insample.png')
+    #plt.savefig('05_MS_insample.png')
     plt.close()
 
     port_cr, port_adr, port_stddr, port_sr = get_portfolio_stats(port_vals)
