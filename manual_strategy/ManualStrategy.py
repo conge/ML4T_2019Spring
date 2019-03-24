@@ -119,8 +119,10 @@ def plot_manual_strategy():
 
     top.set_title('Price - Portfolio V.S Benchmark')
     top.set_ylabel('Stock Price $ (Adjused Closing)')
-    bottom.plot(momentum, color='olive', lw=1)
-    bottom.set_title('Momentum')
+    bottom.plot(momentum, color='olive', lw=1, label="momentum")
+    bottom.plot(PSR, color='red', lw=1, label="PSR")
+    bottom.plot(bb_indicator, color='blue', lw=1, label="Bollinger")
+    bottom.set_title('Indicators')
 
     bottom.axhline(y = -0.2,  color = 'grey', linestyle='--', alpha = 0.5)
     bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
@@ -130,7 +132,7 @@ def plot_manual_strategy():
     top.axes.get_xaxis().set_visible(False)
     plt.xlim(start_date,end_date)
 
-    filename = '03_momentum.png'
+    filename = '05_MS_insample.png'
 
     plt.savefig(filename)
 
