@@ -100,11 +100,11 @@ def plot_indicators():
     bottom.plot(PSR, color='olive', lw=1)
     bottom.set_title('Price over SMA ratio')
 
-    bottom.axhline(y = -0.2,  color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.axhline(y = -0.25,  color = 'grey', linestyle='--', alpha = 0.5)
     bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
-    bottom.axhline(y = 1.2,   color = 'grey', linestyle='--', alpha = 0.5)
-    bottom.ylim(-0.5, 1.5)
-    
+    bottom.axhline(y = .25,   color = 'grey', linestyle='--', alpha = 0.5)
+    bottom.ylim(-0.5, .5)
+
     top.legend()
     top.axes.get_xaxis().set_visible(False)
     plt.xlim(start_date,end_date)
