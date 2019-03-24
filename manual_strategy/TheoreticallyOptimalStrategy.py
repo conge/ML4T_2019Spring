@@ -107,14 +107,8 @@ def plot_optimal_strategy():
     port_Return_daily = port_vals[1:].values / port_vals[:-1] - 1
     bench_Return_daily = benchmark_vals[1:].values / benchmark_vals[:-1] - 1
 
-    print "The Cumulative Return of the Optimal Strategy is", port_Return[0]
-    print "The Cumulative Return of the Benchmark is", bench_Return[0]
-    print "The Average Daily Return of the Optimal Strategy is", port_Return_daily['Strategy'].mean()
-    print "The Average Daily Return of benchmark is", bench_Return_daily['Benchmark'].mean()
-    print "The std of the Optimal Strategy is", np.std(port_Return_daily['Strategy'])
-    print "The std of the benchmark is", np.std(bench_Return_daily['Benchmark'])
 
-    # Compare portfolio against $SPX
+    # Compare portfolio against benchmark
     print "Date Range: {} to {}".format(start_date, end_date)
     print
     #print "Sharpe Ratio of Fund: {}".format(sharpe_ratio)
