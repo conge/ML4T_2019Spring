@@ -129,9 +129,9 @@ def plot_manual_strategy():
     bottom.axhline(y = 0.2,   color = 'grey', linestyle='--', alpha = 0.5)
 
     for index, marks in df_trades.iterrows():
-        if marks['Trades'] == 1000:
+        if marks['Trades'] > 0:
             plt.axvline(x=index, color='green',linestyle='dashed')
-        elif marks['Trades'] == -1000:
+        elif marks['Trades'] < 0:
             plt.axvline(x=index, color='red',linestyle='dashed')
         else:
             pass
