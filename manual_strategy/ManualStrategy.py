@@ -102,6 +102,14 @@ def plot_manual_strategy():
     plt.plot(normed_port, label="Portfolio", color='red', lw=2)
     plt.plot(normed_bench, label="Benchmark",color='green', lw=1.2)
 
+    for index, marks in df_trades.iterrows():
+        if marks['Trades'] == 1000:
+            plt.axvline(x=index, color='green',linestyle='dashed')
+        elif marks['Trades'] == -1000:
+            plt.axvline(x=index, color='red',linestyle='dashed')
+        else:
+            pass
+
     plt.xlabel('Date')
     plt.ylabel('Normalized Value')
     plt.legend()
