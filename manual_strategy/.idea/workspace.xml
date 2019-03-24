@@ -88,12 +88,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ManualStrategy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
+            <state relative-caret-position="22">
+              <caret line="238" column="17" selection-start-line="238" selection-start-column="17" selection-end-line="238" selection-end-column="17" />
               <folding>
                 <element signature="e#19#38#0" expanded="true" />
-                <marker date="1553464017407" expanded="true" signature="2104:2665" ph="..." />
-                <marker date="1553464017407" expanded="true" signature="2692:2698" ph="..." />
+                <marker date="1553464067114" expanded="true" signature="2104:2665" ph="..." />
+                <marker date="1553464067114" expanded="true" signature="2692:2698" ph="..." />
               </folding>
             </state>
           </provider>
@@ -307,12 +307,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ManualStrategy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
+        <state relative-caret-position="22">
+          <caret line="238" column="17" selection-start-line="238" selection-start-column="17" selection-end-line="238" selection-end-column="17" />
           <folding>
             <element signature="e#19#38#0" expanded="true" />
-            <marker date="1553464017407" expanded="true" signature="2104:2665" ph="..." />
-            <marker date="1553464017407" expanded="true" signature="2692:2698" ph="..." />
+            <marker date="1553464067114" expanded="true" signature="2104:2665" ph="..." />
+            <marker date="1553464067114" expanded="true" signature="2692:2698" ph="..." />
           </folding>
         </state>
       </provider>

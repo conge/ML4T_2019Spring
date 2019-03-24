@@ -236,7 +236,7 @@ def plot_manual_strategy():
     bottom.axhline(y = -0.2,  color = 'grey', linestyle='--', alpha = 0.5)
     bottom.axhline(y = 0,   color = 'grey', linestyle='--', alpha = 0.5)
     bottom.axhline(y = 0.2,   color = 'grey', linestyle='--', alpha = 0.5)
-    bottom.lengend()
+    bottom.legend()
 
     top.legend()
     top.axes.get_xaxis().set_visible(False)
