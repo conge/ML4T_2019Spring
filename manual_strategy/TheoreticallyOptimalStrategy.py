@@ -36,7 +36,6 @@ class TheoreticallyOptimalStrategy(object):
         trades.iloc[-1] = 0
         trades.columns = 'Trades'
 
-        print("trades: ",trades)
 
         # buy and sell happens when the difference change direction
         df_trades = pd.DataFrame(data=trades.values, index = trades.index, columns = ['Trades'])
@@ -54,13 +53,10 @@ def plot_optimal_strategy():
     symbol = 'JPM'
 
     df_trades = tos.testPolicy(symbol=symbol, sd=start_date, ed=end_date, sv = 100000)
-    print(df_trades.head())
-
 
     df_orders = df_trades.loc[(df_trades.Trades != 0)]
 
     #df_orders = df_trades[['Trades']][df_trades['Trades'] != 0]
-    print("df_orders = ", df_orders)
 
     df_orders['Symbol'] = symbol
     df_orders['Order'] = np.where(df_orders['Trades']>0, 'BUY', 'SELL')
@@ -69,7 +65,7 @@ def plot_optimal_strategy():
     port_vals = compute_portvals(df_orders, start_val=100000, commission=0.0, impact=0.0)
 
     benchmark_orders = df_orders.copy()
-    benchmark_orders = benchmark_orders.iloc[0:1, :]
+    benchmark_orders = benchmark_orders.iloc[0, :]
     benchmark_orders.loc[benchmark_orders.index[0],'Order'] = 'BUY'
     benchmark_orders.loc[benchmark_orders.index[0],'Shares'] = 1000
     #benchmark_orders.loc[benchmark_orders.index[1],'Order'] = 'BUY' ## The compute_portvals require at least two orders
