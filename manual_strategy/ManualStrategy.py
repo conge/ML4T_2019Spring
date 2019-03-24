@@ -87,7 +87,7 @@ def plot_manual_strategy():
     # dates = pd.date_range(start_date, end_date)
     symbol = 'JPM'
 
-    df_trades = ms.testPolicy(symbol=[symbol], sd=start_date, ed=end_date, sv = 100000)
+    df_trades = ms.testPolicy(symbol=symbol, sd=start_date, ed=end_date, sv = 100000)
 
     # generate orders based on trades
     df_orders, benchmark_orders= generate_orders(df_trades,symbol)
