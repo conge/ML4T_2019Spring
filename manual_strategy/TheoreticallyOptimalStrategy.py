@@ -66,14 +66,13 @@ def plot_optimal_strategy():
 
     benchmark_orders = df_trades.copy()
 
-
-    benchmark_orders = benchmark_orders.iloc[0:1,:]
+    benchmark_orders = benchmark_orders.loc[benchmark_orders.index[0:1],:]
     print("benchmark_orders1: ", benchmark_orders)
     benchmark_orders['Symbol'] = symbol
     benchmark_orders['Order'] = 'BUY'
     benchmark_orders['Shares'] = 1000.0
     print("benchmark_orders2: ", benchmark_orders)
-    benchmark_orders.loc[benchmark_orders.index[1], 'Shares'] = 0
+    #benchmark_orders.loc[benchmark_orders.index[1], 'Shares'] = 0
 
     print("benchmark_orders = ", benchmark_orders)
 
