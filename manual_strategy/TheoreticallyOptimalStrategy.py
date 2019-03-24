@@ -36,6 +36,8 @@ class TheoreticallyOptimalStrategy(object):
         trades.iloc[-1] = 0
         trades.columns = 'Trades'
 
+        print("trades: ",trades)
+
         # buy and sell happens when the difference change direction
         df_trades = pd.DataFrame(data=trades.iloc[:], index = trades.index, columns = ['Trades'])
 
