@@ -57,10 +57,8 @@ class QLearner(object):
         # initialize Q table with random nubers
         self.Q = np.random.uniform(low=-1, high=1, size=(num_states,num_actions))
 
-
     def author(self):
         return 'qli7' # replace tb34 with your Georgia Tech username.
-
 
     def querysetstate(self, s):
         """ 			  		 			     			  	   		   	  			  	
@@ -93,7 +91,8 @@ class QLearner(object):
         # Updates the Q Table
         action = np.argmax(self.Q[s])
 
-        self.Q[s, a] = (1 - self.alpha) * self.Q[s, a] + self.alpha * (r + self.gamma * np.max(self.Q[s_prime, action]))
+        self.Q[s, a] = (1 - self.alpha) * self.Q[s, a] + \
+                       self.alpha * (r + self.gamma * np.max(self.Q[s_prime, action]))
 
         # DYNA code
         if self.dyna == 0:
@@ -106,7 +105,7 @@ class QLearner(object):
 
         if chance >= self.rar:  # This is to control when the action should be randomly selected or select the one with largest Q value
             action = np.argmax(self.Q[s_prime])
-            
+
         self.a = action
         self.s = s_prime
         self.rar = self.radr * self.rar
