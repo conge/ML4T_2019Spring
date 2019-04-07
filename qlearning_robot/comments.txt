@@ -1,85 +1,15 @@
 <pre>--- Summary ---
-Tests passed: 2 out of 11
+Tests passed: 9 out of 11
 
 --- Details ---
-Test #0: failed 
-Test case description: World 1
-IncorrectOutput: Test failed on one or more output criteria.
-  Inputs:
-    group: nodyna
-    world_file: world01.csv
-    median_reward: -29.5
-
-  Failures:
-   Reward too low, expected -29.5, found -74.0
-
-Test #1: failed 
-Test case description: World 2
-IncorrectOutput: Test failed on one or more output criteria.
-  Inputs:
-    group: nodyna
-    world_file: world02.csv
-    median_reward: -19
-
-  Failures:
-   Reward too low, expected -19, found -60.0
-
-Test #2: failed 
-Test case description: World 4
-IncorrectOutput: Test failed on one or more output criteria.
-  Inputs:
-    group: nodyna
-    world_file: world04.csv
-    median_reward: -33
-
-  Failures:
-   Reward too low, expected -33, found -72.0
-
-Test #3: failed 
-Test case description: World 6
-IncorrectOutput: Test failed on one or more output criteria.
-  Inputs:
-    group: nodyna
-    world_file: world06.csv
-    median_reward: -23.5
-
-  Failures:
-   Reward too low, expected -23.5, found -74.0
-
-Test #4: failed 
-Test case description: World 7
-IncorrectOutput: Test failed on one or more output criteria.
-  Inputs:
-    group: nodyna
-    world_file: world07.csv
-    median_reward: -26
-
-  Failures:
-   Reward too low, expected -26, found -115.0
-
-Test #5: failed 
-Test case description: World 8
-IncorrectOutput: Test failed on one or more output criteria.
-  Inputs:
-    group: nodyna
-    world_file: world08.csv
-    median_reward: -19
-
-  Failures:
-   Reward too low, expected -19, found -56.0
-
+Test #0: passed 
+Test #1: passed 
+Test #2: passed 
+Test #3: passed 
+Test #4: passed 
+Test #5: passed 
 Test #6: passed 
-Test #7: failed 
-Test case description: World 10
-IncorrectOutput: Test failed on one or more output criteria.
-  Inputs:
-    group: nodyna
-    world_file: world10.csv
-    median_reward: -42
-
-  Failures:
-   Reward too low, expected -42, found -64.0
-
+Test #7: passed 
 Test #8: failed 
 Test case description: World 1, dyna=200
 IncorrectOutput: Test failed on one or more output criteria.
@@ -89,7 +19,7 @@ IncorrectOutput: Test failed on one or more output criteria.
     median_reward: -29.5
 
   Failures:
-   Reward too low, expected -29.5, found -320.0
+   Reward too low, expected -29.5, found -223.5
 
 Test #9: failed 
 Test case description: World 2, dyna=200
@@ -100,7 +30,7 @@ IncorrectOutput: Test failed on one or more output criteria.
     median_reward: -19
 
   Failures:
-   Reward too low, expected -19, found -499.0
+   Reward too low, expected -19, found -136.5
 
 Test #10: passed 
 </pre>
