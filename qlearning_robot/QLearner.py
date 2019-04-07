@@ -115,7 +115,14 @@ class QLearner(object):
             self.R[s, a] = (1 - self.alpha) * self.R[s, a] + (self.alpha * r)
 
             for _ in range(self.dyna):
-                
+                dyna_s = rand.randint(0, self.num_states - 1)
+                dyna_a = rand.randint(0, self.num_actions - 1)
+                dyna_r = self.R[dyna_s, dyna_a]
+                dyna_s_prime = self.T[dyna_s, dyna_a].argmax()
+                dyna_a_prime = np.argmax(self.Q[dyna_s_prime])
+                # update Q
+                self.Q[dyna_s,dyna_a] = (1 - self.alpha) * self.Q[dyna_s,dyna_a] + \
+                                        self.alpha * (dyna_r + self.gamma * self.Q[dyna_s_prime,dyna_a_prime])
 
         # update parameters -------
         # Select Action
