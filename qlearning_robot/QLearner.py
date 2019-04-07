@@ -24,49 +24,92 @@ GT honor code violation.
 Student Name: Tucker Balch (replace with your name) 			  		 			     			  	   		   	  			  	
 GT User ID: qli7 (replace with your User ID)
 GT ID: 902265013 (replace with your GT ID)
-""" 			  		 			     			  	   		   	  			  	
- 			  		 			     			  	   		   	  			  	
-import numpy as np 			  		 			     			  	   		   	  			  	
-import random as rand 			  		 			     			  	   		   	  			  	
- 			  		 			     			  	   		   	  			  	
-class QLearner(object): 			  		 			     			  	   		   	  			  	
- 			  		 			     			  	   		   	  			  	
+"""
+
+import numpy as np
+import random as rand
+
+
+class QLearner(object):
+
     def __init__(self, \
-        num_states=100, \
-        num_actions = 4, \
-        alpha = 0.2, \
-        gamma = 0.9, \
-        rar = 0.5, \
-        radr = 0.99, \
-        dyna = 0, \
-        verbose = False): 			  		 			     			  	   		   	  			  	
- 			  		 			     			  	   		   	  			  	
-        self.verbose = verbose 			  		 			     			  	   		   	  			  	
-        self.num_actions = num_actions 			  		 			     			  	   		   	  			  	
-        self.s = 0 			  		 			     			  	   		   	  			  	
-        self.a = 0 			  		 			     			  	   		   	  			  	
- 			  		 			     			  	   		   	  			  	
-    def querysetstate(self, s): 			  		 			     			  	   		   	  			  	
+                 num_states=100, \
+                 num_actions=4, \
+                 alpha=0.2, \
+                 gamma=0.9, \
+                 rar=0.5, \
+                 radr=0.99, \
+                 dyna=0, \
+                 verbose=False):
+
+        self.verbose = verbose
+        self.num_actions = num_actions
+        self.s = 0
+        self.a = 0
+
+        self.num_states = num_states
+        self.rar = rar
+        self.radr = radr
+        self.alpha = alpha
+        self.gamma = gamma
+        self.dyna = dyna
+
+        # initialize Q table with random nubers
+        self.Q = np.random.uniform(low=-1, high=1, size=(num_states,num_actions))
+
+
+    def querysetstate(self, s):
         """ 			  		 			     			  	   		   	  			  	
         @summary: Update the state without updating the Q-table 			  		 			     			  	   		   	  			  	
         @param s: The new state 			  		 			     			  	   		   	  			  	
         @returns: The selected action 			  		 			     			  	   		   	  			  	
-        """ 			  		 			     			  	   		   	  			  	
-        self.s = s 			  		 			     			  	   		   	  			  	
-        action = rand.randint(0, self.num_actions-1) 			  		 			     			  	   		   	  			  	
-        if self.verbose: print "s =", s,"a =",action 			  		 			     			  	   		   	  			  	
-        return action 			  		 			     			  	   		   	  			  	
- 			  		 			     			  	   		   	  			  	
-    def query(self,s_prime,r): 			  		 			     			  	   		   	  			  	
+        """
+        self.s = s
+        action = rand.randint(0, self.num_actions - 1)
+
+        chance = rand.randint(1, 100) / 100.0  # a random number between 0 and 1
+
+        if chance >= self.rar:  # This is to control when the action should be randomly selected or select the one with largest Q value
+            action = np.argmax(self.Q[self.s])
+
+        if self.verbose: print "s =", s, ", a =", action
+
+        return action
+
+    def query(self, s_prime, r):
         """ 			  		 			     			  	   		   	  			  	
         @summary: Update the Q table and return an action 			  		 			     			  	   		   	  			  	
         @param s_prime: The new state 			  		 			     			  	   		   	  			  	
         @param r: The ne state 			  		 			     			  	   		   	  			  	
         @returns: The selected action 			  		 			     			  	   		   	  			  	
-        """ 			  		 			     			  	   		   	  			  	
-        action = rand.randint(0, self.num_actions-1) 			  		 			     			  	   		   	  			  	
-        if self.verbose: print "s =", s_prime,"a =",action,"r =",r 			  		 			     			  	   		   	  			  	
-        return action 			  		 			     			  	   		   	  			  	
- 			  		 			     			  	   		   	  			  	
-if __name__=="__main__": 			  		 			     			  	   		   	  			  	
-    print "Remember Q from Star Trek? Well, this isn't him" 			  		 			     			  	   		   	  			  	
+        """
+        a = self.a
+        s = self.s
+
+        # Select Action
+        action = rand.randint(0, self.num_actions - 1)
+        chance = rand.randint(1, 100) / 100.0  # a random number between 0 and 1
+
+        if chance >= self.rar:  # This is to control when the action should be randomly selected or select the one with largest Q value
+            action = np.argmax(self.Q[self.s])
+
+        # Updates the Q Table
+        self.Q[s, a] = (1 - self.alpha) * self.Q[s, a] + self.alpha * (r + self.gamma * np.max(self.Q[s_prime, action]))
+
+        if self.dyna == 0:
+            pass
+
+        # update parameters
+        self.a = action
+        self.s = s_prime
+        self.rar = self.radr * self.rar
+
+
+
+
+        if self.verbose: print "s =", s, ", a = ", action, ", s' = ", s_prime,", r = ", r
+        return action
+
+
+if __name__ == "__main__":
+    print "Remember Q from Star Trek? Well, this isn't him"
