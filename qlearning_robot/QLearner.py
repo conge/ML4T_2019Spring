@@ -114,7 +114,9 @@ class QLearner(object):
             # update R[s,a]
             self.R[s, a] = (1 - self.alpha) * self.R[s, a] + (self.alpha * r)
 
-            # hallucination\
+            # hallucination
+            s_primes = self.T[:,:].argmax(axis=2)
+
             count = 0
             while count < self.dyna:
                 # randomly select s and a
@@ -122,7 +124,8 @@ class QLearner(object):
                 dyna_a = rand.randint(0, self.num_actions - 1)
                 # infer R and s' from R and T matrices.
                 dyna_r = self.R[dyna_s, dyna_a]
-                dyna_s_prime = self.T[dyna_s, dyna_a].argmax()
+                #dyna_s_prime = self.T[dyna_s, dyna_a].argmax()
+                dyna_s_prime =  s_primes[dyna_s, dyna_a]
                 # infer a' from s'
                 dyna_a_prime = np.argmax(self.Q[dyna_s_prime])
                 # update Q
