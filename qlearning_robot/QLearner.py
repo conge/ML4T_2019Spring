@@ -104,8 +104,8 @@ class QLearner(object):
                        self.alpha * (r + self.gamma * np.max(self.Q[s_prime, action]))
 
         # DYNA code
-        if self.dyna != 0:
-            # update T_c and T. (T_c is the count of T[s, a, s'] After real live Q upstate, but before Dyna loop
+        if self.dyna > 0:
+            # update T_c, T and R after interact with real world.
             self.T_c[s, a, s_prime] += 1
 
             # update T
@@ -114,15 +114,21 @@ class QLearner(object):
             # update R[s,a]
             self.R[s, a] = (1 - self.alpha) * self.R[s, a] + (self.alpha * r)
 
-            for _ in range(self.dyna):
+            # hallucination\
+            count = 0
+            while count < self.dyna:
+                # randomly select s and a
                 dyna_s = rand.randint(0, self.num_states - 1)
                 dyna_a = rand.randint(0, self.num_actions - 1)
+                # infer R and s' from R and T matrices.
                 dyna_r = self.R[dyna_s, dyna_a]
                 dyna_s_prime = self.T[dyna_s, dyna_a].argmax()
+                # infer a' from s'
                 dyna_a_prime = np.argmax(self.Q[dyna_s_prime])
                 # update Q
-                self.Q[dyna_s,dyna_a] = (1 - self.alpha) * self.Q[dyna_s,dyna_a] + \
-                                        self.alpha * (dyna_r + self.gamma * self.Q[dyna_s_prime,dyna_a_prime])
+                self.Q[dyna_s,dyna_a] = (1 - self.alpha) * self.Q[dyna_s, dyna_a] + \
+                                        self.alpha * (dyna_r + self.gamma * self.Q[dyna_s_prime, dyna_a_prime])
+                count += 1
 
         # update parameters -------
         # Select Action
