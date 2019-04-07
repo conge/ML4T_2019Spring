@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/qlearning_robot/QLearner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="127" column="56" lean-forward="true" selection-start-line="127" selection-start-column="56" selection-end-line="127" selection-end-column="56" />
+            <state relative-caret-position="1920">
+              <caret line="128" column="34" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
               <folding>
                 <element signature="e#1993#2011#0" expanded="true" />
               </folding>
@@ -122,8 +122,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/qlearning_robot/QLearner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="127" column="56" lean-forward="true" selection-start-line="127" selection-start-column="56" selection-end-line="127" selection-end-column="56" />
+        <state relative-caret-position="1920">
+          <caret line="128" column="34" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
           <folding>
             <element signature="e#1993#2011#0" expanded="true" />
           </folding>
