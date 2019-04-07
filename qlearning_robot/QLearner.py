@@ -57,6 +57,15 @@ class QLearner(object):
         # initialize Q table with random nubers
         self.Q = np.random.uniform(low=-1, high=1, size=(num_states,num_actions))
 
+        # Parameters for Dyna_Q
+        self.T_c = np.random.random(size=(num_states, num_actions, num_states))
+        self.T_c.fill(0.00001)  # small value is to prevent divide by zero errors
+        self.T = self.T_c/np.sum(self.T_c, axis=2, keepdims=True)  #initialize the T matrix
+
+        self.R = self.Q.copy()
+        self.R.fill(-1.0) # piazza solution, not sure why this work
+
+
     def author(self):
         return 'qli7' # replace tb34 with your Georgia Tech username.
 
@@ -95,8 +104,18 @@ class QLearner(object):
                        self.alpha * (r + self.gamma * np.max(self.Q[s_prime, action]))
 
         # DYNA code
-        if self.dyna == 0:
-            pass
+        if self.dyna != 0:
+            # update T_c and T. (T_c is the count of T[s, a, s'] After real live Q upstate, but before Dyna loop
+            self.T_c[s, a, s_prime] += 1
+
+            # update T
+            self.T = self.T_c/np.sum(self.T_c, axis=2, keepdims=True)
+
+            # update R[s,a]
+            self.R[s, a] = (1 - self.alpha) * self.R[s, a] + (self.alpha * r)
+
+            for _ in range(self.dyna):
+                
 
         # update parameters -------
         # Select Action
