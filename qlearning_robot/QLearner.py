@@ -90,26 +90,26 @@ class QLearner(object):
         a = self.a
         s = self.s
 
+        # Updates the Q Table
+        action = np.argmax(self.Q[s])
+
+        self.Q[s, a] = (1 - self.alpha) * self.Q[s, a] + self.alpha * (r + self.gamma * np.max(self.Q[s_prime, action]))
+
+        # DYNA code
+        if self.dyna == 0:
+            pass
+
+        # update parameters -------
         # Select Action
         action = rand.randint(0, self.num_actions - 1)
         chance = rand.randint(1, 100) / 100.0  # a random number between 0 and 1
 
         if chance >= self.rar:  # This is to control when the action should be randomly selected or select the one with largest Q value
-            action = np.argmax(self.Q[self.s])
-
-        # Updates the Q Table
-        self.Q[s, a] = (1 - self.alpha) * self.Q[s, a] + self.alpha * (r + self.gamma * np.max(self.Q[s_prime, action]))
-
-        if self.dyna == 0:
-            pass
-
-        # update parameters
+            action = np.argmax(self.Q[s_prime])
+            
         self.a = action
         self.s = s_prime
         self.rar = self.radr * self.rar
-
-
-
 
         if self.verbose: print "s =", s, ", a = ", action, ", s' = ", s_prime,", r = ", r
         return action
