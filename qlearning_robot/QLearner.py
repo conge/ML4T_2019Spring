@@ -58,6 +58,10 @@ class QLearner(object):
         self.Q = np.random.uniform(low=-1, high=1, size=(num_states,num_actions))
 
 
+    def author(self):
+        return 'qli7' # replace tb34 with your Georgia Tech username.
+
+
     def querysetstate(self, s):
         """ 			  		 			     			  	   		   	  			  	
         @summary: Update the state without updating the Q-table 			  		 			     			  	   		   	  			  	
