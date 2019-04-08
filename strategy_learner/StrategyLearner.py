@@ -21,9 +21,9 @@ GT honor code violation.
  			  		 			     			  	   		   	  			  	
 -----do not edit anything above this line--- 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
-Student Name: Tucker Balch (replace with your name) 			  		 			     			  	   		   	  			  	
-GT User ID: tb34 (replace with your User ID) 			  		 			     			  	   		   	  			  	
-GT ID: 900897987 (replace with your GT ID) 			  		 			     			  	   		   	  			  	
+Student Name: Qingyang Li (replace with your name)
+GT User ID: qli7 (replace with your User ID)
+GT ID: 902265013 (replace with your GT ID)
 """ 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
 import datetime as dt 			  		 			     			  	   		   	  			  	
