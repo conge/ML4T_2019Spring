@@ -29,14 +29,27 @@ GT ID: 902265013 (replace with your GT ID)
 import datetime as dt 			  		 			     			  	   		   	  			  	
 import pandas as pd 			  		 			     			  	   		   	  			  	
 import util as ut 			  		 			     			  	   		   	  			  	
-import random 			  		 			     			  	   		   	  			  	
+import random
+
+from indicators import *
+import QLearner as ql
+from marketsimcode import *
  			  		 			     			  	   		   	  			  	
 class StrategyLearner(object): 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	
     # constructor 			  		 			     			  	   		   	  			  	
     def __init__(self, verbose = False, impact=0.0): 			  		 			     			  	   		   	  			  	
         self.verbose = verbose 			  		 			     			  	   		   	  			  	
-        self.impact = impact 			  		 			     			  	   		   	  			  	
+        self.impact = impact
+        
+        self.learner = ql.QLearner(num_states= 100000,\
+            num_actions = 3, \
+            alpha = 0.5, \
+            gamma = 0.9, \
+            rar = 0.0, \
+            radr = 0.0, \
+            dyna = 0, \
+            verbose=verbose)
  			  		 			     			  	   		   	  			  	
     # this method should create a QLearner, and train it for trading 			  		 			     			  	   		   	  			  	
     def addEvidence(self, symbol = "IBM", \
