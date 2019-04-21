@@ -242,12 +242,6 @@ class StrategyLearner(object):
         _, _, bb_indicator = id.get_BB(prices, lookback)
         momentum = id.get_momentum(prices, lookback)
 
-        print("220: ", trades)
-        if self.verbose: print type(trades) # it better be a DataFrame! 			  		 			     			  	   		   	  			  	
-        if self.verbose: print trades 			  		 			     			  	   		   	  			  	
-        if self.verbose: print prices_all
-
-
         # get indicators and combine them into as a feature data_frame
         lookback = 14
 
@@ -268,8 +262,8 @@ class StrategyLearner(object):
             action = self.learner.querysetstate(state)
 
             # update rewards and holdings with the new action.
-            holdings.iloc[j], _ = self.apply_action(holdings.iloc[i][0], action, daily_returns.iloc[i][0])
-            
+            holdings.iloc[i], _ = self.apply_action(holdings.iloc[i][0], action, daily_returns.iloc[i][0])
+
         holdings.ffill(inplace=True)
         holdings.fillna(0, inplace=True)
         trades = holdings.diff()
@@ -277,6 +271,11 @@ class StrategyLearner(object):
 
         # buy and sell happens when the difference change direction
         df_trades = pd.DataFrame(data=trades.values, index = trades.index, columns = ['Trades'])
+
+        #print("220: ", trades)
+        if self.verbose: print type(df_trades) # it better be a DataFrame!
+        if self.verbose: print trades
+        if self.verbose: print prices
 
         return df_trades
  			  		 			     			  	   		   	  			  	
