@@ -146,7 +146,7 @@ class StrategyLearner(object):
             indices = prices.index
             holdings = pd.DataFrame(np.nan, index=indices, columns=['Holdings'])
             print("SL 148")
-            print("PSR[0] = ",PSR.iloc[0])
+            print("PSR = ",PSR)
             first_state = self.indicators_to_state(PSR.iloc[0], bb_indicator.iloc[0], momentum.iloc[0])
             action = self.learner.querysetstate(first_state)
             print("SL 152: action = ", action)
