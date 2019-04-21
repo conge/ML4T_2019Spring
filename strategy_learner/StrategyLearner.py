@@ -165,7 +165,7 @@ class StrategyLearner(object):
                 action = self.learner.query(state, reward)
 
                 # update rewards and holdings with the new action.
-                holdings.iloc[j], rewards = self.apply_action(holdings.iloc[j], action, daily_rets[j + 1])
+                holdings.iloc[j], rewards = self.apply_action(holdings.iloc[j-1], action, daily_rets[j])
 
                 # Implement action returned by learner and update portfolio
             holdings.ffill(inplace=True)
@@ -221,8 +221,40 @@ class StrategyLearner(object):
         if self.verbose: print trades 			  		 			     			  	   		   	  			  	
         if self.verbose: print prices_all
 
+        prices = prices_all[syms]  # only portfolio symbols
+        prices_SPY = prices_all['SPY']  # only SPY, for comparison later
+        if self.verbose: print prices
 
-        return trades 			  		 			     			  	   		   	  			  	
+        daily_rets = (prices / prices.shift(1)) - 1
+
+        # get indicators and combine them into as a feature data_frame
+        lookback = 14
+
+        _, PSR = id.get_SMA(prices, lookback)
+        _, _, bb_indicator = id.get_BB(prices, lookback)
+        momentum = id.get_momentum(prices, lookback)
+        indices = prices.index
+        holdings = pd.DataFrame(np.nan, index=indices, columns=['Holdings'])
+        holdings.iloc[0] = 0
+
+
+        for i in range(1,daily_rets.shape[0]):
+
+            state = self.indicators_to_state(PSR[i], bb_indicator[i], momentum[i])
+
+            action = self.learner.querysetstate(state)
+
+            holdings.iloc[i], rewards = self.apply_action(holdings.iloc[i-1], action, daily_rets[i])
+
+        holdings.ffill(inplace=True)
+        holdings.fillna(0, inplace=True)
+        trades = holdings.diff()
+        trades.iloc[0] = 0
+
+        # buy and sell happens when the difference change direction
+        df_trades = pd.DataFrame(data=trades.values, index = trades.index, columns = ['Trades'])
+
+        return df_trades
  			  		 			     			  	   		   	  			  	
 if __name__=="__main__": 			  		 			     			  	   		   	  			  	
     print "One does not simply think up a strategy" 			  		 			     			  	   		   	  			  	
