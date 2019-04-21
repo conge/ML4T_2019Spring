@@ -54,12 +54,14 @@ class StrategyLearner(object):
         return 'qli7' # replace tb34 with your Georgia Tech username.
 
     def indicators_to_state(self, PSR, bb_indicator, momentum):
+        if pd.isna(PSR) or pd.isna(bb_indicator) or pd.isna(momentum):
+            return np.nan
 
-        momen_state = pd.cut(momentum, bins=self.mbins, labels=False, include_lowest=True)
-        PSR_state = pd.cut(PSR, bins=self.pbins, labels=False, include_lowest=True)
-        bbp_state = pd.cut(bb_indicator, bins=self.bbins, labels=False, include_lowest=True)
+        momen_state = pd.cut([momentum], bins=self.mbins, labels=False, include_lowest=True)
+        PSR_state = pd.cut([PSR], bins=self.pbins, labels=False, include_lowest=True)
+        bbp_state = pd.cut([bb_indicator], bins=self.bbins, labels=False, include_lowest=True)
 
-        return momen_state[0] +PSR_state[0]*10 + bbp_state * 100
+        return momen_state.value[0] +PSR_state.value[0]*10 + bbp_state.value[0] * 100
 
     def apply_action(self, holdings, action,ret):
         """
@@ -146,7 +148,6 @@ class StrategyLearner(object):
             indices = prices.index
             holdings = pd.DataFrame(np.nan, index=indices, columns=['Holdings'])
             print("SL 148")
-            print("PSR = ",PSR)
             first_state = self.indicators_to_state(PSR.iloc[0], bb_indicator.iloc[0], momentum.iloc[0])
             action = self.learner.querysetstate(first_state)
             print("SL 152: action = ", action)
