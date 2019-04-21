@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/strategy_learner/StrategyLearner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="160" column="85" selection-start-line="160" selection-start-column="85" selection-end-line="160" selection-end-column="85" />
+            <state relative-caret-position="206">
+              <caret line="159" column="67" selection-start-line="159" selection-start-column="67" selection-end-line="159" selection-end-column="67" />
               <folding>
                 <element signature="e#2039#2100#0" expanded="true" />
               </folding>
@@ -124,12 +124,12 @@
       <find>bins</find>
       <find>[</find>
       <find>PSR</find>
-      <find>indicators_to_state</find>
       <find>pbins</find>
       <find>apply_action</find>
       <find>get_pri</find>
       <find>apply_</find>
       <find>daily</find>
+      <find>indicators_to_state</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -198,8 +198,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="727" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -209,7 +210,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="8" visible="true" weight="0.32880846" />
+      <window_info anchor="bottom" id="Python Console" order="8" visible="true" weight="0.32880846" />
       <window_info anchor="bottom" id="Educational.CheckDetails" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -306,8 +307,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/strategy_learner/StrategyLearner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="160" column="85" selection-start-line="160" selection-start-column="85" selection-end-line="160" selection-end-column="85" />
+        <state relative-caret-position="206">
+          <caret line="159" column="67" selection-start-line="159" selection-start-column="67" selection-end-line="159" selection-end-column="67" />
           <folding>
             <element signature="e#2039#2100#0" expanded="true" />
           </folding>

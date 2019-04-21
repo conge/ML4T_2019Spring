@@ -57,9 +57,9 @@ class StrategyLearner(object):
     def indicators_to_state(self, PSR, bb_indicator, momentum):
         print("SL 57: PSR=",PSR, "BB=",bb_indicator, "mom=",momentum)
 
-        momen_state = np.digitize([momentum],self.mbins,right=True)
-        PSR_state = np.digitize([PSR],self.pbins,right=True)
-        bbp_state = np.digitize([bb_indicator],self.bbins,right=True)
+        momen_state = np.digitize([momentum[0]],self.mbins,right=True)
+        PSR_state = np.digitize([PSR[0]],self.pbins,right=True)
+        bbp_state = np.digitize([bb_indicator[0]],self.bbins,right=True)
 
         #momen_state = pd.cut([momentum], bins=self.mbins, labels=False, include_lowest=True)
         #PSR_state = pd.cut([PSR], bins=self.pbins, labels=False, include_lowest=True)
@@ -157,7 +157,7 @@ class StrategyLearner(object):
             holdings = pd.DataFrame(np.nan, index=indices, columns=['Holdings'])
             first_state = self.indicators_to_state(PSR.iloc[0], bb_indicator.iloc[0], momentum.iloc[0])
             action = self.learner.querysetstate(first_state)
-            print("SL 152: holdings.iloc[0] = ", holdings.iloc[0], "; daily_rets.iloc[1] = ", daily_rets.iloc[1])
+            print("SL 152: holdings.iloc[0] = ", holdings.iloc[0][0], "; daily_rets.iloc[1] = ", daily_returns.iloc[1][0])
             holdings.iloc[0], _= self.apply_action(0, action, daily_returns.iloc[1][0])
             print("SL 153")
 
