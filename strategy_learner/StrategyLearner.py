@@ -57,9 +57,9 @@ class StrategyLearner(object):
     def indicators_to_state(self, PSR, bb_indicator, momentum):
         print("SL 57: PSR=",PSR[0], "BB=",bb_indicator[0], "mom=",momentum[0])
 
-        momen_state = np.digitize([momentum[0][0]],self.mbins,right=True)
-        PSR_state = np.digitize([PSR[0][0]],self.pbins,right=True)
-        bbp_state = np.digitize([bb_indicator[0][0]],self.bbins,right=True)
+        momen_state = np.digitize([momentum[0]],self.mbins,right=True)
+        PSR_state = np.digitize([PSR[0]],self.pbins,right=True)
+        bbp_state = np.digitize([bb_indicator[0]],self.bbins,right=True)
         print("SL 63: bbp_state=",bbp_state)
         #momen_state = pd.cut([momentum], bins=self.mbins, labels=False, include_lowest=True)
         #PSR_state = pd.cut([PSR], bins=self.pbins, labels=False, include_lowest=True)
