@@ -179,14 +179,14 @@ class StrategyLearner(object):
             action = self.learner.querysetstate(first_state)
             #print("SL 152: holdings.iloc[0] = ", holdings.iloc[0][0], "; daily_rets.iloc[1] = ", daily_returns.iloc[1][0])
             holdings.iloc[0], _= self.apply_action(0, action, daily_returns.iloc[1][0])
-            #print("SL 153")
+            print("SL 153")
 
-            df_prices = prices.copy()
-            df_prices['Cash'] = pd.Series(1.0, index=indices)
-            df_trades = df_prices.copy()
-            df_trades[:] = 0.0
+            #df_prices = prices.copy()
+            #df_prices['Cash'] = pd.Series(1.0, index=indices)
+            #df_trades = df_prices.copy()
+            #df_trades[:] = 0.0
 
-            old_holdings = 0.0
+            #old_holdings = 0.0
             reward = 0.0
             #print("SL 171: PSR.shape[0] = ",PSR.shape[0],"; daily_returns.shape[0] = ",daily_returns.shape[0])
 
@@ -203,12 +203,12 @@ class StrategyLearner(object):
                 #print("SL 183: holdings.iloc[j][0] = ",holdings.iloc[j][0])
 
                 # Implement action returned by learner and update portfolio
-            #print("SL 185: learning is done.")
+            print("SL 206: one learning is done.")
             holdings.ffill(inplace=True)
             holdings.fillna(0, inplace=True)
             trades = holdings.diff()
             trades.iloc[0] = 0
-            #print("SL 182")
+            print("SL 211")
             # buy and sell happens when the difference change direction
             df_trades = pd.DataFrame(data=trades.values, index=trades.index, columns=['Trades'])
 
@@ -225,7 +225,7 @@ class StrategyLearner(object):
             # check if converge
             if converged:
                 print("SL 212: converged at iteration # ",count)
-            
+
         return df_trades
 
  			  		 			     			  	   		   	  			  	
