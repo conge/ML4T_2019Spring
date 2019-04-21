@@ -33,6 +33,7 @@ import util as ut
 import random
 import QLearner as ql
 from marketsimcode import compute_portvals, get_portfolio_stats
+from util import get_data
 import indicators as id
 import ManualStrategy as ms
 
@@ -74,8 +75,8 @@ class StrategyLearner(object):
         :param ret: return rate of the next day
         :return: updated holdings and reward
         """
-        print("77 holdings, action,ret = ",holdings, ", ",action,", ",ret)
-        print("77 holdings, action,ret = ",holdings, ", ",action,", ",ret)
+        print("77 holdings, action,ret = ",holdings,action,ret)
+
         rewards = 0.0
         if holdings == -1000: # shorting position
             if action <= 1: # Action = { Do nothing or 0 =Short},
@@ -107,13 +108,13 @@ class StrategyLearner(object):
         # this method should create a QLearner, and train it for trading
 
         syms=[symbol] 			  		 			     			  	   		   	  			  	
-        dates = pd.date_range(sd, ed) 			  		 			     			  	   		   	  			  	
-        prices_all = ut.get_data(syms, dates)  # automatically adds SPY 			  		 			     			  	   		   	  			  	
-        prices = prices_all[syms]  # only portfolio symbols 			  		 			     			  	   		   	  			  	
-        prices_SPY = prices_all['SPY']  # only SPY, for comparison later 			  		 			     			  	   		   	  			  	
+        dates = pd.date_range(sd, ed)
+        prices, prices_SPY = id.get_price(syms,dates)
+
         if self.verbose: print prices
 
-        daily_rets = (prices / prices.shift(1)) - 1
+        daily_returns = (prices / prices.shift(1)) - 1
+        daily_returns = daily_returns[1:]
 
         # get indicators and combine them into as a feature data_frame
         lookback = 14
@@ -157,7 +158,7 @@ class StrategyLearner(object):
             first_state = self.indicators_to_state(PSR.iloc[0], bb_indicator.iloc[0], momentum.iloc[0])
             action = self.learner.querysetstate(first_state)
             print("SL 152: holdings.iloc[0] = ", holdings.iloc[0], "; daily_rets.iloc[1] = ", daily_rets.iloc[1])
-            holdings.iloc[0], _= self.apply_action(0, action, daily_rets.iloc[1])
+            holdings.iloc[0], _= self.apply_action(0, action, daily_returns.iloc[1][0])
             print("SL 153")
 
             df_prices = prices.copy()
