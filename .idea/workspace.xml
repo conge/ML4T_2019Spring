@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/strategy_learner/StrategyLearner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="66" column="58" selection-start-line="66" selection-start-column="58" selection-end-line="66" selection-end-column="58" />
+            <state relative-caret-position="188">
+              <caret line="157" column="112" selection-start-line="157" selection-start-column="112" selection-end-line="157" selection-end-column="112" />
               <folding>
                 <element signature="e#2039#2100#0" expanded="true" />
               </folding>
@@ -105,7 +105,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>daily_return</find>
       <find>daily_ret</find>
       <find>holding</find>
       <find>order</find>
@@ -135,6 +134,7 @@
       <find>PSR</find>
       <find>indicators_to_state</find>
       <find>pbins</find>
+      <find>apply_action</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -312,8 +312,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/strategy_learner/StrategyLearner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="66" column="58" selection-start-line="66" selection-start-column="58" selection-end-line="66" selection-end-column="58" />
+        <state relative-caret-position="188">
+          <caret line="157" column="112" selection-start-line="157" selection-start-column="112" selection-end-line="157" selection-end-column="112" />
           <folding>
             <element signature="e#2039#2100#0" expanded="true" />
           </folding>

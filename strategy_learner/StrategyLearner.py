@@ -153,10 +153,9 @@ class StrategyLearner(object):
             # Set first state to the first data point (first day)
             indices = prices.index
             holdings = pd.DataFrame(np.nan, index=indices, columns=['Holdings'])
-            print("SL 148")
             first_state = self.indicators_to_state(PSR.iloc[0], bb_indicator.iloc[0], momentum.iloc[0])
             action = self.learner.querysetstate(first_state)
-            print("SL 152: action = ", action)
+            print("SL 152: holdings.iloc[0] = ", holdings.iloc[0], "; daily_rets.iloc[1] = ", daily_rets.iloc[1])
             holdings.iloc[0] = self.apply_action(0, action, daily_rets.iloc[1])
             print("SL 153")
 
