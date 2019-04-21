@@ -59,7 +59,7 @@ class StrategyLearner(object):
 
     # constructor
     def __init__(self, verbose=False, impact=0.0, commission=0.00,):
-        self.verbose = True
+        self.verbose = verbose
         self.commission = commission
         self.impact = impact
         self.num_actions = 3
@@ -176,10 +176,10 @@ class StrategyLearner(object):
             # Set first state to the first data point (first day)
             indices = prices.index
             holdings = pd.DataFrame(np.nan, index=indices, columns=['Holdings'])
-            first_state = self.indicators_to_state(PSR.iloc[0], bb_indicator.iloc[0], momentum.iloc[0])
-            action = self.learner.querysetstate(first_state)
+            #first_state = self.indicators_to_state(PSR.iloc[0], bb_indicator.iloc[0], momentum.iloc[0])
+
             #print("SL 152: holdings.iloc[0] = ", holdings.iloc[0][0], "; daily_rets.iloc[1] = ", daily_returns.iloc[1][0])
-            holdings.iloc[0], _ = self.apply_action(0, action, daily_returns.iloc[0][0] * 100)
+            holdings.iloc[0] = 0.
             #print("SL 153")
 
             #df_prices = prices.copy()
@@ -187,22 +187,24 @@ class StrategyLearner(object):
             #df_trades = df_prices.copy()
             #df_trades[:] = 0.0
 
-            #old_holdings = 0.0
             reward = 0.0
             #print("SL 171: PSR.shape[0] = ",PSR.shape[0],"; daily_returns.shape[0] = ",daily_returns.shape[0])
 
             # Cycle through dates
-            for j in range(1, daily_returns.shape[0]):
+            for j in range(daily_returns.shape[0] - 1):
 
                 state = self.indicators_to_state(PSR.iloc[j], bb_indicator.iloc[j], momentum.iloc[j])
 
                 # Get action by Query learner with current state and reward to get action
-                action = self.learner.query(state, reward)
+                if j == 0:
+                    action = self.learner.querysetstate(state)
+                else:
+                    action = self.learner.query(state, reward)
 
                 # update reward and holdings with the new action.
-                holdings.iloc[j], reward = self.apply_action(holdings.iloc[j-1][0],
+                holdings.iloc[j], reward = self.apply_action(holdings.iloc[j][0],
                                                              action,
-                                                             daily_returns.iloc[j][0])
+                                                             daily_returns.iloc[j+1][0])
                 #print("SL 183: holdings.iloc[j][0] = ",holdings.iloc[j][0])
 
                 # Implement action returned by learner and update portfolio
