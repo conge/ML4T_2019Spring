@@ -136,7 +136,9 @@ class StrategyLearner(object):
         df_trades  = None
 
         count = 0
+        n_pre_train = 10 # train pre_train times before checking for converge
         old_cum_ret = 0.0
+        converge_count = 0
 
         #print "Total number of states is:", total_states
 
@@ -151,7 +153,7 @@ class StrategyLearner(object):
                                    dyna=0,
                                    verbose=self.verbose)
 
-        while (not converged) and (count<30):
+        while (not converged) and (count<100):
             # Set first state to the first data point (first day)
             indices = prices.index
             holdings = pd.DataFrame(np.nan, index=indices, columns=['Holdings'])
@@ -202,10 +204,12 @@ class StrategyLearner(object):
 
             # check if converge
             if abs((old_cum_ret - cum_ret)*100.0) < 0.00001:
-                converged = True
+                converge_count += 1
             else:
                 old_cum_ret = cum_ret
-            print("SL 208: converged = ",converged)
+            if converge_count> 4:
+                converged = True
+                print("SL 212: converged at iteration # ",count)
 
         return df_trades
 
