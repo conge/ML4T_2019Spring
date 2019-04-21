@@ -109,12 +109,14 @@ class StrategyLearner(object):
             elif action == 2:  # BUY
                 holdings = 1000
                 reward = ret
-        else: # when holdings is 1000
+        elif holdings == 1000: # when holdings is 1000
             if action == 0: # SHORT
                 holdings = -1000
                 reward = -2 * ret
             else:
                 reward = ret
+        else:
+            reward = -10
 
         return holdings, reward
 
@@ -288,7 +290,7 @@ class StrategyLearner(object):
             # Get holdings with the new action.
             holdings.iloc[i], _ = self.apply_action(holdings.iloc[i][0], action, daily_returns.iloc[i+1][0])
 
-        #holdings.iloc[-1] = 0
+        holdings.iloc[-1] = 0
 
         holdings.ffill(inplace=True)
         holdings.fillna(0, inplace=True)
