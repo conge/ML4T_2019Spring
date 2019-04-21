@@ -64,7 +64,7 @@ class StrategyLearner(object):
         #momen_state = pd.cut([momentum], bins=self.mbins, labels=False, include_lowest=True)
         #PSR_state = pd.cut([PSR], bins=self.pbins, labels=False, include_lowest=True)
         #bbp_state = pd.cut([bb_indicator], bins=self.bbins, labels=False, include_lowest=True)
-        print("SL 67: State is: ", momen_state[0] +PSR_state[0]*10 + bbp_state[0] * 100)
+        #print("SL 67: State is: ", momen_state[0] +PSR_state[0]*10 + bbp_state[0] * 100)
         return momen_state[0] +PSR_state[0]*10 + bbp_state[0] * 100
 
     def apply_action(self, holdings, action,ret):
@@ -75,7 +75,7 @@ class StrategyLearner(object):
         :param ret: return rate of the next day
         :return: updated holdings and reward
         """
-        print("77 holdings, action,ret = ",holdings,action,ret)
+        #print("77 holdings, action,ret = ",holdings,action,ret)
 
         rewards = 0.0
         if holdings == -1000: # shorting position
@@ -226,27 +226,27 @@ class StrategyLearner(object):
  			  		 			     			  	   		   	  			  	
         # here we build a fake set of trades 			  		 			     			  	   		   	  			  	
         # your code should return the same sort of data 			  		 			     			  	   		   	  			  	
-        dates = pd.date_range(sd, ed) 			  		 			     			  	   		   	  			  	
-        prices_all = ut.get_data([symbol], dates)  # automatically adds SPY 			  		 			     			  	   		   	  			  	
-        trades = prices_all[[symbol,]]  # only portfolio symbols 			  		 			     			  	   		   	  			  	
-        trades_SPY = prices_all['SPY']  # only SPY, for comparison later 			  		 			     			  	   		   	  			  	
-        trades.values[:,:] = 0 # set them all to nothing 			  		 			     			  	   		   	  			  	
-        trades.values[0,:] = 1000 # add a BUY at the start 			  		 			     			  	   		   	  			  	
-        trades.values[40,:] = -1000 # add a SELL 			  		 			     			  	   		   	  			  	
-        trades.values[41,:] = 1000 # add a BUY 			  		 			     			  	   		   	  			  	
-        trades.values[60,:] = -2000 # go short from long 			  		 			     			  	   		   	  			  	
-        trades.values[61,:] = 2000 # go long from short 			  		 			     			  	   		   	  			  	
-        trades.values[-1,:] = -1000 #exit on the last day
+        syms=[symbol]
+        dates = pd.date_range(sd, ed)
+        prices, prices_SPY = id.get_price(syms,dates)
+
+        if self.verbose: print prices
+
+        daily_returns = (prices / prices.shift(1)) - 1
+        daily_returns = daily_returns[1:]
+
+        # get indicators and combine them into as a feature data_frame
+        lookback = 14
+
+        _, PSR = id.get_SMA(prices, lookback)
+        _, _, bb_indicator = id.get_BB(prices, lookback)
+        momentum = id.get_momentum(prices, lookback)
+
         print("220: ", trades)
         if self.verbose: print type(trades) # it better be a DataFrame! 			  		 			     			  	   		   	  			  	
         if self.verbose: print trades 			  		 			     			  	   		   	  			  	
         if self.verbose: print prices_all
 
-        prices = prices_all[syms]  # only portfolio symbols
-        prices_SPY = prices_all['SPY']  # only SPY, for comparison later
-        if self.verbose: print prices
-
-        daily_rets = (prices / prices.shift(1)) - 1
 
         # get indicators and combine them into as a feature data_frame
         lookback = 14
@@ -257,16 +257,19 @@ class StrategyLearner(object):
         indices = prices.index
         holdings = pd.DataFrame(np.nan, index=indices, columns=['Holdings'])
         holdings.iloc[0] = 0
+        df_trades  = None
 
 
-        for i in range(daily_rets.shape[0]):
+        for i in range(daily_returns.shape[0]):
 
             state = self.indicators_to_state(PSR.iloc[i], bb_indicator.iloc[i], momentum.iloc[i])
 
+            # Get action by Query learner with current state and reward to get action
             action = self.learner.querysetstate(state)
 
-            holdings.iloc[i], _ = self.apply_action(holdings.iloc[i], action, daily_rets.iloc[i])
-
+            # update rewards and holdings with the new action.
+            holdings.iloc[j], _ = self.apply_action(holdings.iloc[i][0], action, daily_returns.iloc[i][0])
+            
         holdings.ffill(inplace=True)
         holdings.fillna(0, inplace=True)
         trades = holdings.diff()
