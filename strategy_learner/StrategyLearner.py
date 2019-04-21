@@ -55,12 +55,14 @@ class StrategyLearner(object):
 
     def indicators_to_state(self, PSR, bb_indicator, momentum):
         print("SL 57: PSR=",PSR, "BB=",bb_indicator, "mom=",momentum)
-        if pd.isna(PSR) or pd.isna(bb_indicator) or pd.isna(momentum):
-            return np.nan
 
-        momen_state = pd.cut([momentum], bins=self.mbins, labels=False, include_lowest=True)
-        PSR_state = pd.cut([PSR], bins=self.pbins, labels=False, include_lowest=True)
-        bbp_state = pd.cut([bb_indicator], bins=self.bbins, labels=False, include_lowest=True)
+        momen_state = np.digitize([momentum],self.mbins,right=True)
+        PSR_state = np.digitize([PSR],self.pbins,right=True)
+        bbp_state = np.digitize([bb_indicator],self.bbins,right=True)
+
+        #momen_state = pd.cut([momentum], bins=self.mbins, labels=False, include_lowest=True)
+        #PSR_state = pd.cut([PSR], bins=self.pbins, labels=False, include_lowest=True)
+        #bbp_state = pd.cut([bb_indicator], bins=self.bbins, labels=False, include_lowest=True)
 
         return momen_state.value[0] +PSR_state.value[0]*10 + bbp_state.value[0] * 100
 
@@ -121,6 +123,9 @@ class StrategyLearner(object):
         _,self.pbins = pd.qcut(PSR,10,labels=False,retbins=True)
         _,self.bbins = pd.qcut(bb_indicator,10,labels=False,retbins=True)
         _,self.mbins = pd.qcut(momentum,10,labels=False,retbins=True)
+        self.pbins = self.pbins[1:-1]
+        self.bbins = self.bbins[1:-1]
+        self.mbins = self.mbins[1:-1]
 
         # start training
 
