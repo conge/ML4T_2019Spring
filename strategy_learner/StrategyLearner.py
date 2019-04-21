@@ -146,8 +146,8 @@ class StrategyLearner(object):
             indices = prices.index
             holdings = pd.DataFrame(np.nan, index=indices, columns=['Holdings'])
             print("SL 148")
-            print("PSR[0] = "PSR[0])
-            first_state = self.indicators_to_state(PSR[0], bb_indicator[0], momentum[0])
+            print("PSR[0] = ",PSR.iloc[0])
+            first_state = self.indicators_to_state(PSR.iloc[0], bb_indicator.iloc[0], momentum.iloc[0])
             print("SL 150")
             action = self.learner.querysetstate(first_state)
             holdings.iloc[0] = self.apply_action(0, action, daily_rets[1])
@@ -166,7 +166,7 @@ class StrategyLearner(object):
             # Cycle through dates
             for j in range(1, PSR.shape[0] -1):
 
-                state = self.indicators_to_state(PSR[j], bb_indicator[j], momentum[j])
+                state = self.indicators_to_state(PSR.iloc[j], bb_indicator.iloc[j], momentum.iloc[j])
 
                 # Get action by Query learner with current state and reward to get action
                 action = self.learner.query(state, reward)
@@ -211,7 +211,9 @@ class StrategyLearner(object):
     def testPolicy(self, symbol = "IBM", \
         sd=dt.datetime(2009,1,1), \
         ed=dt.datetime(2010,1,1), \
-        sv = 10000): 			  		 			     			  	   		   	  			  	
+        sv = 10000):
+
+        syms=[symbol]
  			  		 			     			  	   		   	  			  	
         # here we build a fake set of trades 			  		 			     			  	   		   	  			  	
         # your code should return the same sort of data 			  		 			     			  	   		   	  			  	
@@ -250,11 +252,11 @@ class StrategyLearner(object):
 
         for i in range(daily_rets.shape[0]):
 
-            state = self.indicators_to_state(PSR[i], bb_indicator[i], momentum[i])
+            state = self.indicators_to_state(PSR.iloc[i], bb_indicator.iloc[i], momentum.iloc[i])
 
             action = self.learner.querysetstate(state)
 
-            holdings.iloc[i], _ = self.apply_action(holdings.iloc[i], action, daily_rets[i])
+            holdings.iloc[i], _ = self.apply_action(holdings.iloc[i], action, daily_rets.iloc[i])
 
         holdings.ffill(inplace=True)
         holdings.fillna(0, inplace=True)
