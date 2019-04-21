@@ -272,7 +272,7 @@ class StrategyLearner(object):
         holdings = pd.DataFrame(np.nan, index=indices, columns=['Holdings'])
         holdings.iloc[0] = 0
 
-        for i in range(daily_returns.shape[0]):
+        for i in range(daily_returns.shape[0] - 1):
 
             state = self.indicators_to_state(PSR.iloc[i], bb_indicator.iloc[i], momentum.iloc[i])
 
@@ -280,7 +280,9 @@ class StrategyLearner(object):
             action = self.learner.querysetstate(state)
 
             # update rewards and holdings with the new action.
-            holdings.iloc[i], _ = self.apply_action(holdings.iloc[i][0], action, daily_returns.iloc[i][0])
+            holdings.iloc[i], _ = self.apply_action(holdings.iloc[i][0], action, daily_returns.iloc[i+1][0])
+
+        holdings.iloc[-1] = 0
 
         holdings.ffill(inplace=True)
         holdings.fillna(0, inplace=True)
