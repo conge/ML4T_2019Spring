@@ -136,7 +136,7 @@ def test_strategy(description, insample_args, outsample_args, benchmark_type, be
             train_t = time.time()-tmp 			  		 			     			  	   		   	  			  	
             tmp = time.time() 			  		 			     			  	   		   	  			  	
             insample_trades_1 = learner.testPolicy(**insample_args)
-            print("GSL 140:)
+            print("GSL 140:")
             test_t = time.time()-tmp 			  		 			     			  	   		   	  			  	
             insample_trades_2 = learner.testPolicy(**insample_args) 			  		 			     			  	   		   	  			  	
             tmp = time.time() 			  		 			     			  	   		   	  			  	
