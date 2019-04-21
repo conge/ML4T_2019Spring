@@ -216,7 +216,8 @@ class StrategyLearner(object):
         trades.values[41,:] = 1000 # add a BUY 			  		 			     			  	   		   	  			  	
         trades.values[60,:] = -2000 # go short from long 			  		 			     			  	   		   	  			  	
         trades.values[61,:] = 2000 # go long from short 			  		 			     			  	   		   	  			  	
-        trades.values[-1,:] = -1000 #exit on the last day 			  		 			     			  	   		   	  			  	
+        trades.values[-1,:] = -1000 #exit on the last day
+        print("220: ", trades)
         if self.verbose: print type(trades) # it better be a DataFrame! 			  		 			     			  	   		   	  			  	
         if self.verbose: print trades 			  		 			     			  	   		   	  			  	
         if self.verbose: print prices_all
