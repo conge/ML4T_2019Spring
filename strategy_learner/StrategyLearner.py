@@ -55,16 +55,16 @@ class StrategyLearner(object):
         return 'qli7' # replace tb34 with your Georgia Tech username.
 
     def indicators_to_state(self, PSR, bb_indicator, momentum):
-        print("SL 57: PSR=",PSR[0], "BB=",bb_indicator[0], "mom=",momentum[0])
+        # print("SL 57: PSR=",PSR[0], "BB=",bb_indicator[0], "mom=",momentum[0])
 
         momen_state = np.digitize([momentum[0]],self.mbins,right=True)
         PSR_state = np.digitize([PSR[0]],self.pbins,right=True)
         bbp_state = np.digitize([bb_indicator[0]],self.bbins,right=True)
-        print("SL 63: bbp_state=",bbp_state)
+        #print("SL 63: bbp_state=",bbp_state)
         #momen_state = pd.cut([momentum], bins=self.mbins, labels=False, include_lowest=True)
         #PSR_state = pd.cut([PSR], bins=self.pbins, labels=False, include_lowest=True)
         #bbp_state = pd.cut([bb_indicator], bins=self.bbins, labels=False, include_lowest=True)
-
+        print("SL 67: State is: ", momen_state[0] +PSR_state[0]*10 + bbp_state[0] * 100)
         return momen_state[0] +PSR_state[0]*10 + bbp_state[0] * 100
 
     def apply_action(self, holdings, action,ret):
@@ -168,10 +168,10 @@ class StrategyLearner(object):
 
             old_holdings = 0.0
             reward = 0.0
-            print("SL 163")
+            print("SL 171: PSR.shape[0] = ",PSR.shape[0])
 
             # Cycle through dates
-            for j in range(1, PSR.shape[0] -1):
+            for j in range(1, PSR.shape[0]):
 
                 state = self.indicators_to_state(PSR.iloc[j], bb_indicator.iloc[j], momentum.iloc[j])
 
@@ -179,10 +179,11 @@ class StrategyLearner(object):
                 action = self.learner.query(state, reward)
 
                 # update rewards and holdings with the new action.
-                holdings.iloc[j], rewards = self.apply_action(holdings.iloc[j][0], action, daily_returns.iloc[j+1][0])
+                holdings.iloc[j], rewards = self.apply_action(holdings.iloc[j][0], action, daily_returns.iloc[j][0])
+                print("SL 183: j = ",j)
 
                 # Implement action returned by learner and update portfolio
-            print("SL 177")
+            print("SL 185: learning is done.")
             holdings.ffill(inplace=True)
             holdings.fillna(0, inplace=True)
             trades = holdings.diff()
