@@ -105,7 +105,7 @@ class StrategyLearner(object):
         prices = prices_all[syms]  # only portfolio symbols 			  		 			     			  	   		   	  			  	
         prices_SPY = prices_all['SPY']  # only SPY, for comparison later 			  		 			     			  	   		   	  			  	
         if self.verbose: print prices
-        print("Debug 108:")
+
         daily_rets = (prices / prices.shift(1)) - 1
 
         # get indicators and combine them into as a feature data_frame
@@ -116,9 +116,9 @@ class StrategyLearner(object):
         momentum = id.get_momentum(prices, lookback)
         print("Debug 117:")
 
-        _,self.pbins = pd.qcut(PSR,10,retbins=True)
-        _,self.bbins = pd.qcut(bb_indicator,10,retbins=True)
-        _,self.mbins = pd.qcut(momentum,10,retbins=True)
+        _,self.pbins = pd.qcut(PSR,10,labels=False,retbins=True)
+        _,self.bbins = pd.qcut(bb_indicator,10,labels=False,retbins=True)
+        _,self.mbins = pd.qcut(momentum,10,labels=False,retbins=True)
         print("Debug 122:")
 
         # start training
