@@ -74,7 +74,8 @@ class StrategyLearner(object):
         :param ret: return rate of the next day
         :return: updated holdings and reward
         """
-        print("77 holdings, action,ret.value = ",holdings, ", ",action,", ",ret.value)
+        print("77 holdings, action,ret = ",holdings, ", ",action,", ",ret)
+        print("77 holdings, action,ret = ",holdings, ", ",action,", ",ret)
         rewards = 0.0
         if holdings == -1000: # shorting position
             if action <= 1: # Action = { Do nothing or 0 =Short},
