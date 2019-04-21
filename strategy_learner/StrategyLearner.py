@@ -59,7 +59,7 @@ class StrategyLearner(object):
 
     # constructor
     def __init__(self, verbose=False, impact=0.0, commission=0.00,):
-        self.verbose = verbose
+        self.verbose = True
         self.commission = commission
         self.impact = impact
         self.num_actions = 3
