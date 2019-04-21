@@ -58,8 +58,9 @@ def check_convergence(old_cum_ret,cum_ret,converged_prev,converge_count):
 class StrategyLearner(object):
 
     # constructor
-    def __init__(self, verbose=False, impact=0.0):
-        self.verbose = verbose 			  		 			     			  	   		   	  			  	
+    def __init__(self, verbose=False, impact=0.0, commission=0.00,):
+        self.verbose = verbose
+        self.commission = commission
         self.impact = impact
         self.num_actions = 3
         self.learner = None
@@ -124,9 +125,9 @@ class StrategyLearner(object):
 
         # this method should create a QLearner, and train it for trading
 
-        syms=[symbol] 			  		 			     			  	   		   	  			  	
+        syms = [symbol]
         dates = pd.date_range(sd, ed)
-        prices, prices_SPY = id.get_price(syms,dates)
+        prices, prices_SPY = id.get_price(syms, dates)
 
         if self.verbose: print prices
 
@@ -153,7 +154,7 @@ class StrategyLearner(object):
         df_trades = None
 
         count = 0
-        n_pre_train = 10 # train pre_train times before checking for converge
+
         old_cum_ret = 0.0
         converge_count = 0
         converged_prev = False
@@ -178,7 +179,7 @@ class StrategyLearner(object):
             first_state = self.indicators_to_state(PSR.iloc[0], bb_indicator.iloc[0], momentum.iloc[0])
             action = self.learner.querysetstate(first_state)
             #print("SL 152: holdings.iloc[0] = ", holdings.iloc[0][0], "; daily_rets.iloc[1] = ", daily_returns.iloc[1][0])
-            holdings.iloc[0], reward= self.apply_action(0, action, daily_returns.iloc[1][0])
+            holdings.iloc[0], _ = self.apply_action(0, action, daily_returns.iloc[0][0] * 100)
             #print("SL 153")
 
             #df_prices = prices.copy()
@@ -200,8 +201,8 @@ class StrategyLearner(object):
 
                 # update reward and holdings with the new action.
                 holdings.iloc[j], reward = self.apply_action(holdings.iloc[j-1][0],
-                                                              action,
-                                                              daily_returns.iloc[j][0])
+                                                             action,
+                                                             daily_returns.iloc[j][0])
                 #print("SL 183: holdings.iloc[j][0] = ",holdings.iloc[j][0])
 
                 # Implement action returned by learner and update portfolio
@@ -216,7 +217,7 @@ class StrategyLearner(object):
 
             df_orders, _ = ms.generate_orders(df_trades, symbol)
 
-            port_vals = compute_portvals(df_orders, impact=self.impact, start_val=sv)
+            port_vals = compute_portvals(df_orders, impact=self.impact, start_val=sv, commission=self.commission)
 
             cum_ret, _, _, _ = get_portfolio_stats(port_vals)
 
