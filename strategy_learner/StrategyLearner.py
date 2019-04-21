@@ -114,12 +114,10 @@ class StrategyLearner(object):
         _, PSR = id.get_SMA(prices, lookback)
         _, _, bb_indicator = id.get_BB(prices, lookback)
         momentum = id.get_momentum(prices, lookback)
-        print("Debug 117:")
 
         _,self.pbins = pd.qcut(PSR,10,labels=False,retbins=True)
         _,self.bbins = pd.qcut(bb_indicator,10,labels=False,retbins=True)
         _,self.mbins = pd.qcut(momentum,10,labels=False,retbins=True)
-        print("Debug 122:")
 
         # start training
 
@@ -141,16 +139,18 @@ class StrategyLearner(object):
                                    radr=0.0,
                                    dyna=0,
                                    verbose=self.verbose)
-        print("143: learner init...done; training...")
+
 
         while (not converged) and (count<10):
             # Set first state to the first data point (first day)
             indices = prices.index
             holdings = pd.DataFrame(np.nan, index=indices, columns=['Holdings'])
-
+            print("SL 148")
             first_state = self.indicators_to_state(PSR[0], bb_indicator[0], momentum[0])
+            print("SL 150")
             action = self.learner.querysetstate(first_state)
             holdings.iloc[0] = self.apply_action(0, action, daily_rets[1])
+            print("SL 153")
 
             df_prices = prices.copy()
             df_prices['Cash'] = pd.Series(1.0, index=indices)
@@ -160,6 +160,7 @@ class StrategyLearner(object):
 
             old_holdings = 0.0
             reward = 0.0
+            print("SL 163")
 
             # Cycle through dates
             for j in range(1, PSR.shape[0] -1):
@@ -173,11 +174,12 @@ class StrategyLearner(object):
                 holdings.iloc[j], rewards = self.apply_action(holdings.iloc[j-1], action, daily_rets[j])
 
                 # Implement action returned by learner and update portfolio
+            print("SL 177")
             holdings.ffill(inplace=True)
             holdings.fillna(0, inplace=True)
             trades = holdings.diff()
             trades.iloc[0] = 0
-
+            print("SL 182")
             # buy and sell happens when the difference change direction
             df_trades = pd.DataFrame(data=trades.values, index = trades.index, columns = ['Trades'])
 
@@ -187,6 +189,7 @@ class StrategyLearner(object):
             cum_ret, _, _, _ = get_portfolio_stats(port_vals)
 
             count += 1
+            print("SL 192")
 
             # check if converge
             if abs((old_cum_ret - cum_ret)*100.0) < 0.00001:
