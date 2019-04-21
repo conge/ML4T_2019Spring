@@ -67,7 +67,7 @@ class StrategyLearner(object):
         #print("SL 67: State is: ", momen_state[0] +PSR_state[0]*10 + bbp_state[0] * 100)
         return momen_state[0] +PSR_state[0]*10 + bbp_state[0] * 100
 
-    def apply_action(self, holdings, action,ret):
+    def apply_action(self, holdings, action, ret):
         """
 
         :param holdings: -1000, 0 or 1000
@@ -81,14 +81,14 @@ class StrategyLearner(object):
         if holdings == -1000: # shorting position
             if action <= 1: # Action = { Do nothing or 0 =Short},
                 rewards = -ret # holding don't change, rewards is negative of return
-            else:   # actoion is  1 = BUY
+            else:   # actoion is  2 = BUY
                 holdings = 1000  # Then holding 1000
                 rewards = 2 * ret
         elif holdings == 0:
             if action == 0: # SHORT
                 holdings = -1000
                 rewards = -ret
-            elif action == 2:
+            elif action == 2:  # BUY
                 holdings = 1000
                 rewards = ret
         else: # when holdings is 1000
@@ -139,6 +139,7 @@ class StrategyLearner(object):
         n_pre_train = 10 # train pre_train times before checking for converge
         old_cum_ret = 0.0
         converge_count = 0
+        converged_prev = False
 
         #print "Total number of states is:", total_states
 
@@ -194,19 +195,25 @@ class StrategyLearner(object):
             # buy and sell happens when the difference change direction
             df_trades = pd.DataFrame(data=trades.values, index = trades.index, columns = ['Trades'])
 
-            df_orders, _ = ms.generate_orders(df_trades,symbol)
-            port_vals = compute_portvals(df_orders, impact=self.impact,start_val=sv)
+            df_orders, _ = ms.generate_orders(df_trades, symbol)
+            port_vals = compute_portvals(df_orders, impact=self.impact, start_val=sv)
 
             cum_ret, _, _, _ = get_portfolio_stats(port_vals)
 
             count += 1
-            print("SL 192 cum_ret: ", cum_ret)
 
             # check if converge
             if abs((old_cum_ret - cum_ret)*100.0) < 0.00001:
-                converge_count += 1
+                converged_current = True
+                if converged_prev:
+                    converge_count += 1
+                else:
+                    converge_count = 1
+                converged_prev = True
             else:
+                converged_prev = False
                 old_cum_ret = cum_ret
+                
             if converge_count> 4:
                 converged = True
                 print("SL 212: converged at iteration # ",count)
