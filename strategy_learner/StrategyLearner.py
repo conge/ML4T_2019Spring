@@ -210,7 +210,7 @@ class StrategyLearner(object):
                 #print("SL 183: holdings.iloc[j][0] = ",holdings.iloc[j][0])
 
                 # Implement action returned by learner and update portfolio
-            #print("SL 206: one learning is done.")
+            print("SL 206: one learning is done.")
             holdings.ffill(inplace=True)
             holdings.fillna(0, inplace=True)
             trades = holdings.diff()
@@ -218,13 +218,13 @@ class StrategyLearner(object):
 
             # buy and sell happens when the difference change direction
             df_trades = pd.DataFrame(data=trades.values, index=trades.index, columns=['Trades'])
-
+            print("SL 221:")
             df_orders, _ = ms.generate_orders(df_trades, symbol)
-
+            print("SL 223:")
             port_vals = compute_portvals(df_orders, impact=self.impact, start_val=sv, commission=self.commission)
-
+            print("SL 225:")
             cum_ret, _, _, _ = get_portfolio_stats(port_vals)
-
+            print("SL 227:")
             count += 1
 
             old_cum_ret,converged_prev,converge_count,converged = \
