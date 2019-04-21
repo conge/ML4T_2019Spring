@@ -238,13 +238,13 @@ class StrategyLearner(object):
         holdings.iloc[0] = 0
 
 
-        for i in range(1,daily_rets.shape[0]):
+        for i in range(daily_rets.shape[0]):
 
             state = self.indicators_to_state(PSR[i], bb_indicator[i], momentum[i])
 
             action = self.learner.querysetstate(state)
 
-            holdings.iloc[i], rewards = self.apply_action(holdings.iloc[i-1], action, daily_rets[i])
+            holdings.iloc[i], _ = self.apply_action(holdings.iloc[i], action, daily_rets[i])
 
         holdings.ffill(inplace=True)
         holdings.fillna(0, inplace=True)
