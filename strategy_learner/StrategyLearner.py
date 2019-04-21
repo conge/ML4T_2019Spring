@@ -84,7 +84,7 @@ class StrategyLearner(object):
         #print("SL 67: State is: ", momen_state[0] +PSR_state[0]*10 + bbp_state[0] * 100)
         return momen_state[0] +PSR_state[0]*10 + bbp_state[0] * 100
 
-    def apply_action(self, holdings, action, ret, prices):
+    def apply_action(self, holdings, action, ret):
         """
 
         :param holdings: -1000, 0 or 1000
