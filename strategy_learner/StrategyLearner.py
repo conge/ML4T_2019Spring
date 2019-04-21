@@ -188,7 +188,7 @@ class StrategyLearner(object):
             #df_trades[:] = 0.0
 
             #old_holdings = 0.0
-            # reward = 0.0
+            reward = 0.0
             #print("SL 171: PSR.shape[0] = ",PSR.shape[0],"; daily_returns.shape[0] = ",daily_returns.shape[0])
 
             # Cycle through dates
