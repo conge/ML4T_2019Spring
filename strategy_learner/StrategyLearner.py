@@ -179,7 +179,7 @@ class StrategyLearner(object):
             action = self.learner.querysetstate(first_state)
             #print("SL 152: holdings.iloc[0] = ", holdings.iloc[0][0], "; daily_rets.iloc[1] = ", daily_returns.iloc[1][0])
             holdings.iloc[0], _= self.apply_action(0, action, daily_returns.iloc[1][0])
-            print("SL 153")
+            #print("SL 153")
 
             #df_prices = prices.copy()
             #df_prices['Cash'] = pd.Series(1.0, index=indices)
@@ -203,7 +203,7 @@ class StrategyLearner(object):
                 #print("SL 183: holdings.iloc[j][0] = ",holdings.iloc[j][0])
 
                 # Implement action returned by learner and update portfolio
-            print("SL 206: one learning is done.")
+            #print("SL 206: one learning is done.")
             holdings.ffill(inplace=True)
             holdings.fillna(0, inplace=True)
             trades = holdings.diff()
@@ -213,15 +213,16 @@ class StrategyLearner(object):
             df_trades = pd.DataFrame(data=trades.values, index=trades.index, columns=['Trades'])
 
             df_orders, _ = ms.generate_orders(df_trades, symbol)
+            print("SL 216")
             port_vals = compute_portvals(df_orders, impact=self.impact, start_val=sv)
-
+            print("SL 218")
             cum_ret, _, _, _ = get_portfolio_stats(port_vals)
 
             count += 1
 
             old_cum_ret,converged_prev,converge_count,converged = \
                 check_convergence(old_cum_ret,cum_ret,converged_prev,converge_count)
-
+            print("SL 224")
             # check if converge
             if converged:
                 print("SL 212: converged at iteration # ",count)
