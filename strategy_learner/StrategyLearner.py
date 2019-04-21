@@ -37,6 +37,23 @@ from util import get_data
 import indicators as id
 import ManualStrategy as ms
 
+def check_convergence(old_cum_ret,cum_ret,converged_prev,converge_count):
+                converged = False
+                if abs((old_cum_ret - cum_ret)*100.0) < 0.00001:
+
+                    if converged_prev:
+                        converge_count += 1
+                    else:
+                        converge_count = 1
+                    converged_prev = True
+                else:
+
+                     converged_prev = False
+                     old_cum_ret = cum_ret
+                if converge_count> 4:
+                    converged = True
+
+                return old_cum_ret,converged_prev,converge_count,converged
 
 class StrategyLearner(object):
 
@@ -123,7 +140,7 @@ class StrategyLearner(object):
         _, _, bb_indicator = id.get_BB(prices, lookback)
         momentum = id.get_momentum(prices, lookback)
 
-        _,self.pbins = pd.qcut(PSR,10,labels=False,retbins=True)
+        _,self.pbins = pd.qcut(PSR, 10,labels=False,retbins=True)
         _,self.bbins = pd.qcut(bb_indicator,10,labels=False,retbins=True)
         _,self.mbins = pd.qcut(momentum,10,labels=False,retbins=True)
         self.pbins = self.pbins[1:-1]
@@ -133,7 +150,7 @@ class StrategyLearner(object):
         # start training
 
         converged = False
-        df_trades  = None
+        df_trades = None
 
         count = 0
         n_pre_train = 10 # train pre_train times before checking for converge
@@ -193,7 +210,7 @@ class StrategyLearner(object):
             trades.iloc[0] = 0
             #print("SL 182")
             # buy and sell happens when the difference change direction
-            df_trades = pd.DataFrame(data=trades.values, index = trades.index, columns = ['Trades'])
+            df_trades = pd.DataFrame(data=trades.values, index=trades.index, columns=['Trades'])
 
             df_orders, _ = ms.generate_orders(df_trades, symbol)
             port_vals = compute_portvals(df_orders, impact=self.impact, start_val=sv)
@@ -202,22 +219,13 @@ class StrategyLearner(object):
 
             count += 1
 
-            # check if converge
-            if abs((old_cum_ret - cum_ret)*100.0) < 0.00001:
-                converged_current = True
-                if converged_prev:
-                    converge_count += 1
-                else:
-                    converge_count = 1
-                converged_prev = True
-            else:
-                converged_prev = False
-                old_cum_ret = cum_ret
-                
-            if converge_count> 4:
-                converged = True
-                print("SL 212: converged at iteration # ",count)
+            old_cum_ret,converged_prev,converge_count,converged = \
+                check_convergence(old_cum_ret,cum_ret,converged_prev,converge_count)
 
+            # check if converge
+            if converged:
+                print("SL 212: converged at iteration # ",count)
+            
         return df_trades
 
  			  		 			     			  	   		   	  			  	
