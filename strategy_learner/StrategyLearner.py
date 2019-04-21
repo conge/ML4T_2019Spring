@@ -148,8 +148,8 @@ class StrategyLearner(object):
             print("SL 148")
             print("PSR[0] = ",PSR.iloc[0])
             first_state = self.indicators_to_state(PSR.iloc[0], bb_indicator.iloc[0], momentum.iloc[0])
-            print("SL 150")
             action = self.learner.querysetstate(first_state)
+            print("SL 152: action = ", action)
             holdings.iloc[0] = self.apply_action(0, action, daily_rets.iloc[1])
             print("SL 153")
 
