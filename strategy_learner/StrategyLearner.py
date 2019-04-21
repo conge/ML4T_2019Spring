@@ -208,21 +208,21 @@ class StrategyLearner(object):
             holdings.fillna(0, inplace=True)
             trades = holdings.diff()
             trades.iloc[0] = 0
-            print("SL 211")
+
             # buy and sell happens when the difference change direction
             df_trades = pd.DataFrame(data=trades.values, index=trades.index, columns=['Trades'])
 
             df_orders, _ = ms.generate_orders(df_trades, symbol)
-            print("SL 216")
+
             port_vals = compute_portvals(df_orders, impact=self.impact, start_val=sv)
-            print("SL 218")
+
             cum_ret, _, _, _ = get_portfolio_stats(port_vals)
 
             count += 1
 
             old_cum_ret,converged_prev,converge_count,converged = \
                 check_convergence(old_cum_ret,cum_ret,converged_prev,converge_count)
-            print("SL 224")
+
             # check if converge
             if converged:
                 print("SL 212: converged at iteration # ",count)
