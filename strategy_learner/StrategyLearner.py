@@ -178,7 +178,7 @@ class StrategyLearner(object):
             first_state = self.indicators_to_state(PSR.iloc[0], bb_indicator.iloc[0], momentum.iloc[0])
             action = self.learner.querysetstate(first_state)
             #print("SL 152: holdings.iloc[0] = ", holdings.iloc[0][0], "; daily_rets.iloc[1] = ", daily_returns.iloc[1][0])
-            holdings.iloc[0], _= self.apply_action(0, action, daily_returns.iloc[1][0])
+            holdings.iloc[0], reward= self.apply_action(0, action, daily_returns.iloc[1][0])
             #print("SL 153")
 
             #df_prices = prices.copy()
@@ -187,7 +187,7 @@ class StrategyLearner(object):
             #df_trades[:] = 0.0
 
             #old_holdings = 0.0
-            reward = 0.0
+            # reward = 0.0
             #print("SL 171: PSR.shape[0] = ",PSR.shape[0],"; daily_returns.shape[0] = ",daily_returns.shape[0])
 
             # Cycle through dates
