@@ -54,6 +54,7 @@ class StrategyLearner(object):
         return 'qli7' # replace tb34 with your Georgia Tech username.
 
     def indicators_to_state(self, PSR, bb_indicator, momentum):
+        print("SL 57: PSR=",PSR, "BB=",bb_indicator, "mom=",momentum)
         if pd.isna(PSR) or pd.isna(bb_indicator) or pd.isna(momentum):
             return np.nan
 
