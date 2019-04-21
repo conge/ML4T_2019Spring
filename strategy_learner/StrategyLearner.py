@@ -179,8 +179,8 @@ class StrategyLearner(object):
                 action = self.learner.query(state, reward)
 
                 # update rewards and holdings with the new action.
-                holdings.iloc[j], rewards = self.apply_action(holdings.iloc[j][0], action, daily_returns.iloc[j][0])
-                #print("SL 183: j = ",j)
+                holdings.iloc[j], rewards = self.apply_action(holdings.iloc[j-1][0], action, daily_returns.iloc[j][0])
+                print("SL 183: holdings.iloc[j][0] = ",holdings.iloc[j][0])
 
                 # Implement action returned by learner and update portfolio
             #print("SL 185: learning is done.")
