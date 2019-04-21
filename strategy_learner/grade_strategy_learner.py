@@ -130,8 +130,8 @@ def test_strategy(description, insample_args, outsample_args, benchmark_type, be
             np.random.seed(seed) 			  		 			     			  	   		   	  			  	
             random.seed(seed) 			  		 			     			  	   		   	  			  	
             learner = StrategyLearner.StrategyLearner(verbose=False,impact=impact)
-            print(133)
-            tmp = time.time() 			  		 			     			  	   		   	  			  	
+            tmp = time.time()
+            print(134)
             learner.addEvidence(**insample_args)
             print(136)
             train_t = time.time()-tmp 			  		 			     			  	   		   	  			  	
