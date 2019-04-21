@@ -64,7 +64,7 @@ class StrategyLearner(object):
         #PSR_state = pd.cut([PSR], bins=self.pbins, labels=False, include_lowest=True)
         #bbp_state = pd.cut([bb_indicator], bins=self.bbins, labels=False, include_lowest=True)
 
-        return momen_state.value[0] +PSR_state.value[0]*10 + bbp_state.value[0] * 100
+        return momen_state[0] +PSR_state[0]*10 + bbp_state[0] * 100
 
     def apply_action(self, holdings, action,ret):
         """
