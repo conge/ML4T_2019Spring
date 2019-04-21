@@ -150,7 +150,7 @@ class StrategyLearner(object):
             first_state = self.indicators_to_state(PSR.iloc[0], bb_indicator.iloc[0], momentum.iloc[0])
             print("SL 150")
             action = self.learner.querysetstate(first_state)
-            holdings.iloc[0] = self.apply_action(0, action, daily_rets[1])
+            holdings.iloc[0] = self.apply_action(0, action, daily_rets.iloc[1])
             print("SL 153")
 
             df_prices = prices.copy()
@@ -172,7 +172,7 @@ class StrategyLearner(object):
                 action = self.learner.query(state, reward)
 
                 # update rewards and holdings with the new action.
-                holdings.iloc[j], rewards = self.apply_action(holdings.iloc[j-1], action, daily_rets[j])
+                holdings.iloc[j], rewards = self.apply_action(holdings.iloc[j], action, daily_rets.iloc[j+1])
 
                 # Implement action returned by learner and update portfolio
             print("SL 177")
