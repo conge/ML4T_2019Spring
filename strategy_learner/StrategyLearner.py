@@ -168,10 +168,10 @@ class StrategyLearner(object):
 
             old_holdings = 0.0
             reward = 0.0
-            print("SL 171: PSR.shape[0] = ",PSR.shape[0])
+            print("SL 171: PSR.shape[0] = ",PSR.shape[0],"; daily_returns.shape[0] = ",daily_returns.shape[0])
 
             # Cycle through dates
-            for j in range(1, PSR.shape[0]):
+            for j in range(1, daily_returns.shape[0]):
 
                 state = self.indicators_to_state(PSR.iloc[j], bb_indicator.iloc[j], momentum.iloc[j])
 
