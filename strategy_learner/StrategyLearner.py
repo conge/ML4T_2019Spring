@@ -150,7 +150,6 @@ class StrategyLearner(object):
                                    dyna=0,
                                    verbose=self.verbose)
 
-
         while (not converged) and (count<10):
             # Set first state to the first data point (first day)
             indices = prices.index
@@ -158,14 +157,13 @@ class StrategyLearner(object):
             first_state = self.indicators_to_state(PSR.iloc[0], bb_indicator.iloc[0], momentum.iloc[0])
             action = self.learner.querysetstate(first_state)
             print("SL 152: holdings.iloc[0] = ", holdings.iloc[0], "; daily_rets.iloc[1] = ", daily_rets.iloc[1])
-            holdings.iloc[0] = self.apply_action(0, action, daily_rets.iloc[1])
+            holdings.iloc[0], _= self.apply_action(0, action, daily_rets.iloc[1])
             print("SL 153")
 
             df_prices = prices.copy()
             df_prices['Cash'] = pd.Series(1.0, index=indices)
             df_trades = df_prices.copy()
             df_trades[:] = 0.0
-
 
             old_holdings = 0.0
             reward = 0.0
