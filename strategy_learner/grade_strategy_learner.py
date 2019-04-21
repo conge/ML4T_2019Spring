@@ -129,12 +129,15 @@ def test_strategy(description, insample_args, outsample_args, benchmark_type, be
             #Set fixed seed for repetability 			  		 			     			  	   		   	  			  	
             np.random.seed(seed) 			  		 			     			  	   		   	  			  	
             random.seed(seed) 			  		 			     			  	   		   	  			  	
-            learner = StrategyLearner.StrategyLearner(verbose=False,impact=impact) 			  		 			     			  	   		   	  			  	
+            learner = StrategyLearner.StrategyLearner(verbose=False,impact=impact)
+            print(133)
             tmp = time.time() 			  		 			     			  	   		   	  			  	
-            learner.addEvidence(**insample_args) 			  		 			     			  	   		   	  			  	
+            learner.addEvidence(**insample_args)
+            print(136)
             train_t = time.time()-tmp 			  		 			     			  	   		   	  			  	
             tmp = time.time() 			  		 			     			  	   		   	  			  	
-            insample_trades_1 = learner.testPolicy(**insample_args) 			  		 			     			  	   		   	  			  	
+            insample_trades_1 = learner.testPolicy(**insample_args)
+            print(140)
             test_t = time.time()-tmp 			  		 			     			  	   		   	  			  	
             insample_trades_2 = learner.testPolicy(**insample_args) 			  		 			     			  	   		   	  			  	
             tmp = time.time() 			  		 			     			  	   		   	  			  	
