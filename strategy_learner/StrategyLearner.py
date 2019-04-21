@@ -132,14 +132,15 @@ class StrategyLearner(object):
 
         # Initialize QLearner,
 
-        ql.QLearner(num_states=10**self.num_actions,
-                    num_actions=self.num_actions,
-                    alpha=0.5,
-                    gamma=0.9,
-                    rar=0.0,
-                    radr=0.0,
-                    dyna=0,
-                    verbose=self.verbose)
+        self.learner = ql.QLearner(num_states=10**self.num_actions,
+                                   num_actions=self.num_actions,
+                                   alpha=0.5,
+                                   gamma=0.9,
+                                   rar=0.0,
+                                   radr=0.0,
+                                   dyna=0,
+                                   verbose=self.verbose)
+        print("143: learner init...done; training...")
 
         while (not converged) and (count<10):
             # Set first state to the first data point (first day)
