@@ -151,7 +151,7 @@ class StrategyLearner(object):
                                    dyna=0,
                                    verbose=self.verbose)
 
-        while (not converged) and (count<10):
+        while (not converged) and (count<30):
             # Set first state to the first data point (first day)
             indices = prices.index
             holdings = pd.DataFrame(np.nan, index=indices, columns=['Holdings'])
