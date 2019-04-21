@@ -132,11 +132,11 @@ def test_strategy(description, insample_args, outsample_args, benchmark_type, be
             learner = StrategyLearner.StrategyLearner(verbose=False,impact=impact)
             tmp = time.time()
             learner.addEvidence(**insample_args)
-            print(136)
+            print("GSL 136")
             train_t = time.time()-tmp 			  		 			     			  	   		   	  			  	
             tmp = time.time() 			  		 			     			  	   		   	  			  	
             insample_trades_1 = learner.testPolicy(**insample_args)
-            print(140)
+            print("GSL 140:)
             test_t = time.time()-tmp 			  		 			     			  	   		   	  			  	
             insample_trades_2 = learner.testPolicy(**insample_args) 			  		 			     			  	   		   	  			  	
             tmp = time.time() 			  		 			     			  	   		   	  			  	
