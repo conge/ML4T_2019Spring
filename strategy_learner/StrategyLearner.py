@@ -84,7 +84,7 @@ class StrategyLearner(object):
         #print("SL 67: State is: ", momen_state[0] +PSR_state[0]*10 + bbp_state[0] * 100)
         return momen_state[0] +PSR_state[0]*10 + bbp_state[0] * 100
 
-    def apply_action(self, holdings, action, ret):
+    def apply_action(self, holdings, action, ret, prices):
         """
 
         :param holdings: -1000, 0 or 1000
@@ -94,28 +94,28 @@ class StrategyLearner(object):
         """
         #print("77 holdings, action,ret = ",holdings,action,ret)
 
-        rewards = 0.0
+        reward = 0.0
         if holdings == -1000: # shorting position
             if action <= 1: # Action = { Do nothing or 0 =Short},
-                rewards = -ret # holding don't change, rewards is negative of return
-            else:   # actoion is  2 = BUY
+                reward = -ret # holding don't change, reward is negative of return
+            else:   # action is  2 = BUY
                 holdings = 1000  # Then holding 1000
-                rewards = 2 * ret
+                reward = 2 * ret
         elif holdings == 0:
             if action == 0: # SHORT
                 holdings = -1000
-                rewards = -ret
+                reward = -ret
             elif action == 2:  # BUY
                 holdings = 1000
-                rewards = ret
+                reward = ret
         else: # when holdings is 1000
             if action == 0: # SHORT
                 holdings = -1000
-                rewards = -2 * ret
+                reward = -2 * ret
             else:
-                rewards = ret
+                reward = ret
 
-        return holdings, rewards
+        return holdings, reward
 
     def addEvidence(self, symbol = "IBM", \
         sd=dt.datetime(2008,1,1), \
@@ -198,8 +198,10 @@ class StrategyLearner(object):
                 # Get action by Query learner with current state and reward to get action
                 action = self.learner.query(state, reward)
 
-                # update rewards and holdings with the new action.
-                holdings.iloc[j], rewards = self.apply_action(holdings.iloc[j-1][0], action, daily_returns.iloc[j][0])
+                # update reward and holdings with the new action.
+                holdings.iloc[j], reward = self.apply_action(holdings.iloc[j-1][0],
+                                                              action,
+                                                              daily_returns.iloc[j][0])
                 #print("SL 183: holdings.iloc[j][0] = ",holdings.iloc[j][0])
 
                 # Implement action returned by learner and update portfolio
@@ -279,7 +281,7 @@ class StrategyLearner(object):
             # Get action by Query learner with current state and reward to get action
             action = self.learner.querysetstate(state)
 
-            # update rewards and holdings with the new action.
+            # update reward and holdings with the new action.
             holdings.iloc[i], _ = self.apply_action(holdings.iloc[i][0], action, daily_returns.iloc[i+1][0])
 
         holdings.iloc[-1] = 0
