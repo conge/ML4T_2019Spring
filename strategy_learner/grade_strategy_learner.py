@@ -295,7 +295,8 @@ def evalPolicy2(symbol, student_trades, startval, sd, ed, market_impact,commissi
             continue 			  		 			     			  	   		   	  			  	
         order = 'sell' if nshares < 0 else 'buy' 			  		 			     			  	   		   	  			  	
         new_row = pd.DataFrame([[abs(nshares),order,symbol],],columns=['Shares','Order','Symbol'],index=[row_idx,]) 			  		 			     			  	   		   	  			  	
-        orders_df = orders_df.append(new_row) 			  		 			     			  	   		   	  			  	
+        orders_df = orders_df.append(new_row)
+    print("GSL 299: orders_df = ",orders_df)
     portvals = compute_portvals(orders_df, sd, ed, startval,market_impact,commission_cost) 			  		 			     			  	   		   	  			  	
     return float(portvals[-1]/portvals[0])-1 			  		 			     			  	   		   	  			  	
  			  		 			     			  	   		   	  			  	

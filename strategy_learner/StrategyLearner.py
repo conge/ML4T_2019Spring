@@ -292,7 +292,7 @@ class StrategyLearner(object):
         # buy and sell happens when the difference change direction
         df_trades = pd.DataFrame(data=trades.values, index = trades.index, columns = ['Trades'])
 
-        print("293: ", df_trades)
+        #print("293: ", df_trades)
         if self.verbose: print type(df_trades) # it better be a DataFrame!
         if self.verbose: print trades
         if self.verbose: print prices
