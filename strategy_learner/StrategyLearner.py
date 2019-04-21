@@ -37,22 +37,14 @@ import indicators as id
 import ManualStrategy as ms
 
 
- 			  		 			     			  	   		   	  			  	
-class StrategyLearner(object): 			  		 			     			  	   		   	  			  	
- 			  		 			     			  	   		   	  			  	
-    # constructor 			  		 			     			  	   		   	  			  	
+class StrategyLearner(object):
+
+    # constructor
     def __init__(self, verbose=False, impact=0.0):
         self.verbose = verbose 			  		 			     			  	   		   	  			  	
         self.impact = impact
         self.num_actions = 3
-        self.learner = ql.QLearner(num_states=10**self.num_actions,
-                                   num_actions=self.num_actions,
-                                   alpha=0.5,
-                                   gamma=0.9,
-                                   rar=0.0,
-                                   radr=0.0,
-                                   dyna=0,
-                                   verbose=verbose)
+        self.learner = None
         self.pbins = None
         self.bbins = None
         self.mbins = None
@@ -104,6 +96,7 @@ class StrategyLearner(object):
         sd=dt.datetime(2008,1,1), \
         ed=dt.datetime(2009,1,1), \
         sv = 10000):
+
         # this method should create a QLearner, and train it for trading
 
         syms=[symbol] 			  		 			     			  	   		   	  			  	
@@ -138,6 +131,16 @@ class StrategyLearner(object):
         #print "Total number of states is:", total_states
 
         # Initialize QLearner,
+
+        ql.QLearner(num_states=10**self.num_actions,
+                    num_actions=self.num_actions,
+                    alpha=0.5,
+                    gamma=0.9,
+                    rar=0.0,
+                    radr=0.0,
+                    dyna=0,
+                    verbose=self.verbose)
+
         while (not converged) and (count<10):
             # Set first state to the first data point (first day)
             indices = prices.index
@@ -177,9 +180,9 @@ class StrategyLearner(object):
             df_trades = pd.DataFrame(data=trades.values, index = trades.index, columns = ['Trades'])
 
             df_orders, _ = ms.generate_orders(df_trades,symbol)
-            port_vals = compute_portvals(df_orders, impact=self.impact)
+            port_vals = compute_portvals(df_orders, impact=self.impact,start_val=sv)
 
-            cum_ret, _, _, _ = ms.get_portfolio_stats(port_vals)
+            cum_ret, _, _, _ = get_portfolio_stats(port_vals)
 
             count += 1
 
