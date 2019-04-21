@@ -288,7 +288,7 @@ class StrategyLearner(object):
             # Get holdings with the new action.
             holdings.iloc[i], _ = self.apply_action(holdings.iloc[i][0], action, daily_returns.iloc[i+1][0])
 
-        holdings.iloc[-1] = 0
+        #holdings.iloc[-1] = 0
 
         holdings.ffill(inplace=True)
         holdings.fillna(0, inplace=True)
