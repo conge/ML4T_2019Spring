@@ -37,7 +37,7 @@ def author():
     return 'qli7' # replace tb34 with your Georgia Tech username.
 
 
-def compute_portvals(orders, start_val = 1000000, commission=9.95, impact=0.005):
+def compute_portvals(orders, sd=None, ed=None,start_val = 1000000, commission=9.95, impact=0.005):
     # this is the function the autograder will call to test your code
     # NOTE: orders_file may be a string, or it may be a file object. Your
     # code should work correctly with either input
@@ -45,8 +45,15 @@ def compute_portvals(orders, start_val = 1000000, commission=9.95, impact=0.005)
 
     # orders = pd.read_csv(orders_file,index_col='Date',parse_dates=True,na_values=['nan'])
 
-    start_date = orders.index.min()
-    end_date = orders.index.max()
+    if sd:
+        start_date = sd
+    else:
+
+        start_date = orders.index.min()
+    if ed:
+        end_dat = ed
+    else:
+        end_date = orders.index.max()
 
     # Not reading in 'SPY'
     if orders.__len__() == 1:

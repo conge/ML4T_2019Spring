@@ -217,13 +217,13 @@ class StrategyLearner(object):
 
             # buy and sell happens when the difference change direction
             df_trades = pd.DataFrame(data=trades.values, index=indices, columns=['Trades'])
-            print("SL 221:", symbol)
+
             df_orders, _ = generate_orders(df_trades, symbol)
-            print("SL 223:")
-            port_vals = compute_portvals(df_orders, impact=self.impact, start_val=sv, commission=self.commission)
-            print("SL 225:")
+
+            port_vals = compute_portvals(df_orders, sd=sd, ed=ed, impact=self.impact, start_val=sv, commission=self.commission)
+
             cum_ret, _, _, _ = get_portfolio_stats(port_vals)
-            print("SL 227:")
+
             count += 1
 
             old_cum_ret,converged_prev,converge_count,converged = \
