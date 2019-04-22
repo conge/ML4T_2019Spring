@@ -57,7 +57,7 @@ class ManualStrategy(object):
         return df_trades
 
 
-def generate_orders(df_trades,symbol):
+def generate_orders(df_trades, symbol):
 
     print("MS 62: df_trades: ",df_trades)
     df_orders = df_trades.copy()

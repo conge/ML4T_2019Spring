@@ -210,7 +210,7 @@ class StrategyLearner(object):
                 #print("SL 183: holdings.iloc[j][0] = ",holdings.iloc[j][0])
 
                 # Implement action returned by learner and update portfolio
-            print("SL 206: one learning is done.")
+            #print("SL 206: one learning is done.")
             holdings.ffill(inplace=True)
             holdings.fillna(0, inplace=True)
             trades = holdings.diff()
