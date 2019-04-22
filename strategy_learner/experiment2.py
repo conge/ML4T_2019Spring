@@ -11,6 +11,7 @@ def author():
 
         return 'qli7'
 
+
 def get_port_val_sl(impact,symbol, start_date,end_date, sv,commission = 9.95):
     sl = StrategyLearner.StrategyLearner(impact=impact,commission=commission)
     sl.addEvidence(symbol=symbol, sd=start_date, ed=end_date, sv = 100000, n_bins=5)
@@ -33,8 +34,7 @@ def experiment2():
     sv = 100000
     port_val_dict = []
 
-
-    plt.figure(0)
+    plt.figure(figsize=(12,6.5))
     for i in range(5):
         impact = 0.0025 * i
         port_val = get_port_val_sl(impact,symbol, start_date,end_date, sv)
