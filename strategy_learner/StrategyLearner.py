@@ -35,7 +35,7 @@ import QLearner as ql
 from marketsimcode import compute_portvals, get_portfolio_stats
 from util import get_data
 import indicators as id
-import ManualStrategy as ms
+from ManualStrategy import generate_orders
 
 def check_convergence(old_cum_ret,cum_ret,converged_prev,converge_count):
                 converged = False
@@ -219,7 +219,7 @@ class StrategyLearner(object):
             # buy and sell happens when the difference change direction
             df_trades = pd.DataFrame(data=trades.values, index=trades.index, columns=['Trades'])
             print("SL 221:", symbol)
-            df_orders, _ = ms.generate_orders(df_trades, symbol)
+            df_orders, _ = generate_orders(df_trades, symbol)
             print("SL 223:")
             port_vals = compute_portvals(df_orders, impact=self.impact, start_val=sv, commission=self.commission)
             print("SL 225:")

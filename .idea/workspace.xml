@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/strategy_learner/StrategyLearner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="220" column="35" selection-start-line="220" selection-start-column="35" selection-end-line="220" selection-end-column="35" />
+            <state relative-caret-position="122">
+              <caret line="221" column="27" lean-forward="true" selection-start-line="221" selection-start-column="27" selection-end-line="221" selection-end-column="27" />
               <folding>
                 <element signature="e#2039#2100#0" expanded="true" />
               </folding>
@@ -117,10 +117,10 @@
       <find>student_tr</find>
       <find>evalPolicy</find>
       <find>rewards</find>
-      <find>generate_orders</find>
       <find>df_trades</find>
       <find>-1</find>
       <find>testPolicy</find>
+      <find>generate_orders</find>
     </findStrings>
     <replaceStrings>
       <replace>reward</replace>
@@ -303,8 +303,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/strategy_learner/StrategyLearner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="220" column="35" selection-start-line="220" selection-start-column="35" selection-end-line="220" selection-end-column="35" />
+        <state relative-caret-position="122">
+          <caret line="221" column="27" lean-forward="true" selection-start-line="221" selection-start-column="27" selection-end-line="221" selection-end-column="27" />
           <folding>
             <element signature="e#2039#2100#0" expanded="true" />
           </folding>
