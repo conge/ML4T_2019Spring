@@ -96,6 +96,7 @@ class StrategyLearner(object):
         #print("77 holdings, action,ret = ",holdings,action,ret)
 
         reward = 0.0
+        ret = ret * 100
         if holdings == -1000: # shorting position
             if action <= 1: # Action = { Do nothing or 0 =Short},
                 reward = -ret # holding don't change, reward is negative of return
@@ -116,7 +117,7 @@ class StrategyLearner(object):
             else:
                 reward = ret
         else:
-            reward = -10
+            reward = 0.0
         #print("SL 120: holdings = ", holdings)
         return holdings, reward
 
@@ -211,9 +212,10 @@ class StrategyLearner(object):
 
                 # Implement action returned by learner and update portfolio
             #print("SL 206: one learning is done.")
+            holdings.iloc[-1] = 0
             holdings.ffill(inplace=True)
             holdings.fillna(0, inplace=True)
-            print("SL 216 holdings = ",holdings)
+            #print("SL 216 holdings = ",holdings)
             trades = holdings.diff()
             trades.iloc[0] = 0
 
@@ -280,7 +282,7 @@ class StrategyLearner(object):
         holdings = pd.DataFrame(np.nan, index=indices, columns=['Holdings'])
         holdings.iloc[0] = 0
 
-        for i in range(daily_returns.shape[0] - 1):
+        for i in range(daily_returns.shape[0] ):
 
             state = self.indicators_to_state(PSR.iloc[i], bb_indicator.iloc[i], momentum.iloc[i])
 
@@ -289,9 +291,7 @@ class StrategyLearner(object):
             #print("SL 286 action is ", action)
 
             # Get holdings with the new action.
-            holdings.iloc[i], _ = self.apply_action(holdings.iloc[i][0], action, daily_returns.iloc[i+1][0])
-
-        holdings.iloc[-1] = 0
+            holdings.iloc[i], _ = self.apply_action(holdings.iloc[i][0], action, 0)
 
         holdings.ffill(inplace=True)
         holdings.fillna(0, inplace=True)
