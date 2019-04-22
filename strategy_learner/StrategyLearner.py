@@ -93,7 +93,7 @@ class StrategyLearner(object):
         :param ret: return rate of the next day
         :return: updated holdings and reward
         """
-        print("77 holdings, action,ret = ",holdings,action,ret)
+        #print("77 holdings, action,ret = ",holdings,action,ret)
 
         reward = 0.0
         if holdings == -1000: # shorting position
@@ -117,7 +117,7 @@ class StrategyLearner(object):
                 reward = ret
         else:
             reward = -10
-        print("SL 120: holdings = ", holdings)
+        #print("SL 120: holdings = ", holdings)
         return holdings, reward
 
     def addEvidence(self, symbol = "IBM", \
@@ -213,6 +213,7 @@ class StrategyLearner(object):
             #print("SL 206: one learning is done.")
             holdings.ffill(inplace=True)
             holdings.fillna(0, inplace=True)
+            print("SL 216 holdings = ",holdings)
             trades = holdings.diff()
             trades.iloc[0] = 0
 
