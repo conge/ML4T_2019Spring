@@ -49,7 +49,7 @@ def compute_portvals(orders, sd=None, ed=None,start_val = 1000000, commission=9.
 
     start_date = orders.index.min()
     end_date = orders.index.max()
-    
+
     if sd:
         start_date = sd
 

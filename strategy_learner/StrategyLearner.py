@@ -78,6 +78,7 @@ class StrategyLearner(object):
         momen_state = np.digitize([momentum[0]],self.mbins,right=True)
         PSR_state = np.digitize([PSR[0]],self.pbins,right=True)
         bbp_state = np.digitize([bb_indicator[0]],self.bbins,right=True)
+
         #print("SL 63: bbp_state=",bbp_state)
         #momen_state = pd.cut([momentum], bins=self.mbins, labels=False, include_lowest=True)
         #PSR_state = pd.cut([PSR], bins=self.pbins, labels=False, include_lowest=True)
@@ -92,7 +93,7 @@ class StrategyLearner(object):
         :param ret: return rate of the next day
         :return: updated holdings and reward
         """
-        #print("77 holdings, action,ret = ",holdings,action,ret)
+        print("77 holdings, action,ret = ",holdings,action,ret)
 
         reward = 0.0
         if holdings == -1000: # shorting position
@@ -116,7 +117,7 @@ class StrategyLearner(object):
                 reward = ret
         else:
             reward = -10
-
+        print("SL 120: holdings = ", holdings)
         return holdings, reward
 
     def addEvidence(self, symbol = "IBM", \
