@@ -118,7 +118,7 @@ class StrategyLearner(object):
                 reward = ret
         else:
             reward = 0.0
-        #print("SL 120: holdings = ", holdings)
+        print("SL 120: holdings = ", holdings)
         return holdings, reward
 
     def addEvidence(self, symbol = "IBM", \
@@ -190,24 +190,27 @@ class StrategyLearner(object):
             #df_trades = df_prices.copy()
             #df_trades[:] = 0.0
 
-            reward = 0.0
+            state = self.indicators_to_state(PSR.iloc[0], bb_indicator.iloc[0], momentum.iloc[0])
+            action = self.learner.querysetstate(state)
+            holdings.iloc[0], reward = self.apply_action(holdings.iloc[0][0],
+                                                             action,
+                                                             daily_returns.iloc[1][0])
+
             #print("SL 171: PSR.shape[0] = ",PSR.shape[0],"; daily_returns.shape[0] = ",daily_returns.shape[0])
 
             # Cycle through dates
-            for j in range(daily_returns.shape[0] - 1):
+            for j in range( 1,daily_returns.shape[0] ):
 
                 state = self.indicators_to_state(PSR.iloc[j], bb_indicator.iloc[j], momentum.iloc[j])
 
                 # Get action by Query learner with current state and reward to get action
-                if j == 0:
-                    action = self.learner.querysetstate(state)
-                else:
-                    action = self.learner.query(state, reward)
+
+                action = self.learner.query(state, reward)
 
                 # update reward and holdings with the new action.
-                holdings.iloc[j], reward = self.apply_action(holdings.iloc[j][0],
+                holdings.iloc[j], reward = self.apply_action(holdings.iloc[j-1][0],
                                                              action,
-                                                             daily_returns.iloc[j+1][0])
+                                                             daily_returns.iloc[j][0])
                 #print("SL 183: holdings.iloc[j][0] = ",holdings.iloc[j][0])
 
                 # Implement action returned by learner and update portfolio
