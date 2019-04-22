@@ -58,8 +58,10 @@ class ManualStrategy(object):
 
 
 def generate_orders(df_trades,symbol):
+    print "MS 61 ................"
     df_orders = df_trades.copy()
     df_orders[-1] = 1
+    print "MS 64 ................"
 
     df_orders = df_orders.loc[(df_orders.Trades != 0)]
 
