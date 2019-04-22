@@ -45,15 +45,16 @@ def compute_portvals(orders, sd=None, ed=None,start_val = 1000000, commission=9.
 
     # orders = pd.read_csv(orders_file,index_col='Date',parse_dates=True,na_values=['nan'])
 
+
+
+    start_date = orders.index.min()
+    end_date = orders.index.max()
+    
     if sd:
         start_date = sd
-    else:
 
-        start_date = orders.index.min()
     if ed:
-        end_dat = ed
-    else:
-        end_date = orders.index.max()
+        end_date = ed
 
     # Not reading in 'SPY'
     if orders.__len__() == 1:
