@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e28c1948-8a6b-4160-a928-8368c4293a2c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/strategy_learner/StrategyLearner.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategy_learner/StrategyLearner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manual_strategy/ManualStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/manual_strategy/ManualStrategy.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,11 +12,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/strategy_learner/StrategyLearner.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="122">
-              <caret line="221" column="27" lean-forward="true" selection-start-line="221" selection-start-column="27" selection-end-line="221" selection-end-column="27" />
+              <caret line="221" column="21" selection-start-line="221" selection-start-column="12" selection-end-line="221" selection-end-column="21" />
               <folding>
                 <element signature="e#2039#2100#0" expanded="true" />
               </folding>
@@ -45,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/manual_strategy/ManualStrategy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+            <state relative-caret-position="47">
+              <caret line="62" column="14" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -91,7 +91,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>_cash</find>
       <find>msgs</find>
       <find>sv</find>
       <find>get_portfolio_stats</find>
@@ -121,6 +120,7 @@
       <find>-1</find>
       <find>testPolicy</find>
       <find>generate_orders</find>
+      <find>ms.</find>
     </findStrings>
     <replaceStrings>
       <replace>reward</replace>
@@ -135,8 +135,8 @@
         <option value="$PROJECT_DIR$/qlearning_robot/QLearner.py" />
         <option value="$PROJECT_DIR$/strategy_learner/marketsimcode.py" />
         <option value="$PROJECT_DIR$/strategy_learner/grade_strategy_learner.py" />
-        <option value="$PROJECT_DIR$/manual_strategy/ManualStrategy.py" />
         <option value="$PROJECT_DIR$/strategy_learner/StrategyLearner.py" />
+        <option value="$PROJECT_DIR$/manual_strategy/ManualStrategy.py" />
       </list>
     </option>
   </component>
@@ -291,22 +291,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manual_strategy/ManualStrategy.py">
+    <entry file="file://$PROJECT_DIR$/strategy_learner/StrategyLearner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+        <state relative-caret-position="122">
+          <caret line="221" column="21" selection-start-line="221" selection-start-column="12" selection-end-line="221" selection-end-column="21" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#2039#2100#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/strategy_learner/StrategyLearner.py">
+    <entry file="file://$PROJECT_DIR$/manual_strategy/ManualStrategy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="221" column="27" lean-forward="true" selection-start-line="221" selection-start-column="27" selection-end-line="221" selection-end-column="27" />
+        <state relative-caret-position="47">
+          <caret line="62" column="14" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
           <folding>
-            <element signature="e#2039#2100#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
