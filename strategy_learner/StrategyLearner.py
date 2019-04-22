@@ -166,7 +166,7 @@ class StrategyLearner(object):
 
         # Initialize QLearner,
 
-        self.learner = ql.QLearner(num_states=n_bins**self.num_actions,
+        self.learner = ql.QLearner(num_states=100 * n_bins,
                                    num_actions=self.num_actions,
                                    alpha=0.5,
                                    gamma=0.9,
