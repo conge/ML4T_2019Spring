@@ -93,7 +93,7 @@ class StrategyLearner(object):
         :param ret: return rate of the next day
         :return: updated holdings and reward
         """
-        print("77 holdings, action,ret = ",holdings,action,ret)
+        # print("77 holdings, action,ret = ",holdings,action,ret)
 
         reward = 0.0
         ret = ret * 100
@@ -118,7 +118,7 @@ class StrategyLearner(object):
                 reward = ret
         else:
             reward = 0.0
-        print("SL 120: holdings = ", holdings)
+        #print("SL 120: holdings = ", holdings)
         return holdings, reward
 
     def addEvidence(self, symbol = "IBM", \
@@ -280,7 +280,7 @@ class StrategyLearner(object):
         holdings = pd.DataFrame(np.nan, index=indices, columns=['Holdings'])
         holdings.iloc[0] = 0
 
-        for i in range(daily_returns.shape[0] ):
+        for i in range(1,daily_returns.shape[0] ):
 
             state = self.indicators_to_state(PSR.iloc[i], bb_indicator.iloc[i], momentum.iloc[i])
 
@@ -289,7 +289,7 @@ class StrategyLearner(object):
             #print("SL 286 action is ", action)
 
             # Get holdings with the new action.
-            holdings.iloc[i], _ = self.apply_action(holdings.iloc[i][0], action, 0)
+            holdings.iloc[i], _ = self.apply_action(holdings.iloc[i-1][0], action, 0)
 
         holdings.ffill(inplace=True)
         holdings.fillna(0, inplace=True)
