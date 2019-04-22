@@ -215,7 +215,7 @@ class StrategyLearner(object):
 
                 # Implement action returned by learner and update portfolio
             #print("SL 206: one learning is done.")
-            print("SL 215, holdings.iloc[0]",holdings.iloc[0])
+            #print("SL 215, holdings.iloc[0]",holdings.iloc[0])
             holdings.iloc[-1] = 0
             holdings.ffill(inplace=True)
             holdings.fillna(0, inplace=True)
