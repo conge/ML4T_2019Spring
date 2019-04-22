@@ -284,7 +284,7 @@ class StrategyLearner(object):
 
             # Get action by Query learner with current state and reward to get action
             action = self.learner.querysetstate(state)
-            print("SL 286 action is ", action)
+            #print("SL 286 action is ", action)
 
             # Get holdings with the new action.
             holdings.iloc[i], _ = self.apply_action(holdings.iloc[i][0], action, daily_returns.iloc[i+1][0])

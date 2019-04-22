@@ -58,10 +58,10 @@ class ManualStrategy(object):
 
 
 def generate_orders(df_trades,symbol):
-    print "MS 61 df_trades[-1] = ",df_trades.iloc[-1], "................"
+    #print "MS 61 df_trades[-1] = ",df_trades.iloc[-1], "................"
     df_orders = df_trades.copy()
     df_orders.iloc[-1] = 1
-    print "MS 64: df_trades.index[-1]", df_trades.index[-1]
+    #print "MS 64: df_trades.index[-1]", df_trades.index[-1]
 
     df_orders = df_orders.loc[(df_orders.Trades != 0)]
 
@@ -71,7 +71,7 @@ def generate_orders(df_trades,symbol):
     df_orders['Order'] = np.where(df_orders['Trades']>0, 'BUY', 'SELL')
     df_orders['Shares'] = np.abs(df_orders['Trades'])
     df_orders.loc[df_orders.index[-1],'Shares'] = 0
-    print "MS 74 ................"
+    #print "MS 74 ................"
 
     benchmark_orders = pd.DataFrame(data={'Symbol': [symbol,symbol], 'Order': ["BUY","BUY"],'Shares': [1000,0]},
                                     index={df_trades.index.min(), df_trades.index.max()})
