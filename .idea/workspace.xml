@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e28c1948-8a6b-4160-a928-8368c4293a2c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/strategy_learner/experiment1.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategy_learner/experiment1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/strategy_learner/experiment2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategy_learner/Report08_strategy_learner.docx" beforeDir="false" afterPath="$PROJECT_DIR$/strategy_learner/Report08_strategy_learner.docx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,8 +17,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/strategy_learner/StrategyLearner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
+            <state relative-caret-position="374">
+              <caret line="60" column="48" lean-forward="true" selection-start-line="60" selection-start-column="38" selection-end-line="60" selection-end-column="48" />
               <folding>
                 <element signature="e#2039#2100#0" expanded="true" />
               </folding>
@@ -58,12 +60,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/strategy_learner/experiment1.py">
+        <entry file="file://$PROJECT_DIR$/strategy_learner/experiment2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="228" column="41" lean-forward="true" selection-start-line="228" selection-start-column="41" selection-end-line="228" selection-end-column="41" />
+            <state relative-caret-position="375">
+              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/strategy_learner/02_MLS_outsample.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/martingale/Exp2_fig5.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/martingale/martingale.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-230">
+              <caret line="132" column="32" lean-forward="true" selection-start-line="121" selection-start-column="4" selection-end-line="132" selection-end-column="32" />
+              <folding>
+                <element signature="e#1560#1578#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -101,9 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>[0]</find>
-      <find>cash</find>
-      <find>evalPolicy2</find>
       <find>compute_po</find>
       <find>print</find>
       <find>compute_port</find>
@@ -127,10 +148,13 @@
       <find>dt</find>
       <find>in</find>
       <find>outsam</find>
-      <find>addev</find>
       <find>plt</find>
       <find>10</find>
       <find>n_bins</find>
+      <find>plot</find>
+      <find>port_val</find>
+      <find>addev</find>
+      <find>impact</find>
     </findStrings>
     <replaceStrings>
       <replace>reward</replace>
@@ -149,6 +173,7 @@
         <option value="$PROJECT_DIR$/strategy_learner/grade_strategy_learner.py" />
         <option value="$PROJECT_DIR$/strategy_learner/StrategyLearner.py" />
         <option value="$PROJECT_DIR$/strategy_learner/experiment1.py" />
+        <option value="$PROJECT_DIR$/strategy_learner/experiment2.py" />
       </list>
     </option>
   </component>
@@ -173,6 +198,11 @@
               <item name="ML4T_2019Spring" type="b2602c69:ProjectViewProjectNode" />
               <item name="ML4T_2019Spring" type="462c0819:PsiDirectoryNode" />
               <item name="grading" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ML4T_2019Spring" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ML4T_2019Spring" type="462c0819:PsiDirectoryNode" />
+              <item name="martingale" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ML4T_2019Spring" type="b2602c69:ProjectViewProjectNode" />
@@ -272,13 +302,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/marketsim/marketsim.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="130" column="30" selection-start-line="130" selection-start-column="21" selection-end-line="130" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/strategy_learner/QLearner.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
@@ -313,6 +336,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/strategy_learner/StrategyLearner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="60" column="48" lean-forward="true" selection-start-line="60" selection-start-column="38" selection-end-line="60" selection-end-column="48" />
+          <folding>
+            <element signature="e#2039#2100#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/marketsim/marketsim.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="36" column="30" lean-forward="true" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
+          <folding>
+            <element signature="e#1959#2018#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/strategy_learner/experiment1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-122">
+          <caret line="45" column="4" lean-forward="true" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/strategy_learner/ManualStrategy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="419">
@@ -323,20 +376,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/strategy_learner/StrategyLearner.py">
+    <entry file="file://$PROJECT_DIR$/martingale/martingale.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
+        <state relative-caret-position="-230">
+          <caret line="132" column="32" lean-forward="true" selection-start-line="121" selection-start-column="4" selection-end-line="132" selection-end-column="32" />
           <folding>
-            <element signature="e#2039#2100#0" expanded="true" />
+            <element signature="e#1560#1578#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/strategy_learner/experiment1.py">
+    <entry file="file://$PROJECT_DIR$/martingale/Exp1_fig1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/martingale/Exp2_fig5.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/strategy_learner/02_MLS_outsample.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/strategy_learner/experiment2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="228" column="41" lean-forward="true" selection-start-line="228" selection-start-column="41" selection-end-line="228" selection-end-column="41" />
+        <state relative-caret-position="375">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
