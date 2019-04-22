@@ -58,13 +58,16 @@ class ManualStrategy(object):
 
 
 def generate_orders(df_trades,symbol):
+
+    print("MS 62: df_trades: ",df_trades)
     df_orders = df_trades.copy()
-    print("MS 62: df_orders: ",df_orders)
+
     #df_orders[-1] = 1
 
     df_orders = df_orders.loc[(df_orders.Trades != 0)]
 
     #df_orders = df_trades[['Trades']][df_trades['Trades'] != 0]
+    print("MS 70:")
 
     df_orders['Symbol'] = symbol
     df_orders['Order'] = np.where(df_orders['Trades']>0, 'BUY', 'SELL')
