@@ -17,7 +17,6 @@ def experiment1():
 
     ms = ManualStrategy.ManualStrategy()
     sl = StrategyLearner.StrategyLearner()
-    sl.addEvidence()
 
     commission = 9.95
     impact = 0.005
