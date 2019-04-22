@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/strategy_learner/StrategyLearner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="293" column="83" selection-start-line="293" selection-start-column="83" selection-end-line="293" selection-end-column="83" />
+            <state relative-caret-position="295">
+              <caret line="233" column="45" selection-start-line="233" selection-start-column="34" selection-end-line="233" selection-end-column="45" />
               <folding>
                 <element signature="e#2039#2100#0" expanded="true" />
                 <element signature="e#2431#2944#0" />
@@ -51,8 +51,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/strategy_learner/ManualStrategy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
+            <state relative-caret-position="15">
+              <caret line="76" column="64" selection-start-line="76" selection-start-column="64" selection-end-line="76" selection-end-column="64" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -75,8 +75,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/strategy_learner/marketsimcode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="128" column="31" lean-forward="true" selection-start-line="128" selection-start-column="31" selection-end-line="128" selection-end-column="31" />
+            <state relative-caret-position="-737">
+              <caret line="98" column="22" selection-start-line="98" selection-start-column="14" selection-end-line="98" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -85,7 +85,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>[</find>
       <find>PSR</find>
       <find>pbins</find>
       <find>get_pri</find>
@@ -115,6 +114,7 @@
       <find>get_portfolio_stats</find>
       <find>apply</find>
       <find>apply_action</find>
+      <find>holdings</find>
     </findStrings>
     <replaceStrings>
       <replace>reward</replace>
@@ -277,16 +277,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/strategy_learner/ManualStrategy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/marketsim/marketsim.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="365">
@@ -304,17 +294,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/strategy_learner/ManualStrategy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="76" column="64" selection-start-line="76" selection-start-column="64" selection-end-line="76" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/strategy_learner/marketsimcode.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="128" column="31" lean-forward="true" selection-start-line="128" selection-start-column="31" selection-end-line="128" selection-end-column="31" />
+        <state relative-caret-position="-737">
+          <caret line="98" column="22" selection-start-line="98" selection-start-column="14" selection-end-line="98" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/strategy_learner/StrategyLearner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="293" column="83" selection-start-line="293" selection-start-column="83" selection-end-line="293" selection-end-column="83" />
+        <state relative-caret-position="295">
+          <caret line="233" column="45" selection-start-line="233" selection-start-column="34" selection-end-line="233" selection-end-column="45" />
           <folding>
             <element signature="e#2039#2100#0" expanded="true" />
             <element signature="e#2431#2944#0" />

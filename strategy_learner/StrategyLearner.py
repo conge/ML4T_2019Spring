@@ -235,7 +235,7 @@ class StrategyLearner(object):
 
             # check if converge
             if converged:
-                print("SL 212: converged at iteration # ",count)
+                print("SL 212: converged at iteration # ",count, "cum_ret is: ", cum_ret)
 
         return df_trades
 
@@ -265,12 +265,6 @@ class StrategyLearner(object):
         daily_returns = (prices / prices.shift(1)) - 1
         daily_returns = daily_returns[1:]
 
-        # get indicators and combine them into as a feature data_frame
-        lookback = 14
-
-        _, PSR = id.get_SMA(prices, lookback)
-        _, _, bb_indicator = id.get_BB(prices, lookback)
-        momentum = id.get_momentum(prices, lookback)
 
         # get indicators and combine them into as a feature data_frame
         lookback = 14
