@@ -176,7 +176,7 @@ class StrategyLearner(object):
 
         while (not converged) and (count<100):
             # Set first state to the first data point (first day)
-            indices = prices.index
+            indices = daily_returns.index
             holdings = pd.DataFrame(np.nan, index=indices, columns=['Holdings'])
             #first_state = self.indicators_to_state(PSR.iloc[0], bb_indicator.iloc[0], momentum.iloc[0])
 
@@ -218,7 +218,7 @@ class StrategyLearner(object):
 
             # buy and sell happens when the difference change direction
             df_trades = pd.DataFrame(data=trades.values, index=trades.index, columns=['Trades'])
-            print("SL 221:", df_trades)
+            print("SL 221:", holdings)
             df_orders, _ = ms.generate_orders(df_trades, symbol)
             print("SL 223:")
             port_vals = compute_portvals(df_orders, impact=self.impact, start_val=sv, commission=self.commission)
