@@ -27,7 +27,7 @@ def experiment1():
     # dates = pd.date_range(start_date, end_date)
     symbol = 'JPM'
 
-    sl.addEvidence(symbol=symbol, sd=start_date, ed=end_date, sv = 100000, 5)
+    sl.addEvidence(symbol=symbol, sd=start_date, ed=end_date, sv = 100000, n_bins=5)
 
     df_trades_ms = ms.testPolicy(symbol=symbol, sd=start_date, ed=end_date, sv = 100000)
     df_trades_sl = sl.testPolicy(symbol=symbol, sd=start_date, ed=end_date, sv = 100000)
