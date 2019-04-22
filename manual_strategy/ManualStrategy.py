@@ -59,7 +59,7 @@ class ManualStrategy(object):
 
 def generate_orders(df_trades, symbol):
 
-    print("MS 62: df_trades: ",df_trades)
+    print("MS 62: df_trades: ")
     df_orders = df_trades.copy()
 
     #df_orders[-1] = 1
