@@ -218,7 +218,7 @@ class StrategyLearner(object):
 
             # buy and sell happens when the difference change direction
             df_trades = pd.DataFrame(data=trades.values, index=trades.index, columns=['Trades'])
-            print("SL 221:", df_trades[-1])
+            print("SL 221:", df_trades.iloc[-1])
             df_orders, _ = ms.generate_orders(df_trades, symbol)
             print("SL 223:")
             port_vals = compute_portvals(df_orders, impact=self.impact, start_val=sv, commission=self.commission)
