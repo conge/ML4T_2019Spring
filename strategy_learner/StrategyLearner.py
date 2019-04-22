@@ -93,7 +93,7 @@ class StrategyLearner(object):
         :param ret: return rate of the next day
         :return: updated holdings and reward
         """
-        #print("77 holdings, action,ret = ",holdings,action,ret)
+        print("77 holdings, action,ret = ",holdings,action,ret)
 
         reward = 0.0
         ret = ret * 100
@@ -190,7 +190,7 @@ class StrategyLearner(object):
             #df_trades = df_prices.copy()
             #df_trades[:] = 0.0
 
-            reward = -1
+            reward = 0.0
             #print("SL 171: PSR.shape[0] = ",PSR.shape[0],"; daily_returns.shape[0] = ",daily_returns.shape[0])
 
             # Cycle through dates
