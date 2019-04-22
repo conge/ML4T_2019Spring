@@ -108,7 +108,7 @@ def experiment1():
 
     plt.close()
 
-    port_cr_sl, port_adr_sl, port_stddr_sl, port_sr_sl = ManualStrategy.get_portfolio_stats(port_vals_ms)
+    port_cr_sl, port_adr_sl, port_stddr_sl, port_sr_sl = ManualStrategy.get_portfolio_stats(port_vals_sl)
     port_cr_ms, port_adr_ms, port_stddr_ms, port_sr_ms = ManualStrategy.get_portfolio_stats(port_vals_ms)
     bench_cr, bench_adr, bench_stddr, bench_sr = ManualStrategy.get_portfolio_stats(benchmark_vals)
 
@@ -223,7 +223,7 @@ def experiment1():
 
     plt.close()
 
-    port_cr_sl, port_adr_sl, port_stddr_sl, port_sr_sl = ManualStrategy.get_portfolio_stats(port_vals_ms)
+    port_cr_sl, port_adr_sl, port_stddr_sl, port_sr_sl = ManualStrategy.get_portfolio_stats(port_vals_sl)
     port_cr_ms, port_adr_ms, port_stddr_ms, port_sr_ms = ManualStrategy.get_portfolio_stats(port_vals_ms)
     bench_cr, bench_adr, bench_stddr, bench_sr = ManualStrategy.get_portfolio_stats(benchmark_vals)
 
