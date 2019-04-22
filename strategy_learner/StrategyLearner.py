@@ -124,7 +124,7 @@ class StrategyLearner(object):
     def addEvidence(self, symbol = "IBM", \
         sd=dt.datetime(2008,1,1), \
         ed=dt.datetime(2009,1,1), \
-        sv = 10000):
+        sv = 10000,n_bins=4):
 
         # this method should create a QLearner, and train it for trading
 
@@ -144,9 +144,9 @@ class StrategyLearner(object):
         _, _, bb_indicator = id.get_BB(prices, lookback)
         momentum = id.get_momentum(prices, lookback)
 
-        _,self.pbins = pd.qcut(PSR, 10,labels=False,retbins=True)
-        _,self.bbins = pd.qcut(bb_indicator,10,labels=False,retbins=True)
-        _,self.mbins = pd.qcut(momentum,10,labels=False,retbins=True)
+        _,self.pbins = pd.qcut(PSR, n_bins,labels=False,retbins=True)
+        _,self.bbins = pd.qcut(bb_indicator,n_bins,labels=False,retbins=True)
+        _,self.mbins = pd.qcut(momentum,n_bins,labels=False,retbins=True)
         self.pbins = self.pbins[1:-1]
         self.bbins = self.bbins[1:-1]
         self.mbins = self.mbins[1:-1]
@@ -166,7 +166,7 @@ class StrategyLearner(object):
 
         # Initialize QLearner,
 
-        self.learner = ql.QLearner(num_states=10**self.num_actions,
+        self.learner = ql.QLearner(num_states=n_bins**self.num_actions,
                                    num_actions=self.num_actions,
                                    alpha=0.5,
                                    gamma=0.9,
