@@ -30,10 +30,9 @@ import datetime as dt
 import pandas as pd
 import numpy as np
 import util as ut 			  		 			     			  	   		   	  			  	
-import random
+
 import QLearner as ql
 from marketsimcode import compute_portvals, get_portfolio_stats
-from util import get_data
 import indicators as id
 from ManualStrategy import generate_orders
 
