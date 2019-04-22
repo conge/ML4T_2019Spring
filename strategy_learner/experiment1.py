@@ -77,7 +77,7 @@ def experiment1():
     top.plot(normed_port_ms, lw=1.5, color='black', label='Manual Strategy')
     top.plot(normed_bench, lw=1.2, color='green', label='Benchmark')
 
-    top.set_title('Portfolio V.S Benchmark - In Sample Analysis')
+    top.set_title('Machine Learning Strategy (MLS), Manual Strategy (MS) - In Sample Analysis')
     top.set_ylabel('Normalized Value')
     for index, marks in df_trades_sl.iterrows():
         if marks['Trades'] > 0:
@@ -101,7 +101,7 @@ def experiment1():
     top.axes.get_xaxis().set_visible(False)
     plt.xlim(start_date,end_date)
 
-    filename = '05_MLS_insample.png'
+    filename = '01_MLS_insample.png'
 
     plt.savefig(filename)
 
@@ -192,7 +192,7 @@ def experiment1():
     top.plot(normed_port_ms, lw=1.5, color='black', label='Manual Strategy')
     top.plot(normed_bench, lw=1.2, color='green', label='Benchmark')
 
-    top.set_title('Portfolio V.S Benchmark - Out Sample Analysis')
+    top.set_title('Machine Learning Strategy (MLS) V.S. Manual Strategy (MS) - Out Sample Analysis')
     top.set_ylabel('Normalized Value')
     for index, marks in df_trades_sl.iterrows():
         if marks['Trades'] > 0:
@@ -216,7 +216,7 @@ def experiment1():
     top.axes.get_xaxis().set_visible(False)
     plt.xlim(start_date,end_date)
 
-    filename = '06_MLS_outsample.png'
+    filename = '02_MLS_outsample.png'
 
     plt.savefig(filename)
 
