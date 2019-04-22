@@ -238,8 +238,8 @@ class StrategyLearner(object):
                 check_convergence(old_cum_ret,cum_ret,converged_prev,converge_count)
 
             # check if converge
-            if converged:
-                print("SL 212: converged at iteration # ",count, "cum_ret is: ", cum_ret)
+            #if converged:
+                #print("SL 212: converged at iteration # ",count, "cum_ret is: ", cum_ret)
 
         return df_trades
 
