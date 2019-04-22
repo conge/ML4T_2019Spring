@@ -58,7 +58,7 @@ class ManualStrategy(object):
 
 
 def generate_orders(df_trades, symbol):
-    print "MS 61 ................" 
+    print "MS 61 ................"
 
     df_orders = df_trades.copy()
 
@@ -74,13 +74,16 @@ def generate_orders(df_trades, symbol):
     df_orders['Shares'] = np.abs(df_orders['Trades'])
     df_orders.loc[df_orders.index[-1],'Shares'] = 0
 
-    benchmark_orders = pd.DataFrame(data={'Symbol': [symbol,symbol], 'Order': ["BUY","BUY"],'Shares': [1000,0]},
+    benchmark_orders = pd.DataFrame(data={'Symbol': [symbol,symbol],
+                                          'Order': ["BUY","BUY"],
+                                          'Shares': [1000,0]},
                                     index={df_trades.index.min(), df_trades.index.max()})
 
     return df_orders, benchmark_orders
 
 
 def plot_manual_strategy():
+    print "MS 86......"
 
     ms = ManualStrategy()
 
