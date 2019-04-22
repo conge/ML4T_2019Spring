@@ -217,7 +217,7 @@ class StrategyLearner(object):
             trades.iloc[0] = 0
 
             # buy and sell happens when the difference change direction
-            df_trades = pd.DataFrame(data=trades.values, index=trades.index, columns=['Trades'])
+            df_trades = pd.DataFrame(data=trades.values, index=indices, columns=['Trades'])
             print("SL 221:", symbol)
             df_orders, _ = generate_orders(df_trades, symbol)
             print("SL 223:")
