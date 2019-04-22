@@ -124,7 +124,7 @@ class StrategyLearner(object):
     def addEvidence(self, symbol = "IBM", \
         sd=dt.datetime(2008,1,1), \
         ed=dt.datetime(2009,1,1), \
-        sv = 10000,n_bins=4):
+        sv = 10000,n_bins=6):
 
         # this method should create a QLearner, and train it for trading
 
