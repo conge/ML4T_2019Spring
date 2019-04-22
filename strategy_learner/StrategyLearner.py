@@ -37,22 +37,23 @@ import indicators as id
 from ManualStrategy import generate_orders
 
 def check_convergence(old_cum_ret,cum_ret,converged_prev,converge_count):
-                converged = False
-                if abs((old_cum_ret - cum_ret)*100.0) < 0.00001:
+    converged = False
+    if abs((old_cum_ret - cum_ret)*100.0) < 0.00001:
 
-                    if converged_prev:
-                        converge_count += 1
-                    else:
-                        converge_count = 1
-                    converged_prev = True
-                else:
+        if converged_prev:
+            converge_count += 1
+        else:
+            converge_count = 1
+            converged_prev = True
+    else:
+        converged_prev = False
+        old_cum_ret = cum_ret
 
-                     converged_prev = False
-                     old_cum_ret = cum_ret
-                if converge_count> 4:
-                    converged = True
+    if converge_count> 4:
+        converged = True
 
-                return old_cum_ret,converged_prev,converge_count,converged
+    return old_cum_ret,converged_prev,converge_count,converged
+
 
 class StrategyLearner(object):
 
@@ -86,7 +87,6 @@ class StrategyLearner(object):
 
     def apply_action(self, holdings, action, ret):
         """
-
         :param holdings: -1000, 0 or 1000
         :param action: 0 = Short, 1 = Do nothing, 2 = buy
         :param ret: return rate of the next day
