@@ -96,7 +96,9 @@ def plot_manual_strategy():
     df_trades = ms.testPolicy(symbol=symbol, sd=start_date, ed=end_date, sv = 100000)
 
     # generate orders based on trades
+    print("MS 99..........")
     df_orders, benchmark_orders= generate_orders(df_trades,symbol)
+    print("MS 101..........")
 
     port_vals = compute_portvals(df_orders, start_val=100000, commission=commission, impact=impact)
     #benchmark_orders.loc[benchmark_orders.index[1], 'Shares'] = 0
